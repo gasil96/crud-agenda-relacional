@@ -1,7 +1,10 @@
 package aplication;
 
+import java.sql.Connection;
 import java.util.Locale;
 import java.util.Scanner;
+
+import jdbc.DB;
 
 
 public class Program {
@@ -10,6 +13,9 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 
+		Connection conn = DB.getConnection();
+		DB.closeConnection();
+		
 		
 		sc.close();
 	}
