@@ -11,7 +11,6 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class DB {
 
