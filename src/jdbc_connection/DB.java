@@ -1,4 +1,4 @@
-package jdbc;
+package jdbc_connection;
 
 import java.io.FileInputStream;
 import java.io.IOException;
