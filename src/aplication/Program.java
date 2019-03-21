@@ -31,7 +31,9 @@ public class Program {
 			System.out.println("Done! Rows Affected " + rowsAffected);
 
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
+			
 		}
 		
 		finally {
