@@ -2,7 +2,9 @@ package aplication;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import jdbc_connection.DB;
 
@@ -11,37 +13,54 @@ public class Program {
 	public static void main(String[] args) {
 
 		
+		//INSERÇÃO DADOS *BANCO MYSQL*
 		Connection conn = null;
 		PreparedStatement st = null;
-		
+
 		try {
 			conn = DB.getConnection();
-			st = conn.prepareStatement(
-					"INSERT INTO agenda.contato " // remover apostrofe
-					+ "(nome, cpf, idade, sexo) " //remove apostrofe
-					+ "VALUES "
-					+ "(?, ?, ?, ?)"); //pont  virgula e apost sql apagado
-			
+			st = conn.prepareStatement("INSERT INTO agenda.contato " // ' removido
+					+ "(nome, cpf, idade, sexo) " // ' removido
+					+ "VALUES " + "(?, ?, ?, ?)", // ; e ' removido
+					Statement.RETURN_GENERATED_KEYS);
+
 			st.setString(1, "Gerusa");
 			st.setString(2, "021.429.212-64");
 			st.setInt(3, 39);
 			st.setString(4, "Feminino");
 
 			int rowsAffected = st.executeUpdate();
-			System.out.println("Done! Rows Affected " + rowsAffected);
+
+			if (rowsAffected > 0) {
+				ResultSet rs = st.getGeneratedKeys();
+
+				while (rs.next()) {
+					int id = rs.getInt(1);
+					System.out.println("Done! Id = " + id);
+				
+				}
+
+			} else {
+				System.out.println("No rown affected!");
+			}
 
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-			
+
 		}
-		
+
 		finally {
-		
+
 			DB.closeStatement(st);
 			DB.closeConnection();
-			
+
 		}
+		
+		
+		//ATUALIZAR DADOS *BANCO MYSQL*
+		
+		
 	}
 
 }
