@@ -18,6 +18,7 @@ public class Program {
 		PreparedStatement st = null;
 
 		try {
+			
 			conn = DB.getConnection();
 			st = conn.prepareStatement("INSERT INTO agenda.contato " // ' removido
 					+ "(nome, cpf, idade, sexo) " // ' removido
