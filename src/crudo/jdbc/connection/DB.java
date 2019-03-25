@@ -1,4 +1,4 @@
-package jdbc_connection;
+package crudo.jdbc.connection;
 
 import java.io.FileInputStream;
 import java.io.IOException;

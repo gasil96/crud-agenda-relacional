@@ -1,4 +1,4 @@
-package aplication;
+package crud.aplication;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import jdbc_connection.DB;
+import crudo.jdbc.connection.DB;
 
 public class Program {
 
@@ -25,10 +25,10 @@ public class Program {
 					+ "VALUES " + "(?, ?, ?, ?)", // ; e ' removido
 					Statement.RETURN_GENERATED_KEYS);
 
-			st.setString(1, "Gerusa");
+			st.setString(1, "Gabriel");
 			st.setString(2, "021.429.212-64");
-			st.setInt(3, 39);
-			st.setString(4, "Feminino");
+			st.setInt(3, 22);
+			st.setString(4, "Masculino");
 
 			int rowsAffected = st.executeUpdate();
 
@@ -57,11 +57,9 @@ public class Program {
 			DB.closeConnection();
 
 		}
-		
-		
+				
 		//ATUALIZAR DADOS *BANCO MYSQL*
-		
-		
+				
 	}
 
 }

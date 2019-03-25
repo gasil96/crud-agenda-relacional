@@ -1,4 +1,4 @@
-package jdbc_connection;
+package crudo.jdbc.connection;
 
 public class DbException extends RuntimeException {
 	
