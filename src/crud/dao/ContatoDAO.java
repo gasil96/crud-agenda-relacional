@@ -20,6 +20,10 @@ public class ContatoDAO {
 		conn = DB.getConnection();
 	}
 
+	public ContatoDAO() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void create(Contato contato) {
 
 		try {
@@ -66,8 +70,9 @@ public class ContatoDAO {
 	public void remove(int id) {
 
 		try {
+			
 			conn = DB.getConnection();
-			st = conn.prepareStatement("DELETE FROM contato WHERE id = ?", Statement.RETURN_GENERATED_KEYS);
+			st = conn.prepareStatement("DELETE FROM contato WHERE id_contato = ?");
 
 			st.setInt(1, id);
 
@@ -133,6 +138,8 @@ public class ContatoDAO {
 		rs.close();
 		st.close();
 		return contatos;
+	
+		
 		
 	}
 
