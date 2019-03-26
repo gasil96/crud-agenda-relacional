@@ -1,4 +1,4 @@
-package crud.aplication;
+package crud.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,30 +6,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import crud.entities.Contato;
 import crud.jdbc.connection.DB;
 
-public class Program {
+public class ContatoDAO {
 
-	public static void main(String[] args) {
+	PreparedStatement st = null;
+	Connection conn = null; 
+	
+	public ContatoDAO(Connection conn) {
+		conn = DB.getConnection();
+	}
 
-		
-		//INSERÇÃO DADOS *BANCO MYSQL* provisorio
-		Connection conn = null;
-		PreparedStatement st = null;
+	public void cadastrar(Contato contato) {
 
 		try {
-			
 			conn = DB.getConnection();
-			st = conn.prepareStatement("INSERT INTO agenda.contato " // ' removido
-					+ "(nome, cpf, idade, sexo) " // ' removido
-					+ "VALUES " + "(?, ?, ?, ?)", // ; e ' removido
+			st = conn.prepareStatement(
+					"INSERT INTO agenda.contato " + "(nome, cpf, idade, sexo) " + "VALUES " + "(?, ?, ?, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 
-			st.setString(1, "Gabriel");
-			st.setString(2, "021.429.212-64");
-			st.setInt(3, 22);
-			st.setString(4, "Masculino");
-
+			st.setString(1, contato.getNome());
+			st.setString(2, contato.getCpf());
+			st.setInt(3, contato.getIdade());
+			st.setString(4, contato.getSexo());
+			st.execute();
+			
 			int rowsAffected = st.executeUpdate();
 
 			if (rowsAffected > 0) {
@@ -38,7 +40,7 @@ public class Program {
 				while (rs.next()) {
 					int id = rs.getInt(1);
 					System.out.println("Done! Id = " + id);
-				
+
 				}
 
 			} else {
@@ -57,9 +59,5 @@ public class Program {
 			DB.closeConnection();
 
 		}
-				
-		//ATUALIZAR DADOS *BANCO MYSQL*
-				
 	}
-
 }
