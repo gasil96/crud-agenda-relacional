@@ -2,15 +2,14 @@ package crud.aplication;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-import javax.swing.JLayeredPane;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.InputMethodListener;
+
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.border.EmptyBorder;
 
 public class TelaPrincipal extends JFrame {
 
