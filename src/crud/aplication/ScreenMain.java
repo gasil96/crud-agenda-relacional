@@ -65,27 +65,26 @@ public class ScreenMain extends JFrame {
 		JButton btnContatoAdd = new JButton("Adicionar Contatos no SOUT**TESTE***");
 		btnContatoAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+
 				ContatoDAO cttDAO = new ContatoDAO();
-				
 				Contato contato = new Contato();
 				contato.setNome("Gabriel Silva");
 				contato.setCpf("021.429.212.64");
 				contato.setIdade(23);
 				contato.setSexo("Masculino");
 				cttDAO.create(contato);
-			
+
 			}
 		});
 		contentPane.add(btnContatoAdd, BorderLayout.SOUTH);
-		
+
 		JButton btnRemoverContatosteste = new JButton("Remover Contatos ***TESTE***");
 		btnRemoverContatosteste.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ContatoDAO cttDAO = new ContatoDAO();
-				cttDAO.remove(10);
 				
+				ContatoDAO cttDAO = new ContatoDAO();
+				cttDAO.remove(0);
+							
 			}
 		});
 		contentPane.add(btnRemoverContatosteste, BorderLayout.NORTH);

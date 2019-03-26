@@ -38,21 +38,6 @@ public class ContatoDAO {
 			st.setString(4, contato.getSexo());
 			st.execute();
 
-			int rowsAffected = st.executeUpdate();
-
-			if (rowsAffected > 0) {
-				ResultSet rs = st.getGeneratedKeys();
-
-				while (rs.next()) {
-					int id = rs.getInt(1);
-					System.out.println("Done! Id = " + id);
-
-				}
-
-			} else {
-				System.out.println("No rown affected!");
-			}
-
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -70,7 +55,7 @@ public class ContatoDAO {
 	public void remove(int id) {
 
 		try {
-			
+
 			conn = DB.getConnection();
 			st = conn.prepareStatement("DELETE FROM contato WHERE id_contato = ?");
 
@@ -87,7 +72,7 @@ public class ContatoDAO {
 		finally {
 
 			DB.closeStatement(st);
-			DB.closeConnection();
+			// DB.closeConnection();
 
 		}
 	}
@@ -121,12 +106,12 @@ public class ContatoDAO {
 		}
 	}
 
-	public List<Contato> listarTodos()throws Exception {
+	public List<Contato> listarTodos() throws Exception {
 		List<Contato> contatos = new ArrayList<Contato>();
 		conn = DB.getConnection();
 		st = conn.prepareStatement("select * from produto", Statement.RETURN_GENERATED_KEYS);
 		ResultSet rs = st.executeQuery();
-		while(rs.next()) {
+		while (rs.next()) {
 			Contato contato = new Contato();
 			contato.setId_contato(rs.getInt("id_contato"));
 			contato.setNome(rs.getString("nome"));
@@ -138,9 +123,7 @@ public class ContatoDAO {
 		rs.close();
 		st.close();
 		return contatos;
-	
-		
-		
+
 	}
 
 }
