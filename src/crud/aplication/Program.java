@@ -6,14 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import crudo.jdbc.connection.DB;
+import crud.jdbc.connection.DB;
 
 public class Program {
 
 	public static void main(String[] args) {
 
 		
-		//INSERÇÃO DADOS *BANCO MYSQL*
+		//INSERï¿½ï¿½O DADOS *BANCO MYSQL*
 		Connection conn = null;
 		PreparedStatement st = null;
 

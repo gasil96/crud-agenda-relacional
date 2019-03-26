@@ -1,4 +1,4 @@
-package crudo.jdbc.connection;
+package crud.jdbc.connection;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class DB {
 				Properties props = loadProperties();
 				String url = props.getProperty("dburl");
 				conn = DriverManager.getConnection(url, props);
-				JOptionPane.showMessageDialog(null, "Conexão com o Banco Realizada");
+				JOptionPane.showMessageDialog(null, "Conexï¿½o com o Banco Realizada");
 
 			} catch (SQLException e) {
 
