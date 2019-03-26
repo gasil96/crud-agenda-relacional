@@ -18,7 +18,7 @@ public class ContatoDAO {
 		conn = DB.getConnection();
 	}
 
-	public void cadastrar(Contato contato) {
+	public void create(Contato contato) {
 
 		try {
 			conn = DB.getConnection();
@@ -47,6 +47,33 @@ public class ContatoDAO {
 				System.out.println("No rown affected!");
 			}
 
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		}
+
+		finally {
+
+			DB.closeStatement(st);
+			DB.closeConnection();
+
+		}
+	}
+	
+	public void remove(int id) {
+
+		try {
+			conn = DB.getConnection();
+			st = conn.prepareStatement(
+					"DELETE FROM contato WHERE id = ?",
+					Statement.RETURN_GENERATED_KEYS);
+
+			st.setInt(1, id);
+			
+			st.executeUpdate();
+
+			
 		} catch (SQLException e) {
 
 			e.printStackTrace();
