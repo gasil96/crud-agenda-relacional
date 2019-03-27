@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -53,23 +54,11 @@ public class ScreenList extends JFrame {
 		contentPane.setLayout(null);
 
 		table = new JTable();
-		table.addAncestorListener(new AncestorListener() {
-			public void ancestorAdded(AncestorEvent event) {
-			}
-			public void ancestorMoved(AncestorEvent event) {
-			}
-			public void ancestorRemoved(AncestorEvent event) {
-			}
-		});
-		table.addContainerListener(new ContainerAdapter() {
-			@Override
-			public void componentAdded(ContainerEvent e) {
-			}
-		});
+
 		table.setBounds(10, 11, 425, 349);
 		contentPane.add(table);
 		final DefaultTableModel modelo = new DefaultTableModel();
-		
+
 		JButton btnNewButton = new JButton("Apagar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -102,7 +91,7 @@ public class ScreenList extends JFrame {
 					for (Contato c : cttDAO.listarTodos()) {
 
 						System.out.println("ID: " + c.getId_contato() + " NOME: " + c.getNome() + " CPF: " + c.getCpf()
-								+ " IDADE: "+c.getIdade()+" SEXO: "+c.getSexo());
+								+ " IDADE: " + c.getIdade() + " SEXO: " + c.getSexo());
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
