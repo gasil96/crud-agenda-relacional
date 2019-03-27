@@ -1,4 +1,4 @@
-package crud.aplication;
+package crud.aplication.interfaces;
 
 import java.awt.Button;
 import java.awt.Color;
@@ -17,6 +17,7 @@ import javax.swing.JToolBar;
 
 import crud.dao.ContatoDAO;
 import crud.entities.Contato;
+import javax.swing.JButton;
 
 public class ScreenAdd extends JFrame {
 
@@ -42,7 +43,7 @@ public class ScreenAdd extends JFrame {
 	 */
 	public ScreenAdd() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 425, 415);
+		setBounds(100, 100, 461, 524);
 		getContentPane().setLayout(null);
 
 		Label label = new Label("NOME:");
@@ -86,8 +87,30 @@ public class ScreenAdd extends JFrame {
 		txtSexo.setBounds(71, 207, 127, 22);
 		getContentPane().add(txtSexo);
 
-		Button button = new Button("Salvar");
-		button.addActionListener(new ActionListener() {
+		Label label_5 = new Label("2 Digitos");
+		label_5.setForeground(Color.RED);
+		label_5.setBounds(110, 168, 171, 22);
+		getContentPane().add(label_5);
+
+		Label label_6 = new Label("Com pontos ' . ' e Traço ' - '");
+		label_6.setForeground(Color.RED);
+		label_6.setBounds(261, 127, 171, 22);
+		getContentPane().add(label_6);
+
+		JButton btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				ScreenMain telaPrincipal = new ScreenMain();
+				telaPrincipal.show();
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(253, 452, 89, 23);
+		getContentPane().add(btnNewButton);
+
+		JButton btnNewButton_1 = new JButton("Salvar");
+		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				String nome = txtNome.getText();
@@ -109,22 +132,8 @@ public class ScreenAdd extends JFrame {
 				}
 			}
 		});
-		button.setBounds(321, 345, 70, 22);
-		getContentPane().add(button);
-
-		Label label_5 = new Label("2 Digitos");
-		label_5.setForeground(Color.RED);
-		label_5.setBounds(110, 168, 171, 22);
-		getContentPane().add(label_5);
-
-		Label label_6 = new Label("Com pontos ' . ' e Traço ' - '");
-		label_6.setForeground(Color.RED);
-		label_6.setBounds(261, 127, 171, 22);
-		getContentPane().add(label_6);
-
-		JToolBar toolBar = new JToolBar();
-		toolBar.setBounds(0, 0, 87, 16);
-		getContentPane().add(toolBar);
+		btnNewButton_1.setBounds(344, 452, 89, 23);
+		getContentPane().add(btnNewButton_1);
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {

@@ -109,7 +109,7 @@ public class ContatoDAO {
 	public List<Contato> listarTodos() throws Exception {
 		List<Contato> contatos = new ArrayList<Contato>();
 		conn = DB.getConnection();
-		st = conn.prepareStatement("select * from produto", Statement.RETURN_GENERATED_KEYS);
+		st = conn.prepareStatement("select * from contato", Statement.RETURN_GENERATED_KEYS);
 		ResultSet rs = st.executeQuery();
 		while (rs.next()) {
 			Contato contato = new Contato();
