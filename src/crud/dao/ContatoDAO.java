@@ -21,7 +21,7 @@ public class ContatoDAO {
 	}
 
 	public ContatoDAO() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public void create(Contato contato) {
