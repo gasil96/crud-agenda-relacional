@@ -9,6 +9,7 @@ import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -17,6 +18,8 @@ import javax.swing.JToolBar;
 
 import crud.dao.ContatoDAO;
 import crud.entities.Contato;
+import crud.jdbc.connection.DB;
+
 import javax.swing.JButton;
 
 public class ScreenAdd extends JFrame {
@@ -118,15 +121,11 @@ public class ScreenAdd extends JFrame {
 				contato.setIdade(idade);
 				contato.setSexo(sexo);
 				cttDAO.create(contato);
-				try {
-					cttDAO.create(contato);
-					JOptionPane.showMessageDialog(null, "Novo Contato Cadastrado!");
-				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, "Problemas ao Cadastrar Contato!");
-				}
+				JOptionPane.showMessageDialog(null, "Novo Contato Cadastrado!");
 				ScreenMain telaPrincipal = new ScreenMain();
 				telaPrincipal.show();
 				dispose();
+
 			}
 
 		});

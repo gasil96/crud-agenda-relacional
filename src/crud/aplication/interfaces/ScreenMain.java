@@ -23,12 +23,11 @@ public class ScreenMain extends JFrame {
 		});
 	}
 
-	
 	public ScreenMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 256);
 		getContentPane().setLayout(null);
-		
+
 		JButton btnNewButton = new JButton("NOVO CONTATO");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -39,14 +38,14 @@ public class ScreenMain extends JFrame {
 		});
 		btnNewButton.setBounds(10, 54, 201, 93);
 		getContentPane().add(btnNewButton);
-		
+
 		JButton button = new JButton("CONTATOS");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ScreenList telaLista = new ScreenList();
 				telaLista.show();
 				dispose();
-				
+
 			}
 		});
 		button.setBounds(223, 54, 201, 93);

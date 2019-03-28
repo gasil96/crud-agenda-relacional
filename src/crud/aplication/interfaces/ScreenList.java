@@ -4,24 +4,20 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.SQLException;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import crud.dao.ContatoDAO;
 import crud.entities.Contato;
-import crud.jdbc.connection.DB;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 
 public class ScreenList extends JFrame {
 
@@ -59,18 +55,23 @@ public class ScreenList extends JFrame {
 		JButton btnNewButton = new JButton("Apagar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ContatoDAO cttDAO = new ContatoDAO();
-			 				
+
 				String idRemove = JOptionPane.showInputDialog("Digite a ID do contato a ser removido");
-				
-				int valorConvertido = Integer.parseInt(idRemove);
-				
-				cttDAO.remove(valorConvertido);
-				
-				JOptionPane.showMessageDialog(null, "Removido com Sucesso!");
-				
-				
+				if (idRemove == null) {
+					System.out.println("Cancelou a operação!");
+				} else {
+					int valorConvertido = Integer.parseInt(idRemove);
+
+					cttDAO.remove(valorConvertido);
+
+					JOptionPane.showMessageDialog(null, "Removido com Sucesso!");
+
+					dispose();
+					ScreenList esta = new ScreenList();
+					esta.show();
+				}
 			}
 		});
 
@@ -87,12 +88,12 @@ public class ScreenList extends JFrame {
 		Alterar = new JButton("Alterar");
 		Alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-			
+				JOptionPane.showMessageDialog(null, "Calma TIGRE!");
 			}
 		});
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setEnabled(false);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
 				.createSequentialGroup()
