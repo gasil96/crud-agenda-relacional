@@ -88,7 +88,9 @@ public class ScreenList extends JFrame {
 		Alterar = new JButton("Alterar");
 		Alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Calma TIGRE!");
+			
+				ScreenUpdate telaAlterar = new ScreenUpdate();
+				telaAlterar.show();
 			}
 		});
 

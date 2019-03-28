@@ -22,13 +22,13 @@ import crud.jdbc.connection.DB;
 
 import javax.swing.JButton;
 
-public class ScreenAdd extends JFrame {
+public class ScreenUpdate extends JFrame {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ScreenAdd frame = new ScreenAdd();
+					ScreenUpdate frame = new ScreenUpdate();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,8 @@ public class ScreenAdd extends JFrame {
 
 	}
 
-	public ScreenAdd() {
+	public ScreenUpdate() {
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 461, 524);
 		getContentPane().setLayout(null);
@@ -68,7 +69,7 @@ public class ScreenAdd extends JFrame {
 		label_4.setBounds(10, 127, 49, 22);
 		getContentPane().add(label_4);
 
-		TextField txtNome = new TextField("");
+		TextField txtNome = new TextField();
 		txtNome.setBounds(71, 89, 293, 22);
 		getContentPane().add(txtNome);
 
@@ -94,36 +95,38 @@ public class ScreenAdd extends JFrame {
 		label_6.setBounds(261, 127, 171, 22);
 		getContentPane().add(label_6);
 
-		JButton btnNewButton = new JButton("Voltar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		Label label_7 = new Label("ID:");
+		label_7.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_7.setBounds(10, 61, 55, 22);
+		getContentPane().add(label_7);
 
-				ScreenMain telaPrincipal = new ScreenMain();
-				telaPrincipal.show();
-				dispose();
-			}
-		});
-		btnNewButton.setBounds(253, 452, 89, 23);
-		getContentPane().add(btnNewButton);
+		TextField textId = new TextField();
+		textId.setBounds(71, 61, 33, 22);
+		getContentPane().add(textId);
 
-		JButton btnNewButton_1 = new JButton("Salvar");
+		JButton btnNewButton_1 = new JButton("Alterar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				Contato contato = new Contato();
+				ContatoDAO cttDAO = new ContatoDAO();
 
 				String nome = txtNome.getText();
 				String cpf = txtCpf.getText();
 				int idade = Integer.parseInt(txtIdade.getText());
 				String sexo = txtSexo.getText();
-				ContatoDAO cttDAO = new ContatoDAO();
-				Contato contato = new Contato();
+				int id_contato = Integer.parseInt(textId.getText());
+
 				contato.setNome(nome);
 				contato.setCpf(cpf);
 				contato.setIdade(idade);
 				contato.setSexo(sexo);
-				cttDAO.create(contato);
-				JOptionPane.showMessageDialog(null, "Novo Contato Cadastrado!");
-				ScreenMain telaPrincipal = new ScreenMain();
-				telaPrincipal.show();
+				// contato.setId_contato(id_contato);
+
+				cttDAO.update(contato);
+
+				// JOptionPane.showMessageDialog(null, "Cadastro Alterado");
+
 				dispose();
 
 			}
@@ -131,6 +134,7 @@ public class ScreenAdd extends JFrame {
 		});
 		btnNewButton_1.setBounds(344, 452, 89, 23);
 		getContentPane().add(btnNewButton_1);
+
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
