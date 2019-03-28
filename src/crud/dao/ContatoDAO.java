@@ -21,7 +21,7 @@ public class ContatoDAO {
 	}
 
 	public ContatoDAO() {
-		
+
 	}
 
 	public void create(Contato contato) {
@@ -47,7 +47,7 @@ public class ContatoDAO {
 		finally {
 
 			DB.closeStatement(st);
-			DB.closeConnection();
+			// DB.closeConnection();
 
 		}
 	}
@@ -71,8 +71,8 @@ public class ContatoDAO {
 
 		finally {
 
-			//DB.closeStatement(st);
-			//DB.closeConnection(); 
+			// DB.closeStatement(st);
+			// DB.closeConnection();
 
 		}
 	}
@@ -81,7 +81,7 @@ public class ContatoDAO {
 
 		try {
 			conn = DB.getConnection();
-			st = conn.prepareStatement("UPDATE contato SET nome = ?, cpf = ?, idade = ?, sexo = ?" + "WHERE id = ?",
+			st = conn.prepareStatement("UPDATE contato SET nome = ?, cpf = ?, idade = ?, sexo = ? " + "WHERE id_contato = ?",
 					Statement.RETURN_GENERATED_KEYS);
 
 			st.setString(1, contato.getNome());
@@ -121,10 +121,9 @@ public class ContatoDAO {
 			contatos.add(contato);
 		}
 		rs.close();
-		st.close();
+		//st.close();
 		return contatos;
 
-		
 	}
 
 }

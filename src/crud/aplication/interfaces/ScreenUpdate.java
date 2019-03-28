@@ -59,7 +59,7 @@ public class ScreenUpdate extends JFrame {
 		label_2.setBounds(10, 207, 49, 22);
 		getContentPane().add(label_2);
 
-		Label label_3 = new Label("Masculino/Feminino/Não Declarado");
+		Label label_3 = new Label("Masculino/Feminino/Nï¿½o Declarado");
 		label_3.setForeground(new Color(255, 0, 0));
 		label_3.setBounds(204, 207, 193, 22);
 		getContentPane().add(label_3);
@@ -94,7 +94,7 @@ public class ScreenUpdate extends JFrame {
 		label_5.setBounds(110, 168, 171, 22);
 		getContentPane().add(label_5);
 
-		Label label_6 = new Label("Com pontos ' . ' e Traço ' - '");
+		Label label_6 = new Label("Com pontos ' . ' e Traï¿½o ' - '");
 		label_6.setForeground(Color.RED);
 		label_6.setBounds(261, 127, 171, 22);
 		getContentPane().add(label_6);
@@ -109,22 +109,22 @@ public class ScreenUpdate extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				Contato contato1 = new Contato();
+				Contato contato = new Contato();
 				ContatoDAO cttDAO = new ContatoDAO();
 
 				String nome = txtNome.getText();
 				String cpf = txtCpf.getText();
 				int idade = Integer.parseInt(txtIdade.getText());
 				String sexo = txtSexo.getText();
-				int idContato = Integer.parseInt(txtId.getText());
+				//int idContato = Integer.parseInt(txtId.getText());
 
-				contato1.setNome(nome);
-				contato1.setCpf(cpf);
-				contato1.setIdade(idade);
-				contato1.setSexo(sexo);
-				contato1.setId_contato(12);
+				contato.setNome(nome);
+				contato.setCpf(cpf);
+				contato.setIdade(idade);
+				contato.setSexo(sexo);
+				contato.setId_contato(5);
 
-				cttDAO.update(contato1);
+				cttDAO.update(contato);
 
 				// JOptionPane.showMessageDialog(null, "Cadastro Alterado");
 
