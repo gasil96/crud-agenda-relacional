@@ -21,9 +21,6 @@ import javax.swing.JButton;
 
 public class ScreenAdd extends JFrame {
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -38,9 +35,6 @@ public class ScreenAdd extends JFrame {
 
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public ScreenAdd() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 461, 524);
@@ -63,7 +57,7 @@ public class ScreenAdd extends JFrame {
 
 		Label label_3 = new Label("Masculino/Feminino/Não Declarado");
 		label_3.setForeground(new Color(255, 0, 0));
-		label_3.setBounds(204, 207, 171, 22);
+		label_3.setBounds(204, 207, 193, 22);
 		getContentPane().add(label_3);
 
 		Label label_4 = new Label("CPF:");
@@ -130,7 +124,11 @@ public class ScreenAdd extends JFrame {
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Problemas ao Cadastrar Contato!");
 				}
+				ScreenMain telaPrincipal = new ScreenMain();
+				telaPrincipal.show();
+				dispose();
 			}
+
 		});
 		btnNewButton_1.setBounds(344, 452, 89, 23);
 		getContentPane().add(btnNewButton_1);

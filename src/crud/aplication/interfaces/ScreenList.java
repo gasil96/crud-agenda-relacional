@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -20,11 +21,12 @@ import crud.jdbc.connection.DB;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 public class ScreenList extends JFrame {
 
 	private JPanel contentPane;
-	private JButton button;
+	private JButton Alterar;
 	private JTable table;
 
 	/**
@@ -57,6 +59,18 @@ public class ScreenList extends JFrame {
 		JButton btnNewButton = new JButton("Apagar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				ContatoDAO cttDAO = new ContatoDAO();
+			 				
+				String idRemove = JOptionPane.showInputDialog("Digite a ID do contato a ser removido");
+				
+				int valorConvertido = Integer.parseInt(idRemove);
+				
+				cttDAO.remove(valorConvertido);
+				
+				JOptionPane.showMessageDialog(null, "Removido com Sucesso!");
+				
+				
 			}
 		});
 
@@ -70,18 +84,9 @@ public class ScreenList extends JFrame {
 			}
 		});
 
-		button = new JButton("Listar*PROV");
-		button.addActionListener(new ActionListener() {
+		Alterar = new JButton("Alterar");
+		Alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * ContatoDAO cttDAO = new ContatoDAO(); Contato contato = new Contato();
-				 * 
-				 * try { for (Contato c : cttDAO.listarTodos()) {
-				 * 
-				 * System.out.println("ID: " + c.getId_contato() + " NOME: " + c.getNome() +
-				 * " CPF: " + c.getCpf() + " IDADE: " + c.getIdade() + " SEXO: " + c.getSexo());
-				 * } } catch (Exception e1) { e1.printStackTrace(); }
-				 */
 			
 			
 			}
@@ -96,7 +101,7 @@ public class ScreenList extends JFrame {
 						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
 						.addGap(2)
 						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-						.addGap(2).addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+						.addGap(2).addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap().addComponent(scrollPane,
 								GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)))
 				.addContainerGap()));
@@ -104,7 +109,7 @@ public class ScreenList extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 427, GroupLayout.PREFERRED_SIZE).addGap(9)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(btnNewButton_1)
-								.addComponent(btnNewButton).addComponent(button))));
+								.addComponent(btnNewButton).addComponent(Alterar))));
 
 		table = new JTable(modelo);
 
