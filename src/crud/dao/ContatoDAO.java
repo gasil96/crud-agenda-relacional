@@ -12,7 +12,7 @@ import crud.entities.Contato;
 import crud.jdbc.connection.DB;
 
 public class ContatoDAO {
-
+	
 	PreparedStatement st = null;
 	Connection conn = null;
 
