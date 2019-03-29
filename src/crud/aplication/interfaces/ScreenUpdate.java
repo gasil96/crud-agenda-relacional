@@ -39,7 +39,31 @@ public class ScreenUpdate extends JFrame {
 	}
 
 	public ScreenUpdate() {
+		String idstring = JOptionPane.showInputDialog("Qual ID do contato a ser alterado ?");
+		int id_correta = Integer.parseInt(idstring);
 
+		Contato contato = new Contato();
+		ContatoDAO cttDAO = new ContatoDAO();
+		try {
+			for (Contato c : cttDAO.listarTodos()) {
+				if (id_correta == c.getId_contato()) {
+
+					String nome = c.getNome();
+					String cpf = c.getCpf();
+					int idade = c.getIdade();
+					String sexo = c.getSexo();
+					int id_contato = c.getId_contato();
+					contato.setNome(nome);
+					contato.setCpf(cpf);
+					contato.setIdade(idade);
+					contato.setSexo(sexo);
+					contato.setId_contato(id_contato);
+				}
+
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 461, 524);
 		getContentPane().setLayout(null);
@@ -68,24 +92,29 @@ public class ScreenUpdate extends JFrame {
 		label_4.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label_4.setBounds(10, 127, 49, 22);
 		getContentPane().add(label_4);
-
-		TextField txtId = new TextField();
+		
+		//gambi
+		String idSTG = Integer.toString(contato.getId_contato());
+		
+		TextField txtId = new TextField(idSTG);
 		txtId.setBounds(71, 61, 33, 22);
 		getContentPane().add(txtId);
 
-		TextField txtNome = new TextField();
+		TextField txtNome = new TextField(contato.getNome());
 		txtNome.setBounds(71, 89, 293, 22);
 		getContentPane().add(txtNome);
 
-		TextField txtCpf = new TextField();
+		TextField txtCpf = new TextField(contato.getCpf());
 		txtCpf.setBounds(71, 127, 184, 22);
 		getContentPane().add(txtCpf);
+		// gambi
+		String idadeSTG = Integer.toString(contato.getIdade());
 
-		TextField txtIdade = new TextField();
+		TextField txtIdade = new TextField(idadeSTG);
 		txtIdade.setBounds(71, 168, 33, 22);
 		getContentPane().add(txtIdade);
 
-		TextField txtSexo = new TextField();
+		TextField txtSexo = new TextField(contato.getSexo());
 		txtSexo.setBounds(71, 207, 127, 22);
 		getContentPane().add(txtSexo);
 
@@ -104,31 +133,37 @@ public class ScreenUpdate extends JFrame {
 		label_7.setBounds(10, 61, 55, 22);
 		getContentPane().add(label_7);
 
-
 		JButton btnNewButton_1 = new JButton("Alterar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
 
-				Contato contato = new Contato();
-				ContatoDAO cttDAO = new ContatoDAO();
+					Contato contato2 = new Contato();
+					ContatoDAO cttDAO = new ContatoDAO();
 
-				String nome = txtNome.getText();
-				String cpf = txtCpf.getText();
-				int idade = Integer.parseInt(txtIdade.getText());
-				String sexo = txtSexo.getText();
-				//int idContato = Integer.parseInt(txtId.getText());
+					String nome = txtNome.getText();
+					String cpf = txtCpf.getText();
+					int idade = Integer.parseInt(txtIdade.getText());
+					String sexo = txtSexo.getText();
+					int id_Contato = Integer.parseInt(txtId.getText());
 
-				contato.setNome(nome);
-				contato.setCpf(cpf);
-				contato.setIdade(idade);
-				contato.setSexo(sexo);
-				contato.setId_contato(5);
+					contato2.setNome(nome);
+					contato2.setCpf(cpf);
+					contato2.setIdade(idade);
+					contato2.setSexo(sexo);
+					contato2.setId_contato(id_Contato);
 
-				cttDAO.update(contato);
+					cttDAO.update(contato2);
 
-				// JOptionPane.showMessageDialog(null, "Cadastro Alterado");
+					JOptionPane.showMessageDialog(null, "Cadastro Alterado");
 
-				dispose();
+					dispose();
+
+				} catch (Exception e2) {
+					e2.printStackTrace();
+					System.out.println("ERRO AQUI");
+					dispose();
+				}
 
 			}
 
