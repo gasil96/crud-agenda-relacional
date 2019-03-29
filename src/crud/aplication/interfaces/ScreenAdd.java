@@ -40,7 +40,7 @@ public class ScreenAdd extends JFrame {
 
 	public ScreenAdd() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 461, 524);
+		setBounds(100, 100, 561, 524);
 		getContentPane().setLayout(null);
 
 		Label label = new Label("NOME:");
@@ -58,7 +58,7 @@ public class ScreenAdd extends JFrame {
 		label_2.setBounds(10, 207, 49, 22);
 		getContentPane().add(label_2);
 
-		Label label_3 = new Label("Masculino/Feminino/Não Declarado");
+		Label label_3 = new Label("Masculino/Feminino/Nï¿½o Declarado");
 		label_3.setForeground(new Color(255, 0, 0));
 		label_3.setBounds(204, 207, 193, 22);
 		getContentPane().add(label_3);
@@ -89,7 +89,7 @@ public class ScreenAdd extends JFrame {
 		label_5.setBounds(110, 168, 171, 22);
 		getContentPane().add(label_5);
 
-		Label label_6 = new Label("Com pontos ' . ' e Traço ' - '");
+		Label label_6 = new Label("Com pontos ' . ' e Traï¿½o ' - '");
 		label_6.setForeground(Color.RED);
 		label_6.setBounds(261, 127, 171, 22);
 		getContentPane().add(label_6);
