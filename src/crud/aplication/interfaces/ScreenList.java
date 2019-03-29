@@ -46,7 +46,7 @@ public class ScreenList extends JFrame {
 	 */
 	public ScreenList() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 461, 524);
+		setBounds(100, 100, 561, 524);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -60,7 +60,7 @@ public class ScreenList extends JFrame {
 
 				String idRemove = JOptionPane.showInputDialog("Digite a ID do contato a ser removido");
 				if (idRemove == null) {
-					System.out.println("Cancelou a operação!");
+					System.out.println("Cancelou a operaï¿½ï¿½o!");
 				} else {
 					int valorConvertido = Integer.parseInt(idRemove);
 

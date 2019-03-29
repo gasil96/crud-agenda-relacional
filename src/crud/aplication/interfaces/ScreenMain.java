@@ -1,12 +1,11 @@
 package crud.aplication.interfaces;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
 public class ScreenMain extends JFrame {
 
@@ -36,7 +35,7 @@ public class ScreenMain extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(10, 54, 201, 93);
+		btnNewButton.setBounds(24, 54, 201, 93);
 		getContentPane().add(btnNewButton);
 
 		JButton button = new JButton("CONTATOS");

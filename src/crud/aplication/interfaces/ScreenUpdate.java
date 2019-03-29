@@ -1,6 +1,5 @@
 package crud.aplication.interfaces;
 
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -9,18 +8,14 @@ import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.JToolBar;
 
 import crud.dao.ContatoDAO;
 import crud.entities.Contato;
-import crud.jdbc.connection.DB;
-
-import javax.swing.JButton;
 
 public class ScreenUpdate extends JFrame {
 
@@ -37,7 +32,6 @@ public class ScreenUpdate extends JFrame {
 		});
 
 	}
-
 	public ScreenUpdate() {
 		String idstring = JOptionPane.showInputDialog("Qual ID do contato a ser alterado ?");
 		int id_correta = Integer.parseInt(idstring);
@@ -59,13 +53,12 @@ public class ScreenUpdate extends JFrame {
 					contato.setSexo(sexo);
 					contato.setId_contato(id_contato);
 				}
-
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 461, 524);
+		setBounds(100, 100, 561, 524);
 		getContentPane().setLayout(null);
 
 		Label label = new Label("NOME:");
@@ -92,10 +85,10 @@ public class ScreenUpdate extends JFrame {
 		label_4.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label_4.setBounds(10, 127, 49, 22);
 		getContentPane().add(label_4);
-		
-		//gambi
+
+		// gambi
 		String idSTG = Integer.toString(contato.getId_contato());
-		
+
 		TextField txtId = new TextField(idSTG);
 		txtId.setBounds(71, 61, 33, 22);
 		getContentPane().add(txtId);
@@ -107,7 +100,9 @@ public class ScreenUpdate extends JFrame {
 		TextField txtCpf = new TextField(contato.getCpf());
 		txtCpf.setBounds(71, 127, 184, 22);
 		getContentPane().add(txtCpf);
-		// gambi
+		
+		//
+		
 		String idadeSTG = Integer.toString(contato.getIdade());
 
 		TextField txtIdade = new TextField(idadeSTG);
@@ -135,6 +130,9 @@ public class ScreenUpdate extends JFrame {
 
 		JButton btnNewButton_1 = new JButton("Alterar");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			/* (non-Javadoc)
+			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+			 */
 			public void actionPerformed(ActionEvent e) {
 				try {
 
@@ -171,6 +169,7 @@ public class ScreenUpdate extends JFrame {
 		btnNewButton_1.setBounds(344, 452, 89, 23);
 		getContentPane().add(btnNewButton_1);
 
+		
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
