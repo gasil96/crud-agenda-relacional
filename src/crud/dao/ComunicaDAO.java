@@ -1,10 +1,11 @@
 package crud.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.mysql.jdbc.PreparedStatement;
+
 
 import crud.entities.Comunica;
 import crud.entities.Contato;
@@ -30,13 +31,15 @@ public class ComunicaDAO {
 		try {
 			conn = DB.getConnection();
 			st = conn.prepareStatement(
-					"INSERT INTO agenda.comunica " + "(email, cpf, idade, sexo) " + "VALUES " + "(?, ?, ?, ?)",
+					"INSERT INTO agenda.comunica " + "(telefone_celular, telefone_comercial, telefone_residencial, email, id_contato) "
+							+ "VALUES " + "(?, ?, ?, ?, ?,)",
 					Statement.RETURN_GENERATED_KEYS);
 
-			st.setString(1, comunicao.getEmail());
-			st.setString(2, contato.getCpf());
-			st.setInt(3, contato.getIdade());
-			st.setString(4, contato.getSexo());
+			st.setString(1, comunicao.getTelefone_celular());
+			st.setString(2, comunicao.getTelefone_comercial());
+			st.setString(3, comunicao.getTelefone_residencial());
+			st.setString(4, comunicao.getEmail());
+			st.setInt(5, comunicao.getId_contato());			
 			st.execute();
 
 		} catch (SQLException e) {
