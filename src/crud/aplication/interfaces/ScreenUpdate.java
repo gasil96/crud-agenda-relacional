@@ -155,9 +155,9 @@ public class ScreenUpdate extends JFrame {
 		btnNewButton_1.setBounds(353, 452, 89, 23);
 		getContentPane().add(btnNewButton_1);
 		
-		TextField textField = new TextField();
-		textField.setBounds(129, 231, 184, 22);
-		getContentPane().add(textField);
+		TextField txtEmail = new TextField();
+		txtEmail.setBounds(129, 231, 184, 22);
+		getContentPane().add(txtEmail);
 		
 		Label label_8 = new Label("EMAIL:");
 		label_8.setFont(new Font("Dialog", Font.PLAIN, 16));
@@ -169,27 +169,27 @@ public class ScreenUpdate extends JFrame {
 		label_9.setBounds(44, 259, 79, 22);
 		getContentPane().add(label_9);
 		
-		TextField textField_1 = new TextField();
-		textField_1.setBounds(129, 259, 184, 22);
-		getContentPane().add(textField_1);
+		TextField txtCelular = new TextField();
+		txtCelular.setBounds(129, 259, 184, 22);
+		getContentPane().add(txtCelular);
 		
 		Label label_10 = new Label("COMERCIAL: ");
 		label_10.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label_10.setBounds(21, 287, 102, 22);
 		getContentPane().add(label_10);
 		
-		TextField textField_2 = new TextField();
-		textField_2.setBounds(129, 287, 184, 22);
-		getContentPane().add(textField_2);
+		TextField txtComercial = new TextField();
+		txtComercial.setBounds(129, 287, 184, 22);
+		getContentPane().add(txtComercial);
 		
 		Label label_11 = new Label("RESIDENCIAL:");
 		label_11.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label_11.setBounds(10, 315, 113, 22);
 		getContentPane().add(label_11);
 		
-		TextField textField_3 = new TextField();
-		textField_3.setBounds(129, 315, 184, 22);
-		getContentPane().add(textField_3);
+		TextField txtResidencial = new TextField();
+		txtResidencial.setBounds(129, 315, 184, 22);
+		getContentPane().add(txtResidencial);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 452, 85);

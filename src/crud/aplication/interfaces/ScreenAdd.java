@@ -140,27 +140,27 @@ public class ScreenAdd extends JFrame {
 		label_8.setBounds(39, 231, 84, 22);
 		getContentPane().add(label_8);
 		
-		TextField textField = new TextField();
-		textField.setBounds(124, 231, 184, 22);
-		getContentPane().add(textField);
+		TextField txtCelular = new TextField();
+		txtCelular.setBounds(124, 231, 184, 22);
+		getContentPane().add(txtCelular);
 		
 		Label label_9 = new Label("COMERCIAL: ");
 		label_9.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label_9.setBounds(21, 259, 102, 22);
 		getContentPane().add(label_9);
 		
-		TextField textField_1 = new TextField();
-		textField_1.setBounds(124, 259, 184, 22);
-		getContentPane().add(textField_1);
+		TextField txtComercial = new TextField();
+		txtComercial.setBounds(124, 259, 184, 22);
+		getContentPane().add(txtComercial);
 		
 		Label label_10 = new Label("RESIDENCIAL:");
 		label_10.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label_10.setBounds(10, 287, 113, 22);
 		getContentPane().add(label_10);
 		
-		TextField textField_2 = new TextField();
-		textField_2.setBounds(124, 287, 184, 22);
-		getContentPane().add(textField_2);
+		TextField txtResidencial = new TextField();
+		txtResidencial.setBounds(124, 287, 184, 22);
+		getContentPane().add(txtResidencial);
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
