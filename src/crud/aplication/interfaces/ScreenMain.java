@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import crud.entities.Comunica;
+
 public class ScreenMain extends JFrame {
 
 	public static void main(String[] args) {
@@ -49,5 +51,17 @@ public class ScreenMain extends JFrame {
 		});
 		button.setBounds(223, 54, 201, 93);
 		getContentPane().add(button);
+		
+		JButton btnTesteEnum = new JButton("teste enum");
+		btnTesteEnum.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Comunica comunica = new Comunica(1, Comunica.TIPO.CELULAR, "98198-7035", 2);
+				System.out.println("tipo de comunicao do contato: "+ comunica.getTipo());
+				
+			}
+		});
+		btnTesteEnum.setBounds(24, 184, 130, 23);
+		getContentPane().add(btnTesteEnum);
 	}
 }

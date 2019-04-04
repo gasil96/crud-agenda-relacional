@@ -18,6 +18,8 @@ import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
 
 import crud.dao.ContatoDAO;
+import crud.entities.Comunica;
+import crud.entities.Comunica.TIPO;
 import crud.entities.Contato;
 import crud.jdbc.connection.DB;
 
@@ -119,7 +121,8 @@ public class ScreenAdd extends JFrame {
 				ScreenMain telaPrincipal = new ScreenMain();
 				telaPrincipal.show();
 				dispose();
-
+				Comunica comunica = new Comunica(1, Comunica.TIPO.CELULAR, "98198-7035", 2);
+				
 			}
 
 		});
