@@ -1,0 +1,25 @@
+-------------------CREATE BD-----------------------------------------
+
+
+CREATE DATABASE AGENDA
+
+
+-------------------CREATE TABELA CONTATO-----------------------------
+
+CREATE TABLE `agenda`.`contato` (
+  `id_contato` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(75) NOT NULL,
+  `cpf` VARCHAR(14) NOT NULL,
+  `idade` INT NOT NULL,
+  `sexo` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`id_contato`));
+  
+  -----------------CREATE TABELA COMUNICA-----------------------------
+  
+  CREATE TABLE `agenda`.`comunica` (
+  `id_comunica` INT NOT NULL AUTO_INCREMENT,
+  `tipo` VARCHAR(45) NOT NULL,
+  `registro` VARCHAR(75) NOT NULL,
+  `id_contato` INT NOT NULL,
+  PRIMARY KEY (`id_comunica`));
+  
