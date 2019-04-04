@@ -21,5 +21,6 @@ CREATE TABLE `agenda`.`contato` (
   `tipo` VARCHAR(45) NOT NULL,
   `registro` VARCHAR(75) NOT NULL,
   `id_contato` INT NOT NULL,
-  PRIMARY KEY (`id_comunica`));
-  
+  PRIMARY KEY (`id_comunica`),
+  CONSTRAINT fk_comunica_contato FOREIGN KEY(`id_contato`)
+  REFERENCES contato (`id_contato`));
