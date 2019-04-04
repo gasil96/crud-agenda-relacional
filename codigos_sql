@@ -1,7 +1,7 @@
 -------------------CREATE BD-----------------------------------------
 
 
-CREATE DATABASE AGENDA
+CREATE DATABASE agenda
 
 
 -------------------CREATE TABELA CONTATO-----------------------------
