@@ -56,12 +56,13 @@ public class ScreenMain extends JFrame {
 		btnTesteEnum.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				// MODELO DE COMO O ENUM DEVE FUNCIONAR NA HORA DE SER CHAMADO NA LISTA
 				Comunica comunica = new Comunica(1, Comunica.TIPO.CELULAR, "98198-7035", 2);
 				System.out.println("tipo de comunicao do contato: "+ comunica.getTipo());
 				
 			}
 		});
-		btnTesteEnum.setBounds(24, 184, 130, 23);
+		btnTesteEnum.setBounds(23, 184, 130, 23);
 		getContentPane().add(btnTesteEnum);
 	}
 }

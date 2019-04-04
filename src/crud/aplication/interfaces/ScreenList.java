@@ -55,23 +55,35 @@ public class ScreenList extends JFrame {
 		JButton btnNewButton = new JButton("Apagar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				ContatoDAO cttDAO = new ContatoDAO();
 
-				String idRemove = JOptionPane.showInputDialog("Digite a ID do contato a ser removido");
-				if (idRemove == null) {
-					System.out.println("Cancelou a operaï¿½ï¿½o!");
-				} else {
-					int valorConvertido = Integer.parseInt(idRemove);
-
-					cttDAO.remove(valorConvertido);
-
-					JOptionPane.showMessageDialog(null, "Removido com Sucesso!");
-
-					dispose();
-					ScreenList esta = new ScreenList();
-					esta.show();
+				Object[] options = { "Confirmar", "Cancelar" };
+				JOptionPane.showOptionDialog(null, "Clique Confirmar para Excluir ou Cancelar para Retornar",
+						"Informação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
+						options[0]);
+				// ainda possui um erro...
+				if (options != options[0]) {
+					int idselecionada = (int) table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
+					cttDAO.remove(idselecionada);
+					JOptionPane.showMessageDialog(null, "Contato Apagado");
+					dispose(); ScreenList esta = new ScreenList(); esta.show(); 
+				}else {
+					JOptionPane.showMessageDialog(null, "Operação Cancelada");
 				}
+				// FUNCAO DE EXCLUSAO ANTIGA
+				/* 
+				 * String idRemove =
+				 * JOptionPane.showInputDialog("Digite a ID do contato a ser removido"); if
+				 * (idRemove == null) { System.out.println("Cancelou a operaï¿½ï¿½o!"); } else {
+				 * int valorConvertido = Integer.parseInt(idRemove);
+				 * 
+				 * cttDAO.remove(valorConvertido);
+				 * 
+				 * JOptionPane.showMessageDialog(null, "Removido com Sucesso!");
+				 * 
+				 * dispose(); ScreenList esta = new ScreenList(); esta.show(); }
+				 * 
+				 */
 			}
 		});
 
@@ -88,7 +100,7 @@ public class ScreenList extends JFrame {
 		Alterar = new JButton("Alterar");
 		Alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 				ScreenUpdate telaAlterar = new ScreenUpdate();
 				telaAlterar.show();
 			}
@@ -124,7 +136,7 @@ public class ScreenList extends JFrame {
 		modelo.addColumn("CPF");
 		modelo.addColumn("Idade");
 		modelo.addColumn("Sexo");
-
+		modelo.addColumn("Tipo");
 		ContatoDAO cttDAO = new ContatoDAO();
 		Contato contato = new Contato();
 

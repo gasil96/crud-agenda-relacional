@@ -121,7 +121,6 @@ public class ScreenAdd extends JFrame {
 				ScreenMain telaPrincipal = new ScreenMain();
 				telaPrincipal.show();
 				dispose();
-				Comunica comunica = new Comunica(1, Comunica.TIPO.CELULAR, "98198-7035", 2);
 				
 			}
 
