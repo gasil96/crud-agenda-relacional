@@ -1,30 +1,30 @@
 package crud.aplication.interfaces;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.sql.Connection;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import crud.dao.ComunicaDAO;
 import crud.dao.ContatoDAO;
+import crud.entities.Comunica;
 import crud.entities.Contato;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JLabel;
-import java.awt.Color;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.ListSelectionModel;
 
 public class ScreenList extends JFrame {
 
@@ -95,8 +95,7 @@ public class ScreenList extends JFrame {
 		Alterar = new JButton("Alterar");
 		Alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+
 				ContatoDAO cttDAO = new ContatoDAO();
 
 				ScreenUpdate telaAlterar = new ScreenUpdate();
@@ -209,6 +208,20 @@ public class ScreenList extends JFrame {
 		modelo_comunica.addColumn("TIPO");
 		modelo_comunica.addColumn("DESCRIÇÃO");
 		modelo_comunica.addColumn("ID REFERENCIAL");
+
+		Comunica comunicao = new Comunica();
+		ComunicaDAO cmcDAO = new ComunicaDAO();
+
+		try {
+			for (Comunica cmc : cmcDAO.listarTodasC()) {
+
+				modelo_comunica.addRow(
+						new Object[] { cmc.getId_comunica(), cmc.getTipo(), cmc.getRegistro(), cmc.getId_contato() });
+
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 
 	}
 }
