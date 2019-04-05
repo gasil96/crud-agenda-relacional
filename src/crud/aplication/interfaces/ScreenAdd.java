@@ -25,6 +25,8 @@ import crud.jdbc.connection.DB;
 
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class ScreenAdd extends JFrame {
 
@@ -86,10 +88,6 @@ public class ScreenAdd extends JFrame {
 		txtIdade.setBounds(126, 147, 36, 22);
 		getContentPane().add(txtIdade);
 
-		TextField txtSexo = new TextField();
-		txtSexo.setBounds(125, 175, 124, 22);
-		getContentPane().add(txtSexo);
-
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -102,6 +100,22 @@ public class ScreenAdd extends JFrame {
 		btnNewButton.setBounds(262, 452, 89, 23);
 		getContentPane().add(btnNewButton);
 
+		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Masculino", "Feminino", "Nao Declarado"}));
+		comboBox.setBounds(124, 175, 125, 22);
+		getContentPane().add(comboBox);
+		comboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int indiceDoCombo = comboBox.getSelectedIndex();
+			}
+			
+			
+		});
+		
 		JButton btnNewButton_1 = new JButton("Salvar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -109,7 +123,7 @@ public class ScreenAdd extends JFrame {
 				String nome = txtNome.getText();
 				String cpf = txtCpf.getText();
 				int idade = Integer.parseInt(txtIdade.getText());
-				String sexo = txtSexo.getText();
+				String sexo = comboBox.getSelectedItem().toString();
 				ContatoDAO cttDAO = new ContatoDAO();
 				Contato contato = new Contato();
 				contato.setNome(nome);
@@ -125,6 +139,8 @@ public class ScreenAdd extends JFrame {
 			}
 
 		});
+		
+		
 		btnNewButton_1.setBounds(353, 452, 89, 23);
 		getContentPane().add(btnNewButton_1);
 		
@@ -163,6 +179,8 @@ public class ScreenAdd extends JFrame {
 		TextField txtResidencial = new TextField();
 		txtResidencial.setBounds(124, 287, 184, 22);
 		getContentPane().add(txtResidencial);
+		
+	
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {

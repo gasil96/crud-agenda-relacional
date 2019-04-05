@@ -15,6 +15,14 @@ public class Comunica {
 
 	}
 
+	public Comunica(int id_comunica, TIPO tipo, String registro, int id_contato) {
+		super();
+		this.id_comunica = id_comunica;
+		this.tipo = tipo;
+		this.registro = registro;
+		this.id_contato = id_contato;
+	}
+	
 	public int getId_comunica() {
 		return id_comunica;
 	}
@@ -47,13 +55,11 @@ public class Comunica {
 		this.registro = registro;
 	}
 
-	public Comunica(int id_comunica, TIPO tipo, String registro, int id_contato) {
-		super();
-		this.id_comunica = id_comunica;
-		this.tipo = tipo;
-		this.registro = registro;
-		this.id_contato = id_contato;
+	public String toString() {
+		return "Comunica [id_comunica=" + id_comunica + ", tipo=" + tipo + ", registro=" + registro + ", id_contato="
+				+ id_contato + "]";
 	}
+
 
 	
 	
