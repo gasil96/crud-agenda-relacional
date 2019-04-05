@@ -3,6 +3,7 @@ package crud.aplication.interfaces;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 
 import javax.swing.GroupLayout;
@@ -23,6 +24,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.ListSelectionModel;
 
 public class ScreenList extends JFrame {
 
@@ -47,9 +49,6 @@ public class ScreenList extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public ScreenList() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 561, 524);
@@ -65,16 +64,19 @@ public class ScreenList extends JFrame {
 				ContatoDAO cttDAO = new ContatoDAO();
 
 				Object[] options = { "Confirmar", "Cancelar" };
-				int respostaExclusao = 	JOptionPane.showOptionDialog(null, "Clique Confirmar para Excluir ou Cancelar para Retornar",
-						"Informação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
-						options[0]);
-				
+				int respostaExclusao = JOptionPane.showOptionDialog(null,
+						"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informação",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
 				if (respostaExclusao == 0) {
-					int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(), tabela_contato.getSelectedColumn());
+					int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(),
+							tabela_contato.getSelectedColumn());
 					cttDAO.remove(idselecionada);
 					JOptionPane.showMessageDialog(null, "Contato Apagado");
-					dispose(); ScreenList sl = new ScreenList(); sl.show();
-				}else {
+					dispose();
+					ScreenList sl = new ScreenList();
+					sl.show();
+				} else {
 					JOptionPane.showMessageDialog(null, "Operação Cancelada");
 				}
 			}
@@ -94,74 +96,92 @@ public class ScreenList extends JFrame {
 		Alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				ContatoDAO cttDAO = new ContatoDAO();
+
 				ScreenUpdate telaAlterar = new ScreenUpdate();
 				telaAlterar.show();
+
 			}
 		});
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setEnabled(false);
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setEnabled(false);
-		
+
 		JLabel lblNewLabel = new JLabel("CONTATOS ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setBackground(Color.WHITE);
-		
+
 		JLabel lblRegistroDosContatos = new JLabel("REGISTRO DOS CONTATOS");
 		lblRegistroDosContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblRegistroDosContatos.setHorizontalAlignment(SwingConstants.LEFT);
-		
+
+		JButton button = new JButton("Apagar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+
+		JButton button_1 = new JButton("Alterar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
-						.addComponent(lblRegistroDosContatos, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
-						.addComponent(scrollPane_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
-						.addComponent(lblNewLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(22)
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
-					.addGap(4)
-					.addComponent(lblRegistroDosContatos, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(Alterar)
-						.addComponent(btnNewButton)
-						.addComponent(btnNewButton_1))
-					.addContainerGap())
-		);
-		
-		tabela_comunica = new JTable(modelo_comunica);
-		scrollPane_1.setViewportView(tabela_comunica);
-		modelo_comunica.addColumn("ID");
-		modelo_comunica.addColumn("TIPO");
-		modelo_comunica.addColumn("DESCRIÇÃO");
-		modelo_comunica.addColumn("ID REFERENCIAL");
-		
-		
-		
-		
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
+				.createSequentialGroup().addContainerGap()
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+										.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+										.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(button, GroupLayout.PREFERRED_SIZE, 89,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 89,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
+												.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 89,
+														GroupLayout.PREFERRED_SIZE))
+										.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+										.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+										.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89,
+														GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED, 341, Short.MAX_VALUE)))
+								.addContainerGap())
+						.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblRegistroDosContatos, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+								.addGap(105)))));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addGroup(gl_contentPane
+				.createSequentialGroup().addGap(22)
+				.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnNewButton)
+						.addComponent(Alterar))
+				.addGap(19)
+				.addComponent(lblRegistroDosContatos, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.RELATED)
+				.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+				.addPreferredGap(ComponentPlacement.UNRELATED)
+				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnNewButton_1)
+						.addComponent(button).addComponent(button_1))
+				.addContainerGap()));
+
 		tabela_contato = new JTable(modelo_contato);
+
+		tabela_contato.setRowSelectionAllowed(false);
+		tabela_contato.setSurrendersFocusOnKeystroke(true);
+		tabela_contato.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(tabela_contato);
 		contentPane.setLayout(gl_contentPane);
 
@@ -176,11 +196,20 @@ public class ScreenList extends JFrame {
 		try {
 			for (Contato c : cttDAO.listarTodos()) {
 
-				modelo_contato.addRow(new Object[] { c.getId_contato(), c.getNome(), c.getCpf(), c.getIdade(), c.getSexo() });
+				modelo_contato
+						.addRow(new Object[] { c.getId_contato(), c.getNome(), c.getCpf(), c.getIdade(), c.getSexo() });
 
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+
+		tabela_comunica = new JTable(modelo_comunica);
+		scrollPane_1.setViewportView(tabela_comunica);
+		modelo_comunica.addColumn("ID");
+		modelo_comunica.addColumn("TIPO");
+		modelo_comunica.addColumn("DESCRIÇÃO");
+		modelo_comunica.addColumn("ID REFERENCIAL");
+
 	}
 }

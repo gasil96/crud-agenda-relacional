@@ -77,11 +77,11 @@ public class ScreenAdd extends JFrame {
 		getContentPane().add(label_4);
 
 		TextField txtNome = new TextField("");
-		txtNome.setBounds(123, 91, 293, 22);
+		txtNome.setBounds(128, 91, 290, 22);
 		getContentPane().add(txtNome);
 
 		TextField txtCpf = new TextField();
-		txtCpf.setBounds(124, 119, 184, 22);
+		txtCpf.setBounds(130, 119, 184, 22);
 		getContentPane().add(txtCpf);
 
 		TextField txtIdade = new TextField();
