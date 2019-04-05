@@ -77,7 +77,6 @@ public class ScreenList extends JFrame {
 				}else {
 					JOptionPane.showMessageDialog(null, "Operação Cancelada");
 				}
-				
 			}
 		});
 
