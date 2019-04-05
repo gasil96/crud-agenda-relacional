@@ -18,12 +18,18 @@ import javax.swing.table.DefaultTableModel;
 
 import crud.dao.ContatoDAO;
 import crud.entities.Contato;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class ScreenList extends JFrame {
 
 	private JPanel contentPane;
 	private JButton Alterar;
-	private JTable table;
+	private JTable tabela_contato;
+	private JTable tabela_comunica;
 
 	/**
 	 * Launch the application.
@@ -50,7 +56,8 @@ public class ScreenList extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		final DefaultTableModel modelo = new DefaultTableModel();
+		final DefaultTableModel modelo_contato = new DefaultTableModel();
+		final DefaultTableModel modelo_comunica = new DefaultTableModel();
 
 		JButton btnNewButton = new JButton("Apagar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -63,7 +70,7 @@ public class ScreenList extends JFrame {
 						options[0]);
 				// ainda possui um erro...
 				if (options != options[0]) {
-					int idselecionada = (int) table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
+					int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(), tabela_contato.getSelectedColumn());
 					cttDAO.remove(idselecionada);
 					JOptionPane.showMessageDialog(null, "Contato Apagado");
 					dispose(); ScreenList esta = new ScreenList(); esta.show(); 
@@ -108,47 +115,86 @@ public class ScreenList extends JFrame {
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setEnabled(false);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setEnabled(false);
+		
+		JLabel lblNewLabel = new JLabel("CONTATOS ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel.setBackground(Color.WHITE);
+		
+		JLabel lblRegistroDosContatos = new JLabel("REGISTRO DOS CONTATOS");
+		lblRegistroDosContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblRegistroDosContatos.setHorizontalAlignment(SwingConstants.LEFT);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup()
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-						.createSequentialGroup().addGap(157)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-						.addGap(2)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-						.addGap(2).addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup().addContainerGap().addComponent(scrollPane,
-								GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)))
-				.addContainerGap()));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 427, GroupLayout.PREFERRED_SIZE).addGap(9)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(btnNewButton_1)
-								.addComponent(btnNewButton).addComponent(Alterar))));
-
-		table = new JTable(modelo);
-
-		scrollPane.setViewportView(table);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+						.addComponent(lblRegistroDosContatos, GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
+					.addGap(4)
+					.addComponent(lblRegistroDosContatos, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(Alterar)
+						.addComponent(btnNewButton)
+						.addComponent(btnNewButton_1))
+					.addContainerGap())
+		);
+		
+		tabela_comunica = new JTable(modelo_comunica);
+		scrollPane_1.setViewportView(tabela_comunica);
+		modelo_comunica.addColumn("ID");
+		modelo_comunica.addColumn("TIPO");
+		modelo_comunica.addColumn("DESCRIÇÃO");
+		modelo_comunica.addColumn("ID REFERENCIAL");
+		
+		
+		
+		
+		tabela_contato = new JTable(modelo_contato);
+		scrollPane.setViewportView(tabela_contato);
 		contentPane.setLayout(gl_contentPane);
 
-		modelo.addColumn("Id");
-		modelo.addColumn("Nome");
-		modelo.addColumn("CPF");
-		modelo.addColumn("Idade");
-		modelo.addColumn("Sexo");
-		modelo.addColumn("Tipo");
+		modelo_contato.addColumn("ID");
+		modelo_contato.addColumn("NOME");
+		modelo_contato.addColumn("CPF");
+		modelo_contato.addColumn("IDADE");
+		modelo_contato.addColumn("SEXO");
 		ContatoDAO cttDAO = new ContatoDAO();
 		Contato contato = new Contato();
 
 		try {
 			for (Contato c : cttDAO.listarTodos()) {
 
-				modelo.addRow(new Object[] { c.getId_contato(), c.getNome(), c.getCpf(), c.getIdade(), c.getSexo() });
+				modelo_contato.addRow(new Object[] { c.getId_contato(), c.getNome(), c.getCpf(), c.getIdade(), c.getSexo() });
 
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 	}
-
 }
