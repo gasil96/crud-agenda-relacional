@@ -207,7 +207,7 @@ public class ScreenList extends JFrame {
 		modelo_comunica.addColumn("ID");
 		modelo_comunica.addColumn("TIPO");
 		modelo_comunica.addColumn("DESCRIÇÃO");
-		modelo_comunica.addColumn("ID REFERENCIAL");
+		modelo_comunica.addColumn("ID REFERENCIAL"); 
 
 		Comunica comunicao = new Comunica();
 		ComunicaDAO cmcDAO = new ComunicaDAO();
