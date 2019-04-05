@@ -65,32 +65,19 @@ public class ScreenList extends JFrame {
 				ContatoDAO cttDAO = new ContatoDAO();
 
 				Object[] options = { "Confirmar", "Cancelar" };
-				JOptionPane.showOptionDialog(null, "Clique Confirmar para Excluir ou Cancelar para Retornar",
+				int respostaExclusao = 	JOptionPane.showOptionDialog(null, "Clique Confirmar para Excluir ou Cancelar para Retornar",
 						"Informação", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options,
 						options[0]);
-				// ainda possui um erro...
-				if (options != options[0]) {
+				
+				if (respostaExclusao == 0) {
 					int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(), tabela_contato.getSelectedColumn());
 					cttDAO.remove(idselecionada);
 					JOptionPane.showMessageDialog(null, "Contato Apagado");
-					dispose(); ScreenList esta = new ScreenList(); esta.show(); 
+					dispose(); ScreenList sl = new ScreenList(); sl.show();
 				}else {
 					JOptionPane.showMessageDialog(null, "Operação Cancelada");
 				}
-				// FUNCAO DE EXCLUSAO ANTIGA
-				/* 
-				 * String idRemove =
-				 * JOptionPane.showInputDialog("Digite a ID do contato a ser removido"); if
-				 * (idRemove == null) { System.out.println("Cancelou a operaï¿½ï¿½o!"); } else {
-				 * int valorConvertido = Integer.parseInt(idRemove);
-				 * 
-				 * cttDAO.remove(valorConvertido);
-				 * 
-				 * JOptionPane.showMessageDialog(null, "Removido com Sucesso!");
-				 * 
-				 * dispose(); ScreenList esta = new ScreenList(); esta.show(); }
-				 * 
-				 */
+				
 			}
 		});
 
