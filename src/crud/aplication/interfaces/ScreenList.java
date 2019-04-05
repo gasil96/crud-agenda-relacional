@@ -95,7 +95,8 @@ public class ScreenList extends JFrame {
 		Alterar = new JButton("Alterar");
 		Alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
+				
 				ContatoDAO cttDAO = new ContatoDAO();
 
 				ScreenUpdate telaAlterar = new ScreenUpdate();
@@ -178,10 +179,8 @@ public class ScreenList extends JFrame {
 				.addContainerGap()));
 
 		tabela_contato = new JTable(modelo_contato);
-
-		tabela_contato.setRowSelectionAllowed(false);
 		tabela_contato.setSurrendersFocusOnKeystroke(true);
-		tabela_contato.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabela_contato.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scrollPane.setViewportView(tabela_contato);
 		contentPane.setLayout(gl_contentPane);
 

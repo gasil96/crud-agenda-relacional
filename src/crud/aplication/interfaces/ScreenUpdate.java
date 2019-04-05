@@ -19,6 +19,7 @@ import javax.swing.JPopupMenu;
 import crud.dao.ContatoDAO;
 import crud.entities.Contato;
 import javax.swing.JPanel;
+import java.awt.SystemColor;
 
 public class ScreenUpdate extends JFrame {
 
@@ -108,10 +109,6 @@ public class ScreenUpdate extends JFrame {
 		TextField txtIdade = new TextField(idadeSTG);
 		txtIdade.setBounds(129, 175, 33, 22);
 		getContentPane().add(txtIdade);
-
-		TextField txtSexo = new TextField(contato.getSexo());
-		txtSexo.setBounds(308, 203, 102, 22);
-		getContentPane().add(txtSexo);
 
 		Label label_7 = new Label("ID:");
 		label_7.setFont(new Font("Dialog", Font.PLAIN, 16));
@@ -212,6 +209,7 @@ public class ScreenUpdate extends JFrame {
 		getContentPane().add(txtResidencial);
 
 		JPanel panel = new JPanel();
+		panel.setForeground(SystemColor.windowBorder);
 		panel.setBounds(0, 0, 452, 85);
 		getContentPane().add(panel);
 
