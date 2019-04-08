@@ -11,11 +11,13 @@ public enum TipoComunicaEnum {
 	TELEFONE_RESIDENCIAL, 
 	TELEFONE_COMERCIAL;
 	
-	private  String valor;
+	private  String tipo;
 	
 	public String getValor() {
-		return valor;
+		return tipo	;
 	}
+	
+	
 	
 
 }

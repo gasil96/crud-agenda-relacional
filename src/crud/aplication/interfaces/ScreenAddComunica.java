@@ -66,11 +66,11 @@ public class ScreenAddComunica extends JFrame {
 		comboBoxEnum.setBounds(21, 33, 147, 27);
 		getContentPane().add(comboBoxEnum);
 		comboBoxEnum.addItemListener(new ItemListener() {
-			
+
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		MaskFormatter maskID;
@@ -83,39 +83,30 @@ public class ScreenAddComunica extends JFrame {
 		JButton btnNewButton_1 = new JButton("Salvar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 
-		
-			
-			
 			public void actionPerformed(ActionEvent e) {
 
 				ComunicaDAO cmcDAO = new ComunicaDAO();
 				Comunica comunica = new Comunica();
 				System.out.println(ItemEvent.SELECTED);
-				
+
 				String tipo = comboBoxEnum.getSelectedItem().toString();
+				
 				String registro = txtRegistro.getText();
 				int idCMC = Integer.parseInt(txtID.getText());
-			
-				System.out.println(tipo);
-				System.out.println();
-				//comunica.setTipo();
+				
+				// comunica.setTipo(comunica.getTipo());
 				comunica.setRegistro(registro);
 				comunica.setId_contato(idCMC);
 				cmcDAO.newReg(comunica);
-				
-/*
-				String nome = txtNome.getText();
-				String cpf = formatoCPF.getText();
-				int idade = Integer.parseInt(txtIdade.getText());
-				String sexo = comboBoxSexo.getSelectedItem().toString();
-				contato.setNome(nome);
-				contato.setCpf(cpf);
-				contato.setIdade(idade);
-				contato.setSexo(sexo);
-				cttDAO.create(contato);
-				JOptionPane.showMessageDialog(null, "Novo Contato Cadastrado!");
-				dispose();
-*/
+
+				/*
+				 * String nome = txtNome.getText(); String cpf = formatoCPF.getText(); int idade
+				 * = Integer.parseInt(txtIdade.getText()); String sexo =
+				 * comboBoxSexo.getSelectedItem().toString(); contato.setNome(nome);
+				 * contato.setCpf(cpf); contato.setIdade(idade); contato.setSexo(sexo);
+				 * cttDAO.create(contato); JOptionPane.showMessageDialog(null,
+				 * "Novo Contato Cadastrado!"); dispose();
+				 */
 				ScreenList listagemATT = new ScreenList();
 				listagemATT.show();
 
@@ -143,6 +134,16 @@ public class ScreenAddComunica extends JFrame {
 		txtRegistro.setBounds(171, 33, 258, 27);
 		getContentPane().add(txtRegistro);
 		txtRegistro.setColumns(10);
+		
+		JButton btnNewButton_2 = new JButton("New button");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String tipo = comboBoxEnum.getSelectedItem().toString();
+				System.out.println(tipo);
+			}
+		});
+		btnNewButton_2.setBounds(75, 111, 89, 23);
+		getContentPane().add(btnNewButton_2);
 
 	}
 }
