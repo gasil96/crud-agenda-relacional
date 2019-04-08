@@ -93,11 +93,11 @@ public class ComunicaDAO {
 	public List<Comunica> listarTodasC() throws Exception {
 		List<Comunica> comunica = new ArrayList<Comunica>();
 		conn = DB.getConnection();
-		st = conn.prepareStatement("select * from comunica where id_contato = 1", Statement.RETURN_GENERATED_KEYS);
-		
+		st = conn.prepareStatement("select * from comunica where id_contato = ?", Statement.RETURN_GENERATED_KEYS);
+		st.setInt(1, cmc.getId_contato()); // falta achar o get correto
 		ResultSet rs = st.executeQuery();
-		
 		while (rs.next()) {
+			
 			Comunica cmc = new Comunica();
 			cmc.setId_comunica(rs.getInt("id_comunica"));
 			cmc.setTipo(TipoComunicaEnum.valueOf(rs.getString("Tipo")));
@@ -105,7 +105,7 @@ public class ComunicaDAO {
 			cmc.setId_contato(rs.getInt("Id_Contato"));
 			comunica.add(cmc);
 		}
-		rs.close();
+		//rs.close();
 		// st.close();
 		return comunica;
 

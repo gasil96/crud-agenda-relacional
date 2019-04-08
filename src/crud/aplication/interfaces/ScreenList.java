@@ -26,6 +26,8 @@ import crud.dao.ComunicaDAO;
 import crud.dao.ContatoDAO;
 import crud.entities.Comunica;
 import crud.entities.Contato;
+import crud.entities.TipoComunicaEnum;
+
 import javax.swing.JSeparator;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
@@ -35,7 +37,6 @@ public class ScreenList extends JFrame {
 	private JButton Alterar;
 	private JTable tabela_contato;
 	private JTable tabela_comunica;
-
 
 	/**
 	 * Launch the application.
@@ -55,6 +56,7 @@ public class ScreenList extends JFrame {
 	}
 
 	public ScreenList() {
+		
 		setTitle("AGENDA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 631);
@@ -106,8 +108,8 @@ public class ScreenList extends JFrame {
 
 				ContatoDAO cttDAO = new ContatoDAO();
 
-		//		ScreenUpdate telaAlterar = new ScreenUpdate();
-				//telaAlterar.show();
+				// ScreenUpdate telaAlterar = new ScreenUpdate();
+				// telaAlterar.show();
 
 			}
 		});
@@ -131,7 +133,7 @@ public class ScreenList extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ComunicaDAO cmcDAO = new ComunicaDAO();
-				
+
 				Object[] options = { "Confirmar", "Cancelar" };
 				int respostaExclusao = JOptionPane.showOptionDialog(null,
 						"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informacao",
@@ -150,7 +152,7 @@ public class ScreenList extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "Operacao Cancelada");
 				}
-				
+
 			}
 		});
 
@@ -182,7 +184,6 @@ public class ScreenList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ScreenAddComunica addComunica;
 				try {
-					
 
 					int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(),
 							tabela_contato.getSelectedColumn());
@@ -282,12 +283,14 @@ public class ScreenList extends JFrame {
 		scrollPane_1.setViewportView(tabela_comunica);
 		modelo_comunica.addColumn("ID");
 		modelo_comunica.addColumn("TIPO");
-		modelo_comunica.addColumn("DESCRI��O");
+		modelo_comunica.addColumn("DESCRICAO");
 		modelo_comunica.addColumn("ID REFERENCIAL");
 
-		Comunica comunicao = new Comunica();
 		ComunicaDAO cmcDAO = new ComunicaDAO();
-
+		Comunica comun = new Comunica();
+		int id_contato = 1;
+		comun.setId_contato(id_contato);
+		System.out.println(id_contato);
 		try {
 			for (Comunica cmc : cmcDAO.listarTodasC()) {
 
