@@ -54,8 +54,9 @@ public class ScreenAddComunica extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				ScreenList listagem = new ScreenList();
-				listagem.show();
-				dispose();
+				 listagem.show();
+				 dispose();
+
 			}
 		});
 		btnNewButton.setBounds(249, 180, 89, 23);
@@ -74,7 +75,7 @@ public class ScreenAddComunica extends JFrame {
 			}
 		});
 		MaskFormatter maskID;
-		maskID = new MaskFormatter("##");
+		maskID = new MaskFormatter("#");
 
 		JFormattedTextField txtID = new JFormattedTextField(maskID);
 		txtID.setBounds(171, 71, 28, 27);
@@ -87,14 +88,13 @@ public class ScreenAddComunica extends JFrame {
 
 				ComunicaDAO cmcDAO = new ComunicaDAO();
 				Comunica comunica = new Comunica();
-				System.out.println(ItemEvent.SELECTED);
+				TipoComunicaEnum tipo = (TipoComunicaEnum) comboBoxEnum.getSelectedItem();
+				// String tipo = comboBoxEnum.getSelectedItem().toString();
 
-				String tipo = comboBoxEnum.getSelectedItem().toString();
-				
 				String registro = txtRegistro.getText();
 				int idCMC = Integer.parseInt(txtID.getText());
-				
-				// comunica.setTipo(comunica.getTipo());
+
+				comunica.setTipo(tipo);
 				comunica.setRegistro(registro);
 				comunica.setId_contato(idCMC);
 				cmcDAO.newReg(comunica);
@@ -107,6 +107,7 @@ public class ScreenAddComunica extends JFrame {
 				 * cttDAO.create(contato); JOptionPane.showMessageDialog(null,
 				 * "Novo Contato Cadastrado!"); dispose();
 				 */
+				dispose();
 				ScreenList listagemATT = new ScreenList();
 				listagemATT.show();
 
@@ -134,12 +135,16 @@ public class ScreenAddComunica extends JFrame {
 		txtRegistro.setBounds(171, 33, 258, 27);
 		getContentPane().add(txtRegistro);
 		txtRegistro.setColumns(10);
-		
+
 		JButton btnNewButton_2 = new JButton("New button");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String tipo = comboBoxEnum.getSelectedItem().toString();
+				Comunica comunica = new Comunica();
+				TipoComunicaEnum tipo = (TipoComunicaEnum) comboBoxEnum.getSelectedItem();
 				System.out.println(tipo);
+				comunica.setTipo(tipo);
+				System.out.println(tipo);
+
 			}
 		});
 		btnNewButton_2.setBounds(75, 111, 89, 23);

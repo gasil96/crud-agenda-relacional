@@ -5,19 +5,13 @@
 package crud.entities;
 
 public enum TipoComunicaEnum {
-	
-	EMAIL, 
-	CELULAR, 
-	TELEFONE_RESIDENCIAL, 
-	TELEFONE_COMERCIAL;
-	
-	private  String tipo;
-	
+
+	EMAIL, CELULAR, TELEFONE_RESIDENCIAL, TELEFONE_COMERCIAL;
+
+	private String valor;
+
 	public String getValor() {
-		return tipo	;
+		return valor;
 	}
-	
-	
-	
 
 }

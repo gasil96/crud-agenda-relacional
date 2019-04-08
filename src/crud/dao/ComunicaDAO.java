@@ -26,7 +26,6 @@ public class ComunicaDAO {
 	
 	public ComunicaDAO() {
 	}
-	
 	public void newReg(Comunica comunica) {
 		try {
 			conn = DB.getConnection();
@@ -34,11 +33,12 @@ public class ComunicaDAO {
 					"INSERT INTO agenda.comunica " + "(tipo, registro, id_contato) " + "VALUES " + "(?, ?, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 
-			st.setString(1, comunica.getTipo().getValor());
+			st.setString(1, comunica.getTipo().toString());
 			st.setString(2, comunica.getRegistro());
 			st.setInt(3, comunica.getId_contato());
-			st.execute();
+			st.executeUpdate();
 
+			
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -53,8 +53,25 @@ public class ComunicaDAO {
 		}
 	}
 	
-
 	
+	public void remove(int id) {
+		
+		try {
+			
+			conn = DB.getConnection();
+			st = conn.prepareStatement("DELETE FROM comunica WHERE id_comunica = ?");
+			
+			st.setInt(1, id);
+			
+			st.executeUpdate();
+			
+		} catch (SQLException e3) {
+			e3.printStackTrace();
+			
+		}
+		
+
+	}
 
 	public List<Comunica> listarTodasC() throws Exception {
 		List<Comunica> comunica = new ArrayList<Comunica>();

@@ -36,6 +36,7 @@ public class ScreenList extends JFrame {
 	private JTable tabela_contato;
 	private JTable tabela_comunica;
 
+
 	/**
 	 * Launch the application.
 	 */
@@ -71,7 +72,7 @@ public class ScreenList extends JFrame {
 
 				Object[] options = { "Confirmar", "Cancelar" };
 				int respostaExclusao = JOptionPane.showOptionDialog(null,
-						"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informação",
+						"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informaï¿½ï¿½o",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
 				if (respostaExclusao == 0) {
@@ -85,7 +86,7 @@ public class ScreenList extends JFrame {
 					listagemATT.show();
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Operação Cancelada");
+					JOptionPane.showMessageDialog(null, "Operaï¿½ï¿½o Cancelada");
 				}
 			}
 		});
@@ -129,6 +130,27 @@ public class ScreenList extends JFrame {
 		JButton button = new JButton("Apagar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ComunicaDAO cmcDAO = new ComunicaDAO();
+				
+				Object[] options = { "Confirmar", "Cancelar" };
+				int respostaExclusao = JOptionPane.showOptionDialog(null,
+						"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informacao",
+						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+				if (respostaExclusao == 0) {
+
+					int idselecionada = (int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),
+							tabela_comunica.getSelectedColumn());
+					cmcDAO.remove(idselecionada);
+					JOptionPane.showMessageDialog(null, "Contato Apagado");
+					dispose();
+					ScreenList listagemATT = new ScreenList();
+					listagemATT.show();
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Operacao Cancelada");
+				}
+				
 			}
 		});
 
@@ -160,6 +182,10 @@ public class ScreenList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ScreenAddComunica addComunica;
 				try {
+					
+
+					int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(),
+							tabela_contato.getSelectedColumn());
 					addComunica = new ScreenAddComunica();
 					addComunica.show();
 					dispose();
@@ -256,7 +282,7 @@ public class ScreenList extends JFrame {
 		scrollPane_1.setViewportView(tabela_comunica);
 		modelo_comunica.addColumn("ID");
 		modelo_comunica.addColumn("TIPO");
-		modelo_comunica.addColumn("DESCRIÇÃO");
+		modelo_comunica.addColumn("DESCRICAO");
 		modelo_comunica.addColumn("ID REFERENCIAL");
 
 		Comunica comunicao = new Comunica();
