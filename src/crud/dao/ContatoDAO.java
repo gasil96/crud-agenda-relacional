@@ -73,8 +73,8 @@ public class ContatoDAO {
 
 		finally {
 
-			// DB.closeStatement(st);
-			// DB.closeConnection();
+			 //DB.closeStatement(st);
+			 //DB.closeConnection();
 
 		}
 	}

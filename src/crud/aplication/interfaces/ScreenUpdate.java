@@ -29,6 +29,7 @@ public class ScreenUpdate extends JFrame {
 				try {
 					ScreenUpdate frame = new ScreenUpdate();
 					frame.setVisible(true);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

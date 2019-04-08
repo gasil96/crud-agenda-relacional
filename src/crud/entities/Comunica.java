@@ -2,12 +2,8 @@ package crud.entities;
 
 public class Comunica {
 
-	public enum TIPO {
-		EMAIL, CELULAR, TELEFONE_RESIDENCIAL, TELEFONE_COMERCIAL
-	};
-
 	private int id_comunica;
-	private TIPO tipo;
+	private TipoComunicaEnum tipo;
 	private String registro;
 	private int id_contato;
 
@@ -15,7 +11,7 @@ public class Comunica {
 
 	}
 
-	public Comunica(int id_comunica, TIPO tipo, String registro, int id_contato) {
+	public Comunica(int id_comunica, TipoComunicaEnum tipo, String registro, int id_contato) {
 		super();
 		this.id_comunica = id_comunica;
 		this.tipo = tipo;
@@ -39,11 +35,11 @@ public class Comunica {
 		this.id_contato = id_contato;
 	}
 
-	public TIPO getTipo() {
+	public TipoComunicaEnum getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TIPO tipo) {
+	public void setTipo(TipoComunicaEnum tipo) {
 		this.tipo = tipo;
 	}
 
