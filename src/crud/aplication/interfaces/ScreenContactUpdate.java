@@ -21,13 +21,13 @@ import crud.entities.Contato;
 import javax.swing.JPanel;
 import java.awt.SystemColor;
 
-public class ScreenUpdate extends JFrame {
+public class ScreenContactUpdate extends JFrame {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ScreenUpdate frame = new ScreenUpdate();
+					ScreenContactUpdate frame = new ScreenContactUpdate();
 					frame.setVisible(true);
 
 				} catch (Exception e) {
@@ -38,7 +38,7 @@ public class ScreenUpdate extends JFrame {
 
 	}
 
-	public ScreenUpdate() {
+	public ScreenContactUpdate() {
 		String idstring = JOptionPane.showInputDialog("Qual ID do contato a ser alterado ?");
 		int id_correta = Integer.parseInt(idstring);
 

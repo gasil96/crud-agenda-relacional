@@ -106,8 +106,8 @@ public class ScreenList extends JFrame {
 
 				ContatoDAO cttDAO = new ContatoDAO();
 
-				ScreenUpdate telaAlterar = new ScreenUpdate();
-				telaAlterar.show();
+		//		ScreenUpdate telaAlterar = new ScreenUpdate();
+				//telaAlterar.show();
 
 			}
 		});
@@ -282,7 +282,7 @@ public class ScreenList extends JFrame {
 		scrollPane_1.setViewportView(tabela_comunica);
 		modelo_comunica.addColumn("ID");
 		modelo_comunica.addColumn("TIPO");
-		modelo_comunica.addColumn("DESCRICAO");
+		modelo_comunica.addColumn("DESCRI��O");
 		modelo_comunica.addColumn("ID REFERENCIAL");
 
 		Comunica comunicao = new Comunica();

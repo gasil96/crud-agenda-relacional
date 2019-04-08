@@ -69,22 +69,40 @@ public class ComunicaDAO {
 			e3.printStackTrace();
 			
 		}
+	}
 		
+		public void lista(int idS) {
+			
+			try {
+				
+				conn = DB.getConnection();
+				st = conn.prepareStatement("select * from comunica where id_contato = ?", Statement.RETURN_GENERATED_KEYS);
+				
+				st.setInt(1, idS);
+				
+				st.executeUpdate();
+				
+			} catch (SQLException e3) {
+				e3.printStackTrace();
+				
+			}
 
 	}
+	Comunica cmc = new Comunica();
 
 	public List<Comunica> listarTodasC() throws Exception {
 		List<Comunica> comunica = new ArrayList<Comunica>();
 		conn = DB.getConnection();
-		st = conn.prepareStatement("select * from comunica", Statement.RETURN_GENERATED_KEYS);
+		st = conn.prepareStatement("select * from comunica where id_contato = 1", Statement.RETURN_GENERATED_KEYS);
+		
 		ResultSet rs = st.executeQuery();
-
+		
 		while (rs.next()) {
 			Comunica cmc = new Comunica();
 			cmc.setId_comunica(rs.getInt("id_comunica"));
 			cmc.setTipo(TipoComunicaEnum.valueOf(rs.getString("Tipo")));
 			cmc.setRegistro(rs.getString("Registro"));
-			cmc.setId_contato(rs.getInt("id_contato"));
+			cmc.setId_contato(rs.getInt("Id_Contato"));
 			comunica.add(cmc);
 		}
 		rs.close();
