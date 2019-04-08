@@ -43,6 +43,7 @@ public class ScreenAddContact extends JFrame {
 	}
 
 	public ScreenAddContact() throws Exception {
+		setTitle("Novo Contato");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 468, 254);

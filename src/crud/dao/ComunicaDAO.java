@@ -27,7 +27,7 @@ public class ComunicaDAO {
 	public ComunicaDAO() {
 	}
 	
-	public void novoRegistro(Comunica comunica) {
+	public void newReg(Comunica comunica) {
 		try {
 			conn = DB.getConnection();
 			st = conn.prepareStatement(

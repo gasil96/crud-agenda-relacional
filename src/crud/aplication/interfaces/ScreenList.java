@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -53,6 +54,7 @@ public class ScreenList extends JFrame {
 	}
 
 	public ScreenList() {
+		setTitle("AGENDA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 631);
 		contentPane = new JPanel();
@@ -156,9 +158,14 @@ public class ScreenList extends JFrame {
 		JButton addNewRegistro = new JButton("+");
 		addNewRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ScreenAddComunica addComunica = new ScreenAddComunica();
-				addComunica.show();
-				dispose();
+				ScreenAddComunica addComunica;
+				try {
+					addComunica = new ScreenAddComunica();
+					addComunica.show();
+					dispose();
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
 
 			}
 		});

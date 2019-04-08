@@ -55,7 +55,8 @@ public class Comunica {
 		return "Comunica [id_comunica=" + id_comunica + ", tipo=" + tipo + ", registro=" + registro + ", id_contato="
 				+ id_contato + "]";
 	}
-
+	
+	
 
 	
 	
