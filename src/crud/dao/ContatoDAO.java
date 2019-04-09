@@ -73,27 +73,23 @@ public class ContatoDAO {
 		}
 	}
 
-	public void update(Contato contato, Connection conn) {
+	public void update(Contato contato) {
 
 		PreparedStatement st = null;
 		try {
-			
-			st = conn.prepareStatement(
-					"UPDATE contato SET nome = ?, cpf = ?, idade = ?, sexo = ? " + "WHERE id_contato = ?",
-					Statement.RETURN_GENERATED_KEYS);
+
+			st = DB.getConnection().prepareStatement(
+					"UPDATE contato SET nome = ?, cpf = ?, idade = ?, sexo = ? " + "WHERE id_contato = ?");
 
 			st.setString(1, contato.getNome());
 			st.setString(2, contato.getCpf());
 			st.setInt(3, contato.getIdade());
 			st.setString(4, contato.getSexo());
 			st.setInt(5, contato.getId_contato());
-
 			st.executeUpdate();
 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-
 		}
 
 		finally {
@@ -103,8 +99,6 @@ public class ContatoDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			// DB.closeConnection();
-
 		}
 	}
 	

@@ -109,21 +109,23 @@ public class ScreenList extends JFrame {
 		});
 
 		/*
-		 * METODO ALTERAR REGISTRO
+		 * METODO ALTERAR CONTATO
 		 * */
-		Alterar = new JButton("Alterar");
+		Alterar = new JButton("Atualizar");
 		Alterar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				Object elemento = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
 				if(elemento != null) {
-					
 					try {
 						ContatoDAO contatoDAO = new ContatoDAO();
-						Contato buscarPorId = contatoDAO.buscarPorId( (int) elemento);
-						if (buscarPorId != null) {
-							System.out.println(buscarPorId);							
+						Contato contato = contatoDAO.buscarPorId((int) elemento);
+						if(contato != null) {
+							setVisible(false);
+							ScreenContactUpdate screenContactUpdate = new ScreenContactUpdate(contato);
+							screenContactUpdate.setVisible(true);
 						}
+						
 						
 					} catch (Exception e1) {
 						e1.printStackTrace();
@@ -180,19 +182,29 @@ public class ScreenList extends JFrame {
 			}
 		});
 
+		
+		/*
+		 * ALTERAR O REGISTRO DO CONTATO
+		 * */
 		JButton button_1 = new JButton("Alterar");
 		button_1.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				//alterar o registro do contato
 				
-				try {
+			/*	try {
 					ContatoDAO contatoDAO = new ContatoDAO();
-					Contato buscarPorId = contatoDAO.buscarPorId((int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),0));
-					System.out.println(buscarPorId.toString());
+					Contato contato = contatoDAO.buscarPorId((int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),0));
+					if(contato != null) {
+						setVisible(false);
+						ScreenContactUpdate screenContactUpdate = new ScreenContactUpdate(contato);
+						screenContactUpdate.setVisible(true);
+					}
+					
 					
 				} catch (Exception e1) {
 					e1.printStackTrace();
-				}
+				}*/
 				
 			}
 		});
