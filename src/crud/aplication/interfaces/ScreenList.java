@@ -97,20 +97,41 @@ public class ScreenList extends JFrame {
 			}
 		});
 
-		JButton btnNewButton_1 = new JButton("Voltar");
+		
+		/*
+		 * METODO SAIR DO SISTEMA
+		 * */
+		JButton btnNewButton_1 = new JButton("Sair");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				dispose();
-
 			}
 		});
 
-		Alterar = new JButton("Alterar");
+		/*
+		 * METODO ALTERAR CONTATO
+		 * */
+		Alterar = new JButton("Atualizar");
 		Alterar.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
-
 				Object elemento = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
+				if(elemento != null) {
+					try {
+						ContatoDAO contatoDAO = new ContatoDAO();
+						Contato contato = contatoDAO.buscarPorId((int) elemento);
+						if(contato != null) {
+							setVisible(false);
+							ScreenContactUpdate screenContactUpdate = new ScreenContactUpdate(contato);
+							screenContactUpdate.setVisible(true);
+						}
+						
+						
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					
+				}
 				
 				
 				/*
@@ -161,30 +182,42 @@ public class ScreenList extends JFrame {
 			}
 		});
 
+		
+		/*
+		 * ALTERAR O REGISTRO DO CONTATO
+		 * */
 		JButton button_1 = new JButton("Alterar");
 		button_1.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				//alterar o registro do contato
 				
-				try {
+			/*	try {
 					ContatoDAO contatoDAO = new ContatoDAO();
-					Contato buscarPorId = contatoDAO.buscarPorId((int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),0), DB.getConnection());
-					System.out.println(buscarPorId.toString());
+					Contato contato = contatoDAO.buscarPorId((int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),0));
+					if(contato != null) {
+						setVisible(false);
+						ScreenContactUpdate screenContactUpdate = new ScreenContactUpdate(contato);
+						screenContactUpdate.setVisible(true);
+					}
+					
 					
 				} catch (Exception e1) {
 					e1.printStackTrace();
-				}
+				}*/
 				
 			}
 		});
 
+		/*
+		 * Adicionar contato
+		 * **/
 		JButton addNewContact = new JButton("+");
 		addNewContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ScreenAddContact adicionar;
 				try {
 					adicionar = new ScreenAddContact();
-					adicionar.show();
 					dispose();
 					
 					
@@ -197,26 +230,25 @@ public class ScreenList extends JFrame {
 
 		JPanel panel = new JPanel();
 
+		
+		/*
+		 * ADICIONANDO COMUNICACAO DO USUARIO
+		 * */
 		JButton addNewRegistro = new JButton("+");
 		addNewRegistro.addActionListener(new ActionListener() {
+			
+			
+			/*
+			 * ADICIONANDO METODO DE CLICK NO BOTAO
+			 * */
 			public void actionPerformed(ActionEvent e) {
-				ScreenAddComunica addComunica;
-				Contato ctt = new Contato();
 				if (tabela_contato.getSelectedRow() >= 0) {
 					try {
-
-						Object selecao1 = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
-						int selecaoC100 = Integer.parseInt(selecao1.toString());
-						
-						System.out.println(tabela_contato.getSelectedRow());
-						
-						addComunica = new ScreenAddComunica(selecaoC100);
-						addComunica.show();
+						new ScreenAddComunica((int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0));
 						dispose();
 
 					} catch (ParseException e1) {
 						e1.printStackTrace();
-
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Selecione um contato");
@@ -294,7 +326,7 @@ public class ScreenList extends JFrame {
 		// tabela_contato.setRowSelectionAllowed(false);
 
 		try {
-			List<Contato> listarTodos = cttDAO.listarTodos(DB.getConnection());
+			List<Contato> listarTodos = cttDAO.listarTodos();
 			if(listarTodos.size() > 0) {
 				for (Contato c : listarTodos) {
 					modelo_contato
@@ -309,20 +341,26 @@ public class ScreenList extends JFrame {
 		tabela_comunica = new JTable(modelo_comunica);
 
 		tabela_contato.addMouseListener(new MouseListener() {
+			
+			/*
+			 * ADICIONAR EVENTO DE CLICK NA TABELA DE LISTAGEM DO USUARIO
+			 * */
 			public void mouseClicked(MouseEvent e) {
 				int selecaoC = 0;
 				Object selecao = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
 				selecaoC = Integer.parseInt(selecao.toString());
-				DB.closeConnection();
 				ComunicaDAO cmcDAO = new ComunicaDAO();
 				Comunica valor = new Comunica();
 				valor.setId_contato(selecaoC);
 
 				try {
 					// PASSADO 'VALOR' PARA DENTRO DO MÉTODO ( AJUDA DO DAVIDSON )
-					for (Comunica cmc : cmcDAO.listarTodasC(valor)) {
-						modelo_comunica.addRow(new Object[] { cmc.getId_comunica(), cmc.getTipo(), cmc.getRegistro(),
-								cmc.getId_contato() });
+					List<Comunica> listarTodasC = cmcDAO.listarTodasC(valor);
+					if(listarTodasC.size() > 0){						
+						for (Comunica cmc : listarTodasC) {
+							modelo_comunica.addRow(new Object[] { cmc.getId_comunica(), cmc.getTipo(), cmc.getRegistro(),
+									cmc.getId_contato() });
+						}
 					}
 
 					

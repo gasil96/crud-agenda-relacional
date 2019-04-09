@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +16,12 @@ public class ComunicaDAO {
 	public ComunicaDAO() {
 	}
 
-	public void newReg(Comunica comunica, Connection conn) {
+	public void newReg(Comunica comunica) {
+		Connection conn = DB.getConnection();
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
-					"INSERT INTO agenda.comunica " + "(tipo, registro, id_contato) " + "VALUES " + "(?, ?, ?)",
-					Statement.RETURN_GENERATED_KEYS);
+					"INSERT INTO agenda.comunica " + "(tipo, registro, id_contato) " + "VALUES " + "(?, ?, ?)");
 
 			st.setString(1, comunica.getTipo().toString());
 			st.setString(2, comunica.getRegistro());
@@ -39,7 +38,6 @@ public class ComunicaDAO {
 
 			try {
 				st.close();
-				DB.closeConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -16,8 +16,8 @@ public class ContatoDAO {
 	public ContatoDAO() {
 	}
 
-	public void create(Contato contato, Connection conn) {
-
+	public void create(Contato contato) {
+		Connection conn = DB.getConnection();
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
@@ -40,7 +40,6 @@ public class ContatoDAO {
 
 			try {
 				st.close();
-				DB.closeConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -74,27 +73,23 @@ public class ContatoDAO {
 		}
 	}
 
-	public void update(Contato contato, Connection conn) {
+	public void update(Contato contato) {
 
 		PreparedStatement st = null;
 		try {
-			
-			st = conn.prepareStatement(
-					"UPDATE contato SET nome = ?, cpf = ?, idade = ?, sexo = ? " + "WHERE id_contato = ?",
-					Statement.RETURN_GENERATED_KEYS);
+
+			st = DB.getConnection().prepareStatement(
+					"UPDATE contato SET nome = ?, cpf = ?, idade = ?, sexo = ? " + "WHERE id_contato = ?");
 
 			st.setString(1, contato.getNome());
 			st.setString(2, contato.getCpf());
 			st.setInt(3, contato.getIdade());
 			st.setString(4, contato.getSexo());
 			st.setInt(5, contato.getId_contato());
-
 			st.executeUpdate();
 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-
 		}
 
 		finally {
@@ -104,14 +99,14 @@ public class ContatoDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			// DB.closeConnection();
-
 		}
 	}
 	
 	
 
-	public List<Contato> listarTodos(Connection conn) throws Exception {
+	public List<Contato> listarTodos() throws Exception {
+		
+		Connection conn = DB.getConnection();
 		
 		List<Contato> contatos = new ArrayList<Contato>();
 		PreparedStatement st = conn.prepareStatement("select * from contato");
@@ -126,15 +121,15 @@ public class ContatoDAO {
 			contatos.add(contato);
 		}
 		rs.close();
-		DB.closeConnection();
-		// st.close();
+		st.close();
 		return contatos;
 
 	}
 
-	public Contato buscarPorId(int idSelecionado, Connection conn) throws Exception {
+	public Contato buscarPorId(int idSelecionado) throws Exception {
+		
 		Contato contato = null;
-		PreparedStatement st = conn.prepareStatement("select * from contato where id_contato = ?");
+		PreparedStatement st = DB.getConnection().prepareStatement("select * from contato where id_contato = ?");
 		st.setInt(1, idSelecionado);
 		ResultSet retorno = st.executeQuery();
 		

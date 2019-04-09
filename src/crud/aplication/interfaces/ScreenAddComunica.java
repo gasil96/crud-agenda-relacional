@@ -26,15 +26,6 @@ import crud.jdbc.connection.DB;
 public class ScreenAddComunica extends JFrame {
 	private JTextField txtRegistro;
 	private Long idSelecionado;
-
-	/*
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { ScreenAddComunica frame = new
-	 * ScreenAddComunica(); frame.setVisible(true); } catch (Exception e) {
-	 * e.printStackTrace(); } } });
-	 * 
-	 * }
-	 */
 	
 	public ScreenAddComunica(int idSelecionado) throws ParseException {
 		this.setVisible(true);
@@ -44,12 +35,18 @@ public class ScreenAddComunica extends JFrame {
 		setBounds(100, 100, 468, 199);
 		getContentPane().setLayout(null);
 
+		/*
+		 * ADICIONANDO BOTAO VOLTAR
+		 * */
 		JButton btnNewButton = new JButton("Voltar");
+		
+		/*
+		 * COLOCANDO EVENTO CLICK NO BOTAO
+		 * */
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				ScreenList listagem = new ScreenList();
-				listagem.show();
 				dispose();
 
 			}
@@ -76,6 +73,9 @@ public class ScreenAddComunica extends JFrame {
 		txtID.setBounds(140, 123, 28, 27);
 		getContentPane().add(txtID);
 
+		/*
+		 * METODO SALVAR REGISTRO
+		 * */
 		JButton btnNewButton_1 = new JButton("Salvar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 
@@ -84,27 +84,17 @@ public class ScreenAddComunica extends JFrame {
 				ComunicaDAO cmcDAO = new ComunicaDAO();
 				Comunica comunica = new Comunica();
 				TipoComunicaEnum tipo = (TipoComunicaEnum) comboBoxEnum.getSelectedItem();
-				// String tipo = comboBoxEnum.getSelectedItem().toString();
 
 				String registro = txtRegistro.getText();
-				int idCMC = Integer.parseInt(txtID.getText());
-
+				
 				comunica.setTipo(tipo);
 				comunica.setRegistro(registro);
-				comunica.setId_contato(idCMC);
-				cmcDAO.newReg(comunica, DB.getConnection());
-
-				/*
-				 * String nome = txtNome.getText(); String cpf = formatoCPF.getText(); int idade
-				 * = Integer.parseInt(txtIdade.getText()); String sexo =
-				 * comboBoxSexo.getSelectedItem().toString(); contato.setNome(nome);
-				 * contato.setCpf(cpf); contato.setIdade(idade); contato.setSexo(sexo);
-				 * cttDAO.create(contato); JOptionPane.showMessageDialog(null,
-				 * "Novo Contato Cadastrado!"); dispose();
-				 */
-				dispose();
+				comunica.setId_contato(idSelecionado);
+				cmcDAO.newReg(comunica);
+				
+				setVisible(false);
 				ScreenList listagemATT = new ScreenList();
-				listagemATT.show();
+				listagemATT.setVisible(true);
 
 			}
 		});
