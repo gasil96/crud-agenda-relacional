@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
@@ -22,14 +23,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+
 import crud.dao.ComunicaDAO;
 import crud.dao.ContatoDAO;
 import crud.entities.Comunica;
 import crud.entities.Contato;
-import crud.entities.TipoComunicaEnum;
-
-import javax.swing.JSeparator;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 public class ScreenList extends JFrame {
 
@@ -56,11 +55,7 @@ public class ScreenList extends JFrame {
 	}
 
 	public ScreenList() {
-		
-		Comunica testecmc = new Comunica();
-		testecmc.setId_contato(3);
-		System.out.println(testecmc.getId_contato());
-		
+
 		setTitle("AGENDA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 631);
@@ -281,6 +276,7 @@ public class ScreenList extends JFrame {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+
 		tabela_comunica = new JTable(modelo_comunica);
 		scrollPane_1.setViewportView(tabela_comunica);
 		modelo_comunica.addColumn("ID");
@@ -289,18 +285,16 @@ public class ScreenList extends JFrame {
 		modelo_comunica.addColumn("ID REFERENCIAL");
 
 		ComunicaDAO cmcDAO = new ComunicaDAO();
-		int valorIdPesq = 3;
-		Comunica cm = new Comunica();
-		
-		cm.setId_contato(valorIdPesq);
-		int id_contato=3;
-		cm.setId_contato(id_contato);
-		System.out.println("AQUI POW"+cm.getId_contato());
-		
+		Comunica comunica = new Comunica();
+		int idTest = 3;
+
+		comunica.setId_contato(idTest);
+
+	//	cmcDAO.newReg(comunica);
+
 		try {
 
 			for (Comunica cmc : cmcDAO.listarTodasC()) {
-
 				modelo_comunica.addRow(
 						new Object[] { cmc.getId_comunica(), cmc.getTipo(), cmc.getRegistro(), cmc.getId_contato() });
 
