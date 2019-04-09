@@ -47,7 +47,7 @@ public class ComunicaDAO {
 		finally {
 
 			DB.closeStatement(st);
-			// DB.closeConnection();
+			 DB.closeConnection();
 
 		}
 	}
@@ -95,6 +95,7 @@ public class ComunicaDAO {
 		
 		rs.close();
 		st.close();
+		DB.closeConnection();
 		return comunica;
 
 	}

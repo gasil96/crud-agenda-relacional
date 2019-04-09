@@ -25,7 +25,7 @@ public class DB {
 				Properties props = loadProperties();
 				String url = props.getProperty("dburl");
 				conn = DriverManager.getConnection(url, props);
-			//	JOptionPane.showMessageDialog(null, "Conexão com o Banco Realizada");
+				JOptionPane.showMessageDialog(null, "Conexão com o Banco Realizada");
 
 			} catch (SQLException e) {
 
@@ -44,6 +44,7 @@ public class DB {
 		if (conn != null) {
 			try {
 				conn.close();
+				JOptionPane.showMessageDialog(null, "Conexao com o Banco Fechada");
 			} catch (SQLException e) {
 
 				throw new DbException(e.getMessage());
@@ -54,7 +55,7 @@ public class DB {
 
 	// metodo para carregar propriedas do db.properties
 	private static Properties loadProperties() {
-
+ 
 		try (FileInputStream fs = new FileInputStream("db.properties")) {
 
 			Properties props = new Properties();
