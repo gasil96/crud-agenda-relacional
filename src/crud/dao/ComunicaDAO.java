@@ -71,19 +71,16 @@ public class ComunicaDAO {
 	
 
 
+	//NAO CONSIGO FAZER ISSO FORA DA CLASSA `COMUNICADAO`
 	public List<Comunica> listarTodasC() throws Exception {
-		//NAO CONSIGO FAZER ISSO FORA DA CLASSA `COMUNICADAO`
-		Comunica testecmc = new Comunica();
-		testecmc.setId_contato(3);
 		
-		Comunica cmc = new Comunica();
 		List<Comunica> comunica = new ArrayList<Comunica>();
 		conn = DB.getConnection();
 		st = conn.prepareStatement("select * from comunica where id_contato = ?", Statement.RETURN_GENERATED_KEYS);
-		st.setInt(1, testecmc.getId_contato()); // falta achar o get correto
+		//st.setInt(1, testecmc.getId_contato()); // falta achar o get correto
+		st.setInt(1, 3);
 		ResultSet rs = st.executeQuery();
 		
-		System.out.println("Teste get dentro do dao cmc: "+testecmc.getId_contato());
 		
 		while (rs.next()) {
 			Comunica cmc1 = new Comunica();

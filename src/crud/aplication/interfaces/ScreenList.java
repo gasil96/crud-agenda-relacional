@@ -289,11 +289,13 @@ public class ScreenList extends JFrame {
 		modelo_comunica.addColumn("ID REFERENCIAL");
 
 		ComunicaDAO cmcDAO = new ComunicaDAO();
-		int valorIdPesq = 1;
-		Comunica comunica = new Comunica();
-		comunica.setId_contato(valorIdPesq);
-
+		int valorIdPesq = 3;
+		Comunica cm = new Comunica();
 		
+		cm.setId_contato(valorIdPesq);
+		int id_contato=3;
+		cm.setId_contato(id_contato);
+		System.out.println("AQUI POW"+cm.getId_contato());
 		
 		try {
 
