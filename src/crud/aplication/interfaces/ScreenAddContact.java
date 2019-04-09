@@ -19,6 +19,7 @@ import javax.swing.text.MaskFormatter;
 import crud.dao.ContatoDAO;
 import crud.entities.Contato;
 import crud.entities.TipoComunicaEnum;
+import crud.jdbc.connection.DB;
 
 import javax.swing.JTextField;
 import java.awt.Color;
@@ -27,22 +28,18 @@ import javax.swing.JSeparator;
 
 public class ScreenAddContact extends JFrame {
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ScreenAddContact frame = new ScreenAddContact();
-					frame.setVisible(true);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-	}
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { ScreenAddContact frame = new
+	 * ScreenAddContact(); frame.setVisible(true);
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } } });
+	 * 
+	 * }
+	 */
 
 	public ScreenAddContact() throws Exception {
+		setVisible(true);
 		setTitle("Novo Contato");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -134,7 +131,7 @@ public class ScreenAddContact extends JFrame {
 				contato.setCpf(cpf);
 				contato.setIdade(idade);
 				contato.setSexo(sexo);
-				cttDAO.create(contato);
+				cttDAO.create(contato, DB.getConnection());
 				JOptionPane.showMessageDialog(null, "Novo Contato Cadastrado!");
 				dispose();
 

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,8 +24,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -33,6 +32,7 @@ import crud.dao.ComunicaDAO;
 import crud.dao.ContatoDAO;
 import crud.entities.Comunica;
 import crud.entities.Contato;
+import crud.jdbc.connection.DB;
 
 public class ScreenList extends JFrame {
 
@@ -40,6 +40,7 @@ public class ScreenList extends JFrame {
 	private JButton Alterar;
 	private JTable tabela_contato;
 	private JTable tabela_comunica;
+	
 
 	/**
 	 * Launch the application.
@@ -59,7 +60,7 @@ public class ScreenList extends JFrame {
 	}
 
 	public ScreenList() {
-
+		
 		setTitle("AGENDA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 631);
@@ -84,7 +85,7 @@ public class ScreenList extends JFrame {
 
 					int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(),
 							tabela_contato.getSelectedColumn());
-					cttDAO.remove(idselecionada);
+					cttDAO.remove(idselecionada, DB.getConnection());
 					JOptionPane.showMessageDialog(null, "Contato Apagado");
 					dispose();
 					ScreenList listagemATT = new ScreenList();
@@ -109,10 +110,12 @@ public class ScreenList extends JFrame {
 		Alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				ContatoDAO cttDAO = new ContatoDAO();
-
-				// ScreenUpdate telaAlterar = new ScreenUpdate();
-				// telaAlterar.show();
+				Object elemento = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
+				
+				
+				/*
+				 * ScreenUpdate telaAlterar = new ScreenUpdate(); telaAlterar.show();
+				 */
 
 			}
 		});
@@ -144,9 +147,8 @@ public class ScreenList extends JFrame {
 
 				if (respostaExclusao == 0) {
 
-					int idselecionada = (int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),
-							tabela_comunica.getSelectedColumn());
-					cmcDAO.remove(idselecionada);
+					int idselecionada = (int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),tabela_comunica.getSelectedColumn());
+					cmcDAO.remove(idselecionada, DB.getConnection());
 					JOptionPane.showMessageDialog(null, "Contato Apagado");
 					dispose();
 					ScreenList listagemATT = new ScreenList();
@@ -162,6 +164,17 @@ public class ScreenList extends JFrame {
 		JButton button_1 = new JButton("Alterar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//alterar o registro do contato
+				
+				try {
+					ContatoDAO contatoDAO = new ContatoDAO();
+					Contato buscarPorId = contatoDAO.buscarPorId((int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),0), DB.getConnection());
+					System.out.println(buscarPorId.toString());
+					
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 
@@ -173,6 +186,8 @@ public class ScreenList extends JFrame {
 					adicionar = new ScreenAddContact();
 					adicionar.show();
 					dispose();
+					
+					
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -183,18 +198,19 @@ public class ScreenList extends JFrame {
 		JPanel panel = new JPanel();
 
 		JButton addNewRegistro = new JButton("+");
-		addNewRegistro.addActionListener(new ActionListener() { 
+		addNewRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ScreenAddComunica addComunica;
-
+				Contato ctt = new Contato();
 				if (tabela_contato.getSelectedRow() >= 0) {
 					try {
 
 						Object selecao1 = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
 						int selecaoC100 = Integer.parseInt(selecao1.toString());
+						
 						System.out.println(tabela_contato.getSelectedRow());
-
-						addComunica = new ScreenAddComunica();
+						
+						addComunica = new ScreenAddComunica(selecaoC100);
 						addComunica.show();
 						dispose();
 
@@ -202,7 +218,7 @@ public class ScreenList extends JFrame {
 						e1.printStackTrace();
 
 					}
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Selecione um contato");
 				}
 			}
@@ -275,14 +291,16 @@ public class ScreenList extends JFrame {
 		modelo_contato.addColumn("SEXO");
 		ContatoDAO cttDAO = new ContatoDAO();
 		tabela_contato.setColumnSelectionInterval(1, 1);
-	//	tabela_contato.setRowSelectionAllowed(false);
+		// tabela_contato.setRowSelectionAllowed(false);
 
 		try {
-			for (Contato c : cttDAO.listarTodos()) {
-
-				modelo_contato
-						.addRow(new Object[] { c.getId_contato(), c.getNome(), c.getCpf(), c.getIdade(), c.getSexo() });
-
+			List<Contato> listarTodos = cttDAO.listarTodos(DB.getConnection());
+			if(listarTodos.size() > 0) {
+				for (Contato c : listarTodos) {
+					modelo_contato
+					.addRow(new Object[] { c.getId_contato(), c.getNome(), c.getCpf(), c.getIdade(), c.getSexo() });
+					
+				}				
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -295,6 +313,7 @@ public class ScreenList extends JFrame {
 				int selecaoC = 0;
 				Object selecao = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
 				selecaoC = Integer.parseInt(selecao.toString());
+				DB.closeConnection();
 				ComunicaDAO cmcDAO = new ComunicaDAO();
 				Comunica valor = new Comunica();
 				valor.setId_contato(selecaoC);

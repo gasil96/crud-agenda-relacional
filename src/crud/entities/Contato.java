@@ -7,6 +7,15 @@ public class Contato {
 	private String cpf;
 	private int idade;
 	private String sexo;
+	private int rfp;
+
+	public int getRfp() {
+		return rfp;
+	}
+
+	public void setRfp(int rfp) {
+		this.rfp = rfp;
+	}
 
 	public Contato() {
 

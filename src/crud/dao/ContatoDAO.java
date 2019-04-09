@@ -13,23 +13,13 @@ import crud.jdbc.connection.DB;
 
 public class ContatoDAO {
 	
-	PreparedStatement st = null;
-	Connection conn = null;
-
-	public ContatoDAO(Connection conn) {
-		
-		conn = DB.getConnection();
-		
-	}
-
 	public ContatoDAO() {
-
 	}
 
-	public void create(Contato contato) {
+	public void create(Contato contato, Connection conn) {
 
+		PreparedStatement st = null;
 		try {
-			conn = DB.getConnection();
 			st = conn.prepareStatement(
 					"INSERT INTO agenda.contato " + "(nome, cpf, idade, sexo) " + "VALUES " + "(?, ?, ?, ?)",
 					Statement.RETURN_GENERATED_KEYS);
@@ -48,18 +38,23 @@ public class ContatoDAO {
 
 		finally {
 
-			DB.closeStatement(st);
-			// DB.closeConnection();
+			try {
+				st.close();
+				DB.closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 
 		}
 	}
 
-	public void remove(int id) {
+	public void remove(int id, Connection conn) {
 
 		try {
 
-			conn = DB.getConnection();
-			st = conn.prepareStatement("DELETE FROM contato WHERE id_contato = ?");
+			PreparedStatement st = conn.prepareStatement("DELETE FROM contato WHERE id_contato = ?");
 
 			st.setInt(1, id);
 
@@ -79,10 +74,11 @@ public class ContatoDAO {
 		}
 	}
 
-	public void update(Contato contato) {
+	public void update(Contato contato, Connection conn) {
 
+		PreparedStatement st = null;
 		try {
-			conn = DB.getConnection();
+			
 			st = conn.prepareStatement(
 					"UPDATE contato SET nome = ?, cpf = ?, idade = ?, sexo = ? " + "WHERE id_contato = ?",
 					Statement.RETURN_GENERATED_KEYS);
@@ -103,7 +99,11 @@ public class ContatoDAO {
 
 		finally {
 
-			DB.closeStatement(st);
+			try {
+				st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			// DB.closeConnection();
 
 		}
@@ -111,10 +111,10 @@ public class ContatoDAO {
 	
 	
 
-	public List<Contato> listarTodos() throws Exception {
+	public List<Contato> listarTodos(Connection conn) throws Exception {
+		
 		List<Contato> contatos = new ArrayList<Contato>();
-		conn = DB.getConnection();
-		st = conn.prepareStatement("select * from contato", Statement.RETURN_GENERATED_KEYS);
+		PreparedStatement st = conn.prepareStatement("select * from contato");
 		ResultSet rs = st.executeQuery();
 		while (rs.next()) {
 			Contato contato = new Contato();
@@ -126,9 +126,31 @@ public class ContatoDAO {
 			contatos.add(contato);
 		}
 		rs.close();
+		DB.closeConnection();
 		// st.close();
 		return contatos;
 
 	}
 
+	public Contato buscarPorId(int idSelecionado, Connection conn) throws Exception {
+		Contato contato = null;
+		PreparedStatement st = conn.prepareStatement("select * from contato where id_contato = ?");
+		st.setInt(1, idSelecionado);
+		ResultSet retorno = st.executeQuery();
+		
+		while (retorno.next()) {
+			contato = new Contato();
+			contato.setId_contato(retorno.getInt("id_contato"));
+			contato.setNome(retorno.getString("nome"));
+			contato.setCpf(retorno.getString("cpf"));
+			contato.setIdade(retorno.getInt("idade"));
+			contato.setSexo(retorno.getString("sexo"));
+		}
+		retorno.close();
+		return contato;
+
+	}
+
+	
+	
 }

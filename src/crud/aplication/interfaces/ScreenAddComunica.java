@@ -1,6 +1,5 @@
 package crud.aplication.interfaces;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,28 +20,24 @@ import javax.swing.text.MaskFormatter;
 
 import crud.dao.ComunicaDAO;
 import crud.entities.Comunica;
-import crud.entities.Contato;
 import crud.entities.TipoComunicaEnum;
-import javafx.scene.control.ComboBox;
+import crud.jdbc.connection.DB;
 
 public class ScreenAddComunica extends JFrame {
 	private JTextField txtRegistro;
+	private Long idSelecionado;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ScreenAddComunica frame = new ScreenAddComunica();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-	}
-
-	public ScreenAddComunica() throws ParseException {
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { ScreenAddComunica frame = new
+	 * ScreenAddComunica(); frame.setVisible(true); } catch (Exception e) {
+	 * e.printStackTrace(); } } });
+	 * 
+	 * }
+	 */
+	
+	public ScreenAddComunica(int idSelecionado) throws ParseException {
+		this.setVisible(true);
 		setTitle("Novo Registro de Contato");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,8 +49,8 @@ public class ScreenAddComunica extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				ScreenList listagem = new ScreenList();
-				 listagem.show();
-				 dispose();
+				listagem.show();
+				dispose();
 
 			}
 		});
@@ -78,7 +73,7 @@ public class ScreenAddComunica extends JFrame {
 		maskID = new MaskFormatter("##");
 
 		JFormattedTextField txtID = new JFormattedTextField(maskID);
-		txtID.setBounds(136, 123, 28, 27);
+		txtID.setBounds(140, 123, 28, 27);
 		getContentPane().add(txtID);
 
 		JButton btnNewButton_1 = new JButton("Salvar");
@@ -97,7 +92,7 @@ public class ScreenAddComunica extends JFrame {
 				comunica.setTipo(tipo);
 				comunica.setRegistro(registro);
 				comunica.setId_contato(idCMC);
-				cmcDAO.newReg(comunica);
+				cmcDAO.newReg(comunica, DB.getConnection());
 
 				/*
 				 * String nome = txtNome.getText(); String cpf = formatoCPF.getText(); int idade

@@ -14,21 +14,12 @@ import crud.jdbc.connection.DB;
 
 public class ComunicaDAO {
 
-	PreparedStatement st = null;
-	Connection conn = null;
-
-	public ComunicaDAO(Connection conn) {
-
-		conn = DB.getConnection();
-
-	}
-
 	public ComunicaDAO() {
 	}
 
-	public void newReg(Comunica comunica) {
+	public void newReg(Comunica comunica, Connection conn) {
+		PreparedStatement st = null;
 		try {
-			conn = DB.getConnection();
 			st = conn.prepareStatement(
 					"INSERT INTO agenda.comunica " + "(tipo, registro, id_contato) " + "VALUES " + "(?, ?, ?)",
 					Statement.RETURN_GENERATED_KEYS);
@@ -46,18 +37,23 @@ public class ComunicaDAO {
 
 		finally {
 
-			DB.closeStatement(st);
+			try {
+				st.close();
+				DB.closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			// DB.closeConnection();
 
 		}
 	}
 
-	public void remove(int id) {
+	public void remove(int id, Connection conn) {
 
 		try {
 
-			conn = DB.getConnection();
-			st = conn.prepareStatement("DELETE FROM comunica WHERE id_comunica = ?");
+			PreparedStatement st = conn.prepareStatement("DELETE FROM comunica WHERE id_comunica = ?");
 
 			st.setInt(1, id);
 
@@ -75,14 +71,12 @@ public class ComunicaDAO {
 
 	//NAO CONSIGO FAZER ISSO FORA DA CLASSA `COMUNICADAO`
 	public List<Comunica> listarTodasC(Comunica valor) throws Exception {
+		Connection conn = DB.getConnection();
 //		Comunica novaComunica = new Comunica();
 		List<Comunica> comunica = new ArrayList<Comunica>();
-		conn = DB.getConnection();
-		st = conn.prepareStatement("select * from comunica where id_contato = ?", Statement.RETURN_GENERATED_KEYS);
-		//st.setInt(1, testecmc.getId_contato()); // falta achar o get correto
+		PreparedStatement st = conn.prepareStatement("select * from comunica where id_contato = ?");
 		st.setInt(1, valor.getId_contato());//n consigo settar esse valor `3`
 		ResultSet rs = st.executeQuery();
-		
 		
 		while (rs.next()) {
 			Comunica cmc1 = new Comunica();
