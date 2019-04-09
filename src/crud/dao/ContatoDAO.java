@@ -108,6 +108,8 @@ public class ContatoDAO {
 
 		}
 	}
+	
+	
 
 	public List<Contato> listarTodos() throws Exception {
 		List<Contato> contatos = new ArrayList<Contato>();

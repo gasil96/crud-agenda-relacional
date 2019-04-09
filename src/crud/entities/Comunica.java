@@ -27,13 +27,7 @@ public class Comunica {
 		this.id_comunica = id_comunica;
 	}
 
-	public int getId_contato() {
-		return id_contato;
-	}
 
-	public void setId_contato(int id_contato) {
-		this.id_contato = id_contato;
-	}
 
 	public TipoComunicaEnum getTipo() {
 		return tipo;
@@ -51,6 +45,14 @@ public class Comunica {
 		this.registro = registro;
 	}
 
+	public int getId_contato() {
+		return id_contato;
+	}
+
+	public void setId_contato(int id_contato) {
+		 this.id_contato = id_contato;
+	}
+	
 	public String toString() {
 		return "Comunica [id_comunica=" + id_comunica + ", tipo=" + tipo + ", registro=" + registro + ", id_contato="
 				+ id_contato + "]";

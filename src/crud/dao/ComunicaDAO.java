@@ -23,9 +23,9 @@ public class ComunicaDAO {
 
 	}
 
-	
 	public ComunicaDAO() {
 	}
+
 	public void newReg(Comunica comunica) {
 		try {
 			conn = DB.getConnection();
@@ -37,8 +37,7 @@ public class ComunicaDAO {
 			st.setString(2, comunica.getRegistro());
 			st.setInt(3, comunica.getId_contato());
 			st.executeUpdate();
-
-			
+			System.out.println("teste do get dentro do dao new reg: "+ comunica.getId_contato());
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -52,60 +51,50 @@ public class ComunicaDAO {
 
 		}
 	}
-	
-	
+
 	public void remove(int id) {
-		
+
 		try {
-			
+
 			conn = DB.getConnection();
 			st = conn.prepareStatement("DELETE FROM comunica WHERE id_comunica = ?");
-			
+
 			st.setInt(1, id);
-			
+
 			st.executeUpdate();
-			
+
 		} catch (SQLException e3) {
 			e3.printStackTrace();
-			
+
 		}
 	}
-		
-		public void lista(int idS) {
-			
-			try {
-				
-				conn = DB.getConnection();
-				st = conn.prepareStatement("select * from comunica where id_contato = ?", Statement.RETURN_GENERATED_KEYS);
-				
-				st.setInt(1, idS);
-				
-				st.executeUpdate();
-				
-			} catch (SQLException e3) {
-				e3.printStackTrace();
-				
-			}
+	
 
-	}
-	Comunica cmc = new Comunica();
 
 	public List<Comunica> listarTodasC() throws Exception {
+		//NAO CONSIGO FAZER ISSO FORA DA CLASSA `COMUNICADAO`
+		Comunica testecmc = new Comunica();
+		testecmc.setId_contato(3);
+		
+		Comunica cmc = new Comunica();
 		List<Comunica> comunica = new ArrayList<Comunica>();
 		conn = DB.getConnection();
 		st = conn.prepareStatement("select * from comunica where id_contato = ?", Statement.RETURN_GENERATED_KEYS);
-		st.setInt(1, cmc.getId_contato()); // falta achar o get correto
+		st.setInt(1, testecmc.getId_contato()); // falta achar o get correto
 		ResultSet rs = st.executeQuery();
+		
+		System.out.println("Teste get dentro do dao cmc: "+testecmc.getId_contato());
+		
 		while (rs.next()) {
-			
-			Comunica cmc = new Comunica();
-			cmc.setId_comunica(rs.getInt("id_comunica"));
-			cmc.setTipo(TipoComunicaEnum.valueOf(rs.getString("Tipo")));
-			cmc.setRegistro(rs.getString("Registro"));
-			cmc.setId_contato(rs.getInt("Id_Contato"));
-			comunica.add(cmc);
+			Comunica cmc1 = new Comunica();
+			cmc1.setId_comunica(rs.getInt("id_comunica"));
+			cmc1.setTipo(TipoComunicaEnum.valueOf(rs.getString("Tipo")));
+			cmc1.setRegistro(rs.getString("Registro"));
+			cmc1.setId_contato(rs.getInt("id_Contato"));
+			comunica.add(cmc1);
 		}
-		//rs.close();
+		
+		rs.close();
 		// st.close();
 		return comunica;
 

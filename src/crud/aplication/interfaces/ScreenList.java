@@ -57,6 +57,10 @@ public class ScreenList extends JFrame {
 
 	public ScreenList() {
 		
+		Comunica testecmc = new Comunica();
+		testecmc.setId_contato(3);
+		System.out.println(testecmc.getId_contato());
+		
 		setTitle("AGENDA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 631);
@@ -201,9 +205,9 @@ public class ScreenList extends JFrame {
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-				.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+				.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+				.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
 				.addGroup(gl_contentPane.createSequentialGroup().addGroup(gl_contentPane
 						.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel)
 						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
@@ -212,14 +216,14 @@ public class ScreenList extends JFrame {
 								.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
-						.addPreferredGap(ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
 								.addComponent(addNewRegistro, GroupLayout.PREFERRED_SIZE, 41,
 										GroupLayout.PREFERRED_SIZE)
 								.addComponent(addNewContact).addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE,
 										89, GroupLayout.PREFERRED_SIZE)))
-				.addComponent(separator, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE));
+				.addComponent(separator, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE));
 		gl_contentPane
 				.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -247,7 +251,7 @@ public class ScreenList extends JFrame {
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(button)
 										.addComponent(button_1).addComponent(btnNewButton_1))
-								.addContainerGap(19, Short.MAX_VALUE)));
+								.addContainerGap(51, Short.MAX_VALUE)));
 
 		JLabel lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle("New JGoodies title");
 		panel.add(lblNewJgoodiesTitle);
@@ -264,7 +268,6 @@ public class ScreenList extends JFrame {
 		modelo_contato.addColumn("IDADE");
 		modelo_contato.addColumn("SEXO");
 		ContatoDAO cttDAO = new ContatoDAO();
-		Contato contato = new Contato();
 		tabela_contato.setColumnSelectionInterval(1, 1);
 		tabela_contato.setRowSelectionAllowed(false);
 
@@ -278,7 +281,6 @@ public class ScreenList extends JFrame {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-
 		tabela_comunica = new JTable(modelo_comunica);
 		scrollPane_1.setViewportView(tabela_comunica);
 		modelo_comunica.addColumn("ID");
@@ -287,11 +289,14 @@ public class ScreenList extends JFrame {
 		modelo_comunica.addColumn("ID REFERENCIAL");
 
 		ComunicaDAO cmcDAO = new ComunicaDAO();
-		Comunica comun = new Comunica();
-		int id_contato = 1;
-		comun.setId_contato(id_contato);
-		System.out.println(id_contato);
+		int valorIdPesq = 1;
+		Comunica comunica = new Comunica();
+		comunica.setId_contato(valorIdPesq);
+
+		
+		
 		try {
+
 			for (Comunica cmc : cmcDAO.listarTodasC()) {
 
 				modelo_comunica.addRow(
