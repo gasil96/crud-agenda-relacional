@@ -28,16 +28,6 @@ import javax.swing.JSeparator;
 
 public class ScreenAddContact extends JFrame {
 
-	/*
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { ScreenAddContact frame = new
-	 * ScreenAddContact(); frame.setVisible(true);
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } } });
-	 * 
-	 * }
-	 */
-
 	public ScreenAddContact() throws Exception {
 		setVisible(true);
 		setTitle("Novo Contato");
@@ -116,22 +106,28 @@ public class ScreenAddContact extends JFrame {
 		formatoCPF.setBounds(87, 115, 119, 27);
 		getContentPane().add(formatoCPF);
 
+		/*
+		 * METODO SALVAR
+		 * */
 		JButton btnNewButton_1 = new JButton("Salvar");
 		btnNewButton_1.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 
 				ContatoDAO cttDAO = new ContatoDAO();
-				Contato contato = new Contato();
 
+				Contato contato = new Contato();
 				String nome = txtNome.getText();
 				String cpf = formatoCPF.getText();
 				int idade = Integer.parseInt(txtIdade.getText());
 				String sexo = comboBoxSexo.getSelectedItem().toString();
+				
 				contato.setNome(nome);
 				contato.setCpf(cpf);
 				contato.setIdade(idade);
 				contato.setSexo(sexo);
-				cttDAO.create(contato, DB.getConnection());
+				
+				cttDAO.create(contato);
 				JOptionPane.showMessageDialog(null, "Novo Contato Cadastrado!");
 				dispose();
 

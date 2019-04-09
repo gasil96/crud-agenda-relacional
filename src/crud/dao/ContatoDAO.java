@@ -16,8 +16,8 @@ public class ContatoDAO {
 	public ContatoDAO() {
 	}
 
-	public void create(Contato contato, Connection conn) {
-
+	public void create(Contato contato) {
+		Connection conn = DB.getConnection();
 		PreparedStatement st = null;
 		try {
 			st = conn.prepareStatement(
@@ -40,7 +40,6 @@ public class ContatoDAO {
 
 			try {
 				st.close();
-				DB.closeConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -111,7 +110,9 @@ public class ContatoDAO {
 	
 	
 
-	public List<Contato> listarTodos(Connection conn) throws Exception {
+	public List<Contato> listarTodos() throws Exception {
+		
+		Connection conn = DB.getConnection();
 		
 		List<Contato> contatos = new ArrayList<Contato>();
 		PreparedStatement st = conn.prepareStatement("select * from contato");
@@ -126,15 +127,15 @@ public class ContatoDAO {
 			contatos.add(contato);
 		}
 		rs.close();
-		DB.closeConnection();
-		// st.close();
+		st.close();
 		return contatos;
 
 	}
 
-	public Contato buscarPorId(int idSelecionado, Connection conn) throws Exception {
+	public Contato buscarPorId(int idSelecionado) throws Exception {
+		
 		Contato contato = null;
-		PreparedStatement st = conn.prepareStatement("select * from contato where id_contato = ?");
+		PreparedStatement st = DB.getConnection().prepareStatement("select * from contato where id_contato = ?");
 		st.setInt(1, idSelecionado);
 		ResultSet retorno = st.executeQuery();
 		

@@ -19,14 +19,11 @@ public class DB {
 	// metodo pra conexao ao banco de dados
 	public static Connection getConnection() {
 		if (conn == null) {
-
 			try {
 
 				Properties props = loadProperties();
 				String url = props.getProperty("dburl");
 				conn = DriverManager.getConnection(url, props);
-			//	JOptionPane.showMessageDialog(null, "Conexão com o Banco Realizada");
-
 			} catch (SQLException e) {
 
 				JOptionPane.showMessageDialog(null, "Erro ao conectar no banco");
