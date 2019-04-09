@@ -264,8 +264,7 @@ public class ScreenList extends JFrame {
 		panel.add(lblNewJgoodiesTitle);
 
 		tabela_contato = new JTable(modelo_contato);
-		tabela_contato.setSurrendersFocusOnKeystroke(true);
-		tabela_contato.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabela_contato.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		scrollPane.setViewportView(tabela_contato);
 		contentPane.setLayout(gl_contentPane);
 
@@ -276,7 +275,7 @@ public class ScreenList extends JFrame {
 		modelo_contato.addColumn("SEXO");
 		ContatoDAO cttDAO = new ContatoDAO();
 		tabela_contato.setColumnSelectionInterval(1, 1);
-		tabela_contato.setRowSelectionAllowed(false);
+	//	tabela_contato.setRowSelectionAllowed(false);
 
 		try {
 			for (Contato c : cttDAO.listarTodos()) {

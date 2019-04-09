@@ -46,7 +46,7 @@ public class ScreenAddComunica extends JFrame {
 		setTitle("Novo Registro de Contato");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 468, 254);
+		setBounds(100, 100, 468, 199);
 		getContentPane().setLayout(null);
 
 		JButton btnNewButton = new JButton("Voltar");
@@ -59,12 +59,12 @@ public class ScreenAddComunica extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(249, 180, 89, 23);
+		btnNewButton.setBounds(249, 125, 89, 23);
 		getContentPane().add(btnNewButton);
 
 		JComboBox comboBoxEnum = new JComboBox();
 		comboBoxEnum.setModel(new DefaultComboBoxModel(TipoComunicaEnum.values()));
-		comboBoxEnum.setBounds(21, 33, 147, 27);
+		comboBoxEnum.setBounds(21, 48, 147, 27);
 		getContentPane().add(comboBoxEnum);
 		comboBoxEnum.addItemListener(new ItemListener() {
 
@@ -75,10 +75,10 @@ public class ScreenAddComunica extends JFrame {
 			}
 		});
 		MaskFormatter maskID;
-		maskID = new MaskFormatter("#");
+		maskID = new MaskFormatter("##");
 
 		JFormattedTextField txtID = new JFormattedTextField(maskID);
-		txtID.setBounds(171, 71, 28, 27);
+		txtID.setBounds(136, 123, 28, 27);
 		getContentPane().add(txtID);
 
 		JButton btnNewButton_1 = new JButton("Salvar");
@@ -114,11 +114,11 @@ public class ScreenAddComunica extends JFrame {
 			}
 		});
 
-		btnNewButton_1.setBounds(340, 180, 89, 23);
+		btnNewButton_1.setBounds(340, 125, 89, 23);
 		getContentPane().add(btnNewButton_1);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(21, 167, 408, 2);
+		separator.setBounds(21, 106, 408, 2);
 		getContentPane().add(separator);
 
 		JSeparator separator_1 = new JSeparator();
@@ -128,11 +128,11 @@ public class ScreenAddComunica extends JFrame {
 		JLabel lblIdprovisorio = new JLabel("ID (provisorio):");
 		lblIdprovisorio.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblIdprovisorio.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblIdprovisorio.setBounds(75, 71, 93, 27);
+		lblIdprovisorio.setBounds(21, 121, 93, 27);
 		getContentPane().add(lblIdprovisorio);
 
 		txtRegistro = new JTextField();
-		txtRegistro.setBounds(171, 33, 258, 27);
+		txtRegistro.setBounds(171, 48, 258, 27);
 		getContentPane().add(txtRegistro);
 		txtRegistro.setColumns(10);
 
