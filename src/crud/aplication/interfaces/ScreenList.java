@@ -183,102 +183,82 @@ public class ScreenList extends JFrame {
 		JPanel panel = new JPanel();
 
 		JButton addNewRegistro = new JButton("+");
-		addNewRegistro.addActionListener(new ActionListener() {
+		addNewRegistro.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				ScreenAddComunica addComunica;
-				try {
 
-					
-					Object selecao = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
-					int selecaoC = Integer.parseInt(selecao.toString());
-					System.out.println(selecaoC);
-					
-					
+				if (tabela_contato.getSelectedRow() >= 0) {
+					try {
+
+						Object selecao1 = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
+						int selecaoC100 = Integer.parseInt(selecao1.toString());
+						System.out.println(tabela_contato.getSelectedRow());
 
 						addComunica = new ScreenAddComunica();
 						addComunica.show();
 						dispose();
 
+					} catch (ParseException e1) {
+						e1.printStackTrace();
 
-				} catch (ParseException e1) {
-					e1.printStackTrace();
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Selecione um contato");
 				}
-
 			}
 		});
 
 		JSeparator separator = new JSeparator();
-		
-		JButton btnTest = new JButton("Listar Comunicacoes");
-		btnTest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				Object selecao = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
-				int selecaoC = Integer.parseInt(selecao.toString());
-				
-				if( selecaoC < 0) {
-					System.out.println("s"+selecaoC);
-				}
-				
-				System.out.println(selecaoC);
-			}
-		});
 
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel)
+				.addGroup(gl_contentPane.createSequentialGroup().addGroup(gl_contentPane
+						.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel)
 						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblRegistroDosContatos)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
-					.addGap(1)
-					.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-						.addComponent(addNewRegistro, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addComponent(addNewContact)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
-				.addComponent(separator, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(addNewContact))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(Alterar)
-						.addComponent(btnTest))
-					.addGap(13)
-					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblRegistroDosContatos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(addNewRegistro))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(button)
-						.addComponent(button_1)
-						.addComponent(btnNewButton_1))
-					.addContainerGap(19, Short.MAX_VALUE))
-		);
+								.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
+						.addPreferredGap(ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+								.addComponent(addNewRegistro, GroupLayout.PREFERRED_SIZE, 41,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(addNewContact).addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE,
+										89, GroupLayout.PREFERRED_SIZE)))
+				.addComponent(separator, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE));
+		gl_contentPane
+				.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+								.addGap(11)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(addNewContact))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btnNewButton).addComponent(Alterar))
+								.addGap(13)
+								.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblRegistroDosContatos, GroupLayout.PREFERRED_SIZE, 22,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(addNewRegistro))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(button)
+										.addComponent(button_1).addComponent(btnNewButton_1))
+								.addContainerGap(19, Short.MAX_VALUE)));
 
 		JLabel lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle("New JGoodies title");
 		panel.add(lblNewJgoodiesTitle);
@@ -310,59 +290,55 @@ public class ScreenList extends JFrame {
 		}
 
 		tabela_comunica = new JTable(modelo_comunica);
-	
+
 		tabela_contato.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e) {
+				int selecaoC = 0;
 				Object selecao = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
-				int selecaoC = Integer.parseInt(selecao.toString());
+				selecaoC = Integer.parseInt(selecao.toString());
 				ComunicaDAO cmcDAO = new ComunicaDAO();
 				Comunica valor = new Comunica();
-
 				valor.setId_contato(selecaoC);
-				
 
-				// PASSADO 'VALOR' PARA DENTRO DO MÉTODO ( AJUDA DO DAVIDSON )
 				try {
+					// PASSADO 'VALOR' PARA DENTRO DO MÉTODO ( AJUDA DO DAVIDSON )
 					for (Comunica cmc : cmcDAO.listarTodasC(valor)) {
-						modelo_comunica.addRow(
-								new Object[] { cmc.getId_comunica(), cmc.getTipo(), cmc.getRegistro(), cmc.getId_contato() });
-
+						modelo_comunica.addRow(new Object[] { cmc.getId_comunica(), cmc.getTipo(), cmc.getRegistro(),
+								cmc.getId_contato() });
 					}
+
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
+
 			}
-			
-			
+
 			@Override
 			public void mousePressed(MouseEvent e) {
-				
+
 			}
-			
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				
+
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				
+
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
-				
-			} });
-		
-		
-		
+
+			}
+		});
+
 		scrollPane_1.setViewportView(tabela_comunica);
 		modelo_comunica.addColumn("ID");
 		modelo_comunica.addColumn("TIPO");
 		modelo_comunica.addColumn("DESCRICAO");
 		modelo_comunica.addColumn("ID REFERENCIAL");
-
-	
 
 	}
 }
