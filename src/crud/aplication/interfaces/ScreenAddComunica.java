@@ -136,19 +136,5 @@ public class ScreenAddComunica extends JFrame {
 		getContentPane().add(txtRegistro);
 		txtRegistro.setColumns(10);
 
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Comunica comunica = new Comunica();
-				TipoComunicaEnum tipo = (TipoComunicaEnum) comboBoxEnum.getSelectedItem();
-				System.out.println(tipo);
-				comunica.setTipo(tipo);
-				System.out.println(tipo);
-
-			}
-		});
-		btnNewButton_2.setBounds(75, 111, 89, 23);
-		getContentPane().add(btnNewButton_2);
-
 	}
 }

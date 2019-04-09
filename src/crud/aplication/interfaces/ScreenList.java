@@ -73,7 +73,7 @@ public class ScreenList extends JFrame {
 
 				Object[] options = { "Confirmar", "Cancelar" };
 				int respostaExclusao = JOptionPane.showOptionDialog(null,
-						"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informa��o",
+						"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informacao",
 						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
 				if (respostaExclusao == 0) {
@@ -87,7 +87,7 @@ public class ScreenList extends JFrame {
 					listagemATT.show();
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Opera��o Cancelada");
+					JOptionPane.showMessageDialog(null, "Operacao Cancelada");
 				}
 			}
 		});

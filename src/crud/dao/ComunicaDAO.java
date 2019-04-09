@@ -81,7 +81,7 @@ public class ComunicaDAO {
 		conn = DB.getConnection();
 		st = conn.prepareStatement("select * from comunica where id_contato = ?", Statement.RETURN_GENERATED_KEYS);
 		//st.setInt(1, testecmc.getId_contato()); // falta achar o get correto
-		st.setInt(1, 3);//n consigo settar esse valor `3`
+		st.setInt(1, 60);//n consigo settar esse valor `3`
 		ResultSet rs = st.executeQuery();
 		
 		
@@ -95,7 +95,7 @@ public class ComunicaDAO {
 		}
 		
 		rs.close();
-		// st.close();
+		st.close();
 		return comunica;
 
 	}
