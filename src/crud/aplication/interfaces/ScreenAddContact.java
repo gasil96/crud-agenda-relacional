@@ -98,7 +98,7 @@ public class ScreenAddContact extends JFrame {
 		JComboBox comboBoxSexo = new JComboBox();
 		comboBoxSexo.setToolTipText("Sexo");
 		comboBoxSexo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "MASCULINO", "FEMININO", "NAO DECLARADO" }));
+		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "MASCULINO", "FEMININO", "NAO BINARIO" }));
 		comboBoxSexo.setBounds(87, 82, 138, 27);
 		getContentPane().add(comboBoxSexo);
 		comboBoxSexo.addActionListener(new ActionListener() {

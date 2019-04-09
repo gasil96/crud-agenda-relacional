@@ -56,9 +56,7 @@ public class ScreenContactUpdate extends JFrame {
 				if (id_correta == c.getId_contato()) {
 
 					String nome = c.getNome();
-					String cpf = c.getCpf();
 					int idade = c.getIdade();
-					String sexo = c.getSexo();
 					int id_contato = c.getId_contato();
 					contato.setNome(nome);
 					contato.setIdade(idade);
@@ -137,7 +135,7 @@ public class ScreenContactUpdate extends JFrame {
 
 		JComboBox comboBoxSexo = new JComboBox();
 		comboBoxSexo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Nao Declarado" }));
+		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "MASCULINO", "FEMININO", "NAO BINARIO" }));
 		comboBoxSexo.setBounds(82, 79, 125, 27);
 		getContentPane().add(comboBoxSexo);
 		comboBoxSexo.addActionListener(new ActionListener() {
@@ -188,10 +186,6 @@ public class ScreenContactUpdate extends JFrame {
 		});
 		bttAlterar.setBounds(329, 179, 89, 23);
 		getContentPane().add(bttAlterar);
-
-	}
-
-	private static void addPopup(Component component, final JPopupMenu popup) {
 
 	}
 }

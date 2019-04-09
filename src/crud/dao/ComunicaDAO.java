@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import crud.aplication.interfaces.ScreenList;
 import crud.entities.Comunica;
 import crud.entities.TipoComunicaEnum;
 import crud.jdbc.connection.DB;
@@ -75,13 +74,13 @@ public class ComunicaDAO {
 
 
 	//NAO CONSIGO FAZER ISSO FORA DA CLASSA `COMUNICADAO`
-	public List<Comunica> listarTodasC() throws Exception {
-		Comunica novaComunica = new Comunica();
+	public List<Comunica> listarTodasC(Comunica valor) throws Exception {
+//		Comunica novaComunica = new Comunica();
 		List<Comunica> comunica = new ArrayList<Comunica>();
 		conn = DB.getConnection();
 		st = conn.prepareStatement("select * from comunica where id_contato = ?", Statement.RETURN_GENERATED_KEYS);
 		//st.setInt(1, testecmc.getId_contato()); // falta achar o get correto
-		st.setInt(1, 60);//n consigo settar esse valor `3`
+		st.setInt(1, valor.getId_contato());//n consigo settar esse valor `3`
 		ResultSet rs = st.executeQuery();
 		
 		
