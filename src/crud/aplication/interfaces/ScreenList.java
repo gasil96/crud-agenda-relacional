@@ -12,6 +12,8 @@ import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +35,9 @@ import crud.dao.ContatoDAO;
 import crud.entities.Comunica;
 import crud.entities.Contato;
 import crud.jdbc.connection.DB;
+import java.awt.Label;
+import javax.swing.UIManager;
+import java.awt.Toolkit;
 
 public class ScreenList extends JFrame {
 
@@ -50,7 +55,8 @@ public class ScreenList extends JFrame {
 				try {
 					ScreenList frame = new ScreenList();
 					frame.setVisible(true);
-
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -59,7 +65,8 @@ public class ScreenList extends JFrame {
 	}
 
 	public ScreenList() {
-
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\14876\\git\\crud_basa_project\\resource\\basa.png"));
+		
 		setTitle("AGENDA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 631);
@@ -259,8 +266,6 @@ public class ScreenList extends JFrame {
 			}
 		});
 
-		JPanel panel = new JPanel();
-
 		/*
 		 * ADICIONANDO COMUNICACAO DO USUARIO
 		 */
@@ -284,61 +289,63 @@ public class ScreenList extends JFrame {
 		});
 
 		JSeparator separator = new JSeparator();
-
+		
+		JLabel agendaTitulo = new JLabel("AGENDA");
+		agendaTitulo.setFont(new Font("Tahoma", Font.BOLD, 53));
+		agendaTitulo.setForeground(UIManager.getColor("CheckBox.darkShadow"));
+		agendaTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-				.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel)
-								.addComponent(lblRegistroDosContatos)
-								.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(addNewRegistro, GroupLayout.PREFERRED_SIZE, 41,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(addNewContact).addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE,
-										89, GroupLayout.PREFERRED_SIZE)))
-				.addComponent(separator, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-				.addGroup(Alignment.LEADING,
-						gl_contentPane.createSequentialGroup()
-								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap()));
-		gl_contentPane
-				.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-								.addGap(11)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(addNewContact))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(btnNewButton).addComponent(Alterar))
-								.addGap(13)
-								.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblRegistroDosContatos, GroupLayout.PREFERRED_SIZE, 22,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(addNewRegistro))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(button)
-										.addComponent(btnNewButton_1))
-								.addContainerGap(19, Short.MAX_VALUE)));
-
-		JLabel lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle("AGENDA");
-		lblNewJgoodiesTitle.setBackground(Color.YELLOW);
-		panel.add(lblNewJgoodiesTitle);
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel)
+						.addComponent(lblRegistroDosContatos)
+						.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(addNewRegistro)
+						.addComponent(addNewContact)
+						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
+				.addComponent(separator, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addComponent(agendaTitulo, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(agendaTitulo, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addComponent(addNewContact))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton)
+						.addComponent(Alterar))
+					.addGap(13)
+					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblRegistroDosContatos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addComponent(addNewRegistro))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(button)
+						.addComponent(btnNewButton_1))
+					.addContainerGap(19, Short.MAX_VALUE))
+		);
 
 		/*
 		 * TABELA E LISTAGEM CONTATO
