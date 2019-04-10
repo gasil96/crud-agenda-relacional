@@ -40,7 +40,6 @@ public class ScreenList extends JFrame {
 	private JButton Alterar;
 	private JTable tabela_contato;
 	private JTable tabela_comunica;
-	
 
 	/**
 	 * Launch the application.
@@ -60,7 +59,7 @@ public class ScreenList extends JFrame {
 	}
 
 	public ScreenList() {
-		
+
 		setTitle("AGENDA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 631);
@@ -70,73 +69,105 @@ public class ScreenList extends JFrame {
 		final DefaultTableModel modelo_contato = new DefaultTableModel();
 		final DefaultTableModel modelo_comunica = new DefaultTableModel();
 
+		/*
+		 * METODO REMOVER CONTATO (POR ID)
+		 */
 		JButton btnNewButton = new JButton("Apagar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				ContatoDAO cttDAO = new ContatoDAO();
-				ScreenList listagem = new ScreenList();
 
-				Object[] options = { "Confirmar", "Cancelar" };
-				int respostaExclusao = JOptionPane.showOptionDialog(null,
-						"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informacao",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+				if (tabela_contato.getSelectedRow() >= 0) {
 
-				if (respostaExclusao == 0) {
+					Object[] options = { "Confirmar", "Cancelar" };
+					int respostaExclusao = JOptionPane.showOptionDialog(null,
+							"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informacao",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-					int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(),
-							tabela_contato.getSelectedColumn());
-					cttDAO.remove(idselecionada, DB.getConnection());
-					JOptionPane.showMessageDialog(null, "Contato Apagado");
-					dispose();
-					ScreenList listagemATT = new ScreenList();
-					listagemATT.show();
+					if (respostaExclusao == 0) {
+
+						int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(),
+								tabela_contato.getSelectedColumn());
+						cttDAO.remove(idselecionada);
+						
+						//RECARREGA JTABLE APOS EXCLUSAO ******************************
+						modelo_contato.setRowCount(0);
+						try {
+							List<Contato> listarTodos = cttDAO.listarTodos();
+							if (listarTodos.size() > 0) {
+								for (Contato c : listarTodos) {
+									modelo_contato.addRow(
+											new Object[] { c.getId_contato(), c.getNome(), c.getCpf(), c.getIdade(), c.getSexo() });
+
+								}
+							}
+							
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+						// DEVE TER UM JEITO MELHOR DE FAZER ISSO **************
+						
+						JOptionPane.showMessageDialog(null, "Contato Apagado");
+						ScreenList listagemATT = new ScreenList();
+					} else {
+						JOptionPane.showMessageDialog(null, "Operacao Cancelada");
+					}
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Operacao Cancelada");
+					JOptionPane.showMessageDialog(null, "Selecione um contato para ser apagado!");
 				}
+			
+
 			}
 		});
 
-		
 		/*
 		 * METODO SAIR DO SISTEMA
-		 * */
+		 */
 		JButton btnNewButton_1 = new JButton("Sair");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				
 			}
 		});
 
 		/*
 		 * METODO ALTERAR CONTATO
-		 * */
-		Alterar = new JButton("Atualizar");
+		 */
+		Alterar = new JButton("Alterar");
 		Alterar.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-				Object elemento = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
-				if(elemento != null) {
-					try {
-						ContatoDAO contatoDAO = new ContatoDAO();
-						Contato contato = contatoDAO.buscarPorId((int) elemento);
-						if(contato != null) {
-							setVisible(false);
-							ScreenContactUpdate screenContactUpdate = new ScreenContactUpdate(contato);
-							screenContactUpdate.setVisible(true);
+				
+				ContatoDAO contatoDAO = new ContatoDAO();
+				
+				if(tabela_contato.getSelectedRow() >= 0) {
+					
+					Object elemento = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
+
+					if (elemento != null) {
+						try {
+							
+							Contato contato = contatoDAO.buscarPorId((int) elemento);
+							if (contato != null) {
+								setVisible(false);
+								ScreenContactUpdate screenContactUpdate = new ScreenContactUpdate(contato);
+								screenContactUpdate.setVisible(true);
+							}
+							
+						} catch (Exception e1) {
+							JOptionPane.showMessageDialog(null,"T");
+							e1.printStackTrace();
 						}
 						
-						
-					} catch (Exception e1) {
-						e1.printStackTrace();
 					}
-					
+				}else {
+					JOptionPane.showMessageDialog(null, "Selecione um contato para ser alterado!");
 				}
 				
-				
-				/*
-				 * ScreenUpdate telaAlterar = new ScreenUpdate(); telaAlterar.show();
-				 */
+
 
 			}
 		});
@@ -158,60 +189,43 @@ public class ScreenList extends JFrame {
 
 		JButton button = new JButton("Apagar");
 		button.addActionListener(new ActionListener() {
+			
+			
+			//METODO REMOVER COMUNICACAO
 			public void actionPerformed(ActionEvent e) {
 				ComunicaDAO cmcDAO = new ComunicaDAO();
 
-				Object[] options = { "Confirmar", "Cancelar" };
-				int respostaExclusao = JOptionPane.showOptionDialog(null,
-						"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informacao",
-						JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-
-				if (respostaExclusao == 0) {
-
-					int idselecionada = (int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),tabela_comunica.getSelectedColumn());
-					cmcDAO.remove(idselecionada, DB.getConnection());
-					JOptionPane.showMessageDialog(null, "Contato Apagado");
-					dispose();
-					ScreenList listagemATT = new ScreenList();
-					listagemATT.show();
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Operacao Cancelada");
+				
+				if(tabela_comunica.getSelectedRow() >=0) {
+					
+					Object[] options = { "Confirmar", "Cancelar" };
+					int respostaExclusao = JOptionPane.showOptionDialog(null,
+							"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informacao",
+							JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+					
+					if (respostaExclusao == 0) {
+						
+						int idselecionada = (int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),
+								tabela_comunica.getSelectedColumn());
+						cmcDAO.remove(idselecionada);
+						JOptionPane.showMessageDialog(null, "Contato Apagado");
+						dispose();
+						ScreenList listagemATT = new ScreenList();
+						listagemATT.show();
+						
+					} else {
+						JOptionPane.showMessageDialog(null, "Operacao Cancelada");
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Selecione uma comunicacao para ser apagada!");
 				}
 
 			}
 		});
 
-		
 		/*
-		 * ALTERAR O REGISTRO DO CONTATO
-		 * */
-		JButton button_1 = new JButton("Alterar");
-		button_1.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				//alterar o registro do contato
-				
-			/*	try {
-					ContatoDAO contatoDAO = new ContatoDAO();
-					Contato contato = contatoDAO.buscarPorId((int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),0));
-					if(contato != null) {
-						setVisible(false);
-						ScreenContactUpdate screenContactUpdate = new ScreenContactUpdate(contato);
-						screenContactUpdate.setVisible(true);
-					}
-					
-					
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}*/
-				
-			}
-		});
-
-		/*
-		 * Adicionar contato
-		 * **/
+		 * ADICIONAR CONTATO
+		 **/
 		JButton addNewContact = new JButton("+");
 		addNewContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -219,8 +233,7 @@ public class ScreenList extends JFrame {
 				try {
 					adicionar = new ScreenAddContact();
 					dispose();
-					
-					
+
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -230,17 +243,13 @@ public class ScreenList extends JFrame {
 
 		JPanel panel = new JPanel();
 
-		
 		/*
 		 * ADICIONANDO COMUNICACAO DO USUARIO
-		 * */
+		 */
+		
 		JButton addNewRegistro = new JButton("+");
 		addNewRegistro.addActionListener(new ActionListener() {
-			
-			
-			/*
-			 * ADICIONANDO METODO DE CLICK NO BOTAO
-			 * */
+
 			public void actionPerformed(ActionEvent e) {
 				if (tabela_contato.getSelectedRow() >= 0) {
 					try {
@@ -263,22 +272,23 @@ public class ScreenList extends JFrame {
 				.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-				.addGroup(gl_contentPane.createSequentialGroup().addGroup(gl_contentPane
-						.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblRegistroDosContatos)
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
-						.addPreferredGap(ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+				.addGroup(gl_contentPane.createSequentialGroup()
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel)
+								.addComponent(lblRegistroDosContatos)
+								.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
 								.addComponent(addNewRegistro, GroupLayout.PREFERRED_SIZE, 41,
 										GroupLayout.PREFERRED_SIZE)
 								.addComponent(addNewContact).addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE,
 										89, GroupLayout.PREFERRED_SIZE)))
-				.addComponent(separator, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE));
+				.addComponent(separator, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+				.addGroup(Alignment.LEADING,
+						gl_contentPane.createSequentialGroup()
+								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()));
 		gl_contentPane
 				.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -305,11 +315,16 @@ public class ScreenList extends JFrame {
 								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(button)
-										.addComponent(button_1).addComponent(btnNewButton_1))
+										.addComponent(btnNewButton_1))
 								.addContainerGap(19, Short.MAX_VALUE)));
 
-		JLabel lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle("New JGoodies title");
+		JLabel lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle("AGENDA");
+		lblNewJgoodiesTitle.setBackground(Color.YELLOW);
 		panel.add(lblNewJgoodiesTitle);
+
+		/*
+		 * TABELA E LISTAGEM CONTATO
+		 */
 
 		tabela_contato = new JTable(modelo_contato);
 		tabela_contato.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -323,16 +338,15 @@ public class ScreenList extends JFrame {
 		modelo_contato.addColumn("SEXO");
 		ContatoDAO cttDAO = new ContatoDAO();
 		tabela_contato.setColumnSelectionInterval(1, 1);
-		// tabela_contato.setRowSelectionAllowed(false);
 
 		try {
 			List<Contato> listarTodos = cttDAO.listarTodos();
-			if(listarTodos.size() > 0) {
+			if (listarTodos.size() > 0) {
 				for (Contato c : listarTodos) {
-					modelo_contato
-					.addRow(new Object[] { c.getId_contato(), c.getNome(), c.getCpf(), c.getIdade(), c.getSexo() });
-					
-				}				
+					modelo_contato.addRow(
+							new Object[] { c.getId_contato(), c.getNome(), c.getCpf(), c.getIdade(), c.getSexo() });
+
+				}
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -341,10 +355,10 @@ public class ScreenList extends JFrame {
 		tabela_comunica = new JTable(modelo_comunica);
 
 		tabela_contato.addMouseListener(new MouseListener() {
-			
+
 			/*
 			 * ADICIONAR EVENTO DE CLICK NA TABELA DE LISTAGEM DO USUARIO
-			 * */
+			 */
 			public void mouseClicked(MouseEvent e) {
 				int selecaoC = 0;
 				Object selecao = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
@@ -352,18 +366,21 @@ public class ScreenList extends JFrame {
 				ComunicaDAO cmcDAO = new ComunicaDAO();
 				Comunica valor = new Comunica();
 				valor.setId_contato(selecaoC);
-
+				modelo_comunica.setRowCount(0);
 				try {
+					/*
+					 * LISTAGEM TABELA COMUNICA
+					 */
 					// PASSADO 'VALOR' PARA DENTRO DO MÉTODO ( AJUDA DO DAVIDSON )
 					List<Comunica> listarTodasC = cmcDAO.listarTodasC(valor);
-					if(listarTodasC.size() > 0){						
+					if (listarTodasC.size() > 0) {
 						for (Comunica cmc : listarTodasC) {
-							modelo_comunica.addRow(new Object[] { cmc.getId_comunica(), cmc.getTipo(), cmc.getRegistro(),
-									cmc.getId_contato() });
+							modelo_comunica.addRow(new Object[] { cmc.getId_comunica(), cmc.getTipo(),
+									cmc.getRegistro(), cmc.getId_contato() });
 						}
+						
 					}
 
-					
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -390,6 +407,10 @@ public class ScreenList extends JFrame {
 
 			}
 		});
+
+		/*
+		 * TABELA COMUNICA
+		 */
 
 		scrollPane_1.setViewportView(tabela_comunica);
 		modelo_comunica.addColumn("ID");

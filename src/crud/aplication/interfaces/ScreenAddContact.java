@@ -6,6 +6,9 @@ import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -19,6 +22,7 @@ import javax.swing.text.MaskFormatter;
 import crud.dao.ContatoDAO;
 import crud.entities.Contato;
 import crud.entities.TipoComunicaEnum;
+import crud.entities.TipoSexoEnum;
 import crud.jdbc.connection.DB;
 
 import javax.swing.JTextField;
@@ -82,10 +86,16 @@ public class ScreenAddContact extends JFrame {
 		btnNewButton.setBounds(249, 180, 89, 23);
 		getContentPane().add(btnNewButton);
 
+		
+		// cria um ArrayList baseado no enum e dentro de um foreach puxa o enum em string
+		List<String> lista = new ArrayList<String>();
+		Arrays.stream(TipoSexoEnum.values()).forEach( i -> lista.add(i.name()));
+		
+		
 		JComboBox comboBoxSexo = new JComboBox();
+		comboBoxSexo.setModel(new DefaultComboBoxModel(lista.toArray()));
 		comboBoxSexo.setToolTipText("Sexo");
 		comboBoxSexo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboBoxSexo.setModel(new DefaultComboBoxModel(new String[] { "MASCULINO", "FEMININO", "NAO BINARIO" }));
 		comboBoxSexo.setBounds(87, 82, 138, 27);
 		getContentPane().add(comboBoxSexo);
 		comboBoxSexo.addActionListener(new ActionListener() {

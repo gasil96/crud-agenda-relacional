@@ -47,6 +47,7 @@ public class ScreenAddComunica extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				ScreenList listagem = new ScreenList();
+				listagem.show();
 				dispose();
 
 			}
@@ -62,16 +63,11 @@ public class ScreenAddComunica extends JFrame {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		});
 		MaskFormatter maskID;
 		maskID = new MaskFormatter("##");
-
-		JFormattedTextField txtID = new JFormattedTextField(maskID);
-		txtID.setBounds(140, 123, 28, 27);
-		getContentPane().add(txtID);
 
 		/*
 		 * METODO SALVAR REGISTRO
@@ -109,12 +105,6 @@ public class ScreenAddComunica extends JFrame {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(21, 22, 408, 2);
 		getContentPane().add(separator_1);
-
-		JLabel lblIdprovisorio = new JLabel("ID (provisorio):");
-		lblIdprovisorio.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblIdprovisorio.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblIdprovisorio.setBounds(21, 121, 93, 27);
-		getContentPane().add(lblIdprovisorio);
 
 		txtRegistro = new JTextField();
 		txtRegistro.setBounds(171, 48, 258, 27);

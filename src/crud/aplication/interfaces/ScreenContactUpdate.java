@@ -91,12 +91,12 @@ public class ScreenContactUpdate extends JFrame {
 
 		// ADICIONAR ID CONTATO
 		 
-		txtId = new JTextField(contato.getId_contato());
-		txtId.setBounds(191, 186, 22, 20);
-		getContentPane().add(txtId);
-		txtId.setColumns(10);
-		txtId.setVisible(false);
-		setTitle("Alterar Contato");
+//		txtId = new JTextField(contato.getId_contato());
+//		txtId.setBounds(10, 186, 22, 20);
+//		getContentPane().add(txtId);
+//		txtId.setColumns(10);
+//		txtId.setVisible(false);
+//		setTitle("Alterar Contato");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 444, 255);
@@ -155,6 +155,18 @@ public class ScreenContactUpdate extends JFrame {
 		});
 		bttAlterar.setBounds(329, 179, 89, 23);
 		getContentPane().add(bttAlterar);
+		
+		JButton button = new JButton("Voltar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ScreenList listagem = new ScreenList();
+				listagem.show();
+				dispose();
+			
+			}
+		});
+		button.setBounds(234, 179, 89, 23);
+		getContentPane().add(button);
 
 	}
 }

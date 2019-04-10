@@ -27,7 +27,7 @@ public class ComunicaDAO {
 			st.setString(2, comunica.getRegistro());
 			st.setInt(3, comunica.getId_contato());
 			st.executeUpdate();
-			System.out.println("teste do get dentro do dao new reg: "+ comunica.getId_contato());
+			System.out.println("teste do get dentro do dao new reg: " + comunica.getId_contato());
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -47,11 +47,13 @@ public class ComunicaDAO {
 		}
 	}
 
-	public void remove(int id, Connection conn) {
+	public void remove(int id) {
 
+		Connection conn = DB.getConnection();
+		PreparedStatement st = null;
 		try {
 
-			PreparedStatement st = conn.prepareStatement("DELETE FROM comunica WHERE id_comunica = ?");
+			st = conn.prepareStatement("DELETE FROM comunica WHERE id_comunica = ?");
 
 			st.setInt(1, id);
 
@@ -62,20 +64,16 @@ public class ComunicaDAO {
 
 		}
 	}
-	
-	
-	
 
-
-	//NAO CONSIGO FAZER ISSO FORA DA CLASSA `COMUNICADAO`
+	// NAO CONSIGO FAZER ISSO FORA DA CLASSA `COMUNICADAO`
 	public List<Comunica> listarTodasC(Comunica valor) throws Exception {
 		Connection conn = DB.getConnection();
 //		Comunica novaComunica = new Comunica();
 		List<Comunica> comunica = new ArrayList<Comunica>();
 		PreparedStatement st = conn.prepareStatement("select * from comunica where id_contato = ?");
-		st.setInt(1, valor.getId_contato());//n consigo settar esse valor `3`
+		st.setInt(1, valor.getId_contato());// n consigo settar esse valor `3`
 		ResultSet rs = st.executeQuery();
-		
+
 		while (rs.next()) {
 			Comunica cmc1 = new Comunica();
 			cmc1.setId_comunica(rs.getInt("id_comunica"));
@@ -84,12 +82,11 @@ public class ComunicaDAO {
 			cmc1.setId_contato(rs.getInt("id_Contato"));
 			comunica.add(cmc1);
 		}
-		
+
 		rs.close();
 		st.close();
 		return comunica;
 
 	}
-
 
 }

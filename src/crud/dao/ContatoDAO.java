@@ -12,7 +12,7 @@ import crud.entities.Contato;
 import crud.jdbc.connection.DB;
 
 public class ContatoDAO {
-	
+
 	public ContatoDAO() {
 	}
 
@@ -45,16 +45,15 @@ public class ContatoDAO {
 				e.printStackTrace();
 			}
 
-
 		}
 	}
 
-	public void remove(int id, Connection conn) {
+	public void remove(int id) {
 
 		try {
+			PreparedStatement st = null;
 
-			PreparedStatement st = conn.prepareStatement("DELETE FROM contato WHERE id_contato = ?");
-
+			st = DB.getConnection().prepareStatement("DELETE FROM contato WHERE id_contato = ?");
 			st.setInt(1, id);
 
 			st.executeUpdate();
@@ -67,8 +66,8 @@ public class ContatoDAO {
 
 		finally {
 
-			 //DB.closeStatement(st);
-			 //DB.closeConnection();
+			// DB.closeStatement(st);
+			// DB.closeConnection();
 
 		}
 	}
@@ -101,13 +100,11 @@ public class ContatoDAO {
 			}
 		}
 	}
-	
-	
 
 	public List<Contato> listarTodos() throws Exception {
-		
+
 		Connection conn = DB.getConnection();
-		
+
 		List<Contato> contatos = new ArrayList<Contato>();
 		PreparedStatement st = conn.prepareStatement("select * from contato");
 		ResultSet rs = st.executeQuery();
@@ -127,12 +124,12 @@ public class ContatoDAO {
 	}
 
 	public Contato buscarPorId(int idSelecionado) throws Exception {
-		
+
 		Contato contato = null;
 		PreparedStatement st = DB.getConnection().prepareStatement("select * from contato where id_contato = ?");
 		st.setInt(1, idSelecionado);
 		ResultSet retorno = st.executeQuery();
-		
+
 		while (retorno.next()) {
 			contato = new Contato();
 			contato.setId_contato(retorno.getInt("id_contato"));
@@ -146,6 +143,4 @@ public class ContatoDAO {
 
 	}
 
-	
-	
 }
