@@ -65,13 +65,11 @@ public class ComunicaDAO {
 		}
 	}
 
-	// NAO CONSIGO FAZER ISSO FORA DA CLASSA `COMUNICADAO`
 	public List<Comunica> listarTodasC(Comunica valor) throws Exception {
 		Connection conn = DB.getConnection();
-//		Comunica novaComunica = new Comunica();
 		List<Comunica> comunica = new ArrayList<Comunica>();
 		PreparedStatement st = conn.prepareStatement("select * from comunica where id_contato = ?");
-		st.setInt(1, valor.getId_contato());// n consigo settar esse valor `3`
+		st.setInt(1, valor.getId_contato());
 		ResultSet rs = st.executeQuery();
 
 		while (rs.next()) {

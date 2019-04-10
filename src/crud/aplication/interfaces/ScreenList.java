@@ -77,47 +77,69 @@ public class ScreenList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				ContatoDAO cttDAO = new ContatoDAO();
+				ComunicaDAO cmcDAO = new ComunicaDAO();
+				Comunica valor = new Comunica();
 
 				if (tabela_contato.getSelectedRow() >= 0) {
 
-					Object[] options = { "Confirmar", "Cancelar" };
+					Object[] options = { "Confirmar" };
 					int respostaExclusao = JOptionPane.showOptionDialog(null,
-							"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informacao",
+							"Tem certeza que deseja EXCLUIR este contato!", "Informacao",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
 					if (respostaExclusao == 0) {
 
-						int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(),
-								0);
-						cttDAO.remove(idselecionada);
-						
-						//RECARREGA JTABLE APOS EXCLUSAO ******************************
-						modelo_contato.setRowCount(0);
-						try {
-							List<Contato> listarTodos = cttDAO.listarTodos();
-							if (listarTodos.size() > 0) {
-								for (Contato c : listarTodos) {
-									modelo_contato.addRow(
-											new Object[] { c.getId_contato(), c.getNome(), c.getCpf(), c.getIdade(), c.getSexo() });
+						int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
 
+						valor.setId_contato(idselecionada);
+
+						try {
+							List<Comunica> listagemC = cmcDAO.listarTodasC(valor);
+
+							if (listagemC.size() > 0) {
+								JOptionPane.showMessageDialog(null,
+										"IMPOSSIVEL APAGAR \n O contato selecionado possui uma ou mais comunicacoes!");
+
+							} else {
+
+								cttDAO.remove(idselecionada);
+
+								JOptionPane.showMessageDialog(null, "Contato Apagado");
+								modelo_contato.setRowCount(0);
+
+								// RECARREGA JTABLE APOS EXCLUSAO ******************************
+
+								try {
+									List<Contato> listarTodos = cttDAO.listarTodos();
+									if (listarTodos.size() > 0) {
+										for (Contato c : listarTodos) {
+											modelo_contato.addRow(new Object[] { c.getId_contato(), c.getNome(),
+													c.getCpf(), c.getIdade(), c.getSexo() });
+
+										}
+									}
+
+								} catch (Exception e1) {
+									e1.printStackTrace();
 								}
+								// DEVE TER UM JEITO MELHOR DE FAZER ISSO **************
+
+								ScreenList listagemATT = new ScreenList();
+
 							}
-							
-						} catch (Exception e1) {
-							e1.printStackTrace();
+
+						} catch (Exception e2) {
+							e2.printStackTrace();
 						}
-						// DEVE TER UM JEITO MELHOR DE FAZER ISSO **************
-						
-						JOptionPane.showMessageDialog(null, "Contato Apagado");
-						ScreenList listagemATT = new ScreenList();
+
 					} else {
 						JOptionPane.showMessageDialog(null, "Operacao Cancelada");
+
 					}
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Selecione um contato para ser apagado!");
 				}
-			
 
 			}
 		});
@@ -127,9 +149,10 @@ public class ScreenList extends JFrame {
 		 */
 		JButton btnNewButton_1 = new JButton("Sair");
 		btnNewButton_1.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				
+
 			}
 		});
 
@@ -140,34 +163,32 @@ public class ScreenList extends JFrame {
 		Alterar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ContatoDAO contatoDAO = new ContatoDAO();
-				
-				if(tabela_contato.getSelectedRow() >= 0) {
-					
+
+				if (tabela_contato.getSelectedRow() >= 0) {
+
 					Object elemento = tabela_contato.getValueAt(tabela_contato.getSelectedRow(), 0);
 
 					if (elemento != null) {
 						try {
-							
+
 							Contato contato = contatoDAO.buscarPorId((int) elemento);
 							if (contato != null) {
 								setVisible(false);
 								ScreenContactUpdate screenContactUpdate = new ScreenContactUpdate(contato);
 								screenContactUpdate.setVisible(true);
 							}
-							
+
 						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(null,"T");
+							JOptionPane.showMessageDialog(null, "T");
 							e1.printStackTrace();
 						}
-						
+
 					}
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Selecione um contato para ser alterado!");
 				}
-				
-
 
 			}
 		});
@@ -189,34 +210,31 @@ public class ScreenList extends JFrame {
 
 		JButton button = new JButton("Apagar");
 		button.addActionListener(new ActionListener() {
-			
-			
-			//METODO REMOVER COMUNICACAO
+
+			// METODO REMOVER COMUNICACAO
 			public void actionPerformed(ActionEvent e) {
 				ComunicaDAO cmcDAO = new ComunicaDAO();
 
-				
-				if(tabela_comunica.getSelectedRow() >=0) {
-					
+				if (tabela_comunica.getSelectedRow() >= 0) {
+
 					Object[] options = { "Confirmar", "Cancelar" };
 					int respostaExclusao = JOptionPane.showOptionDialog(null,
 							"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informacao",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-					
+
 					if (respostaExclusao == 0) {
-						
-						int idselecionada = (int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),
-								0);
+
+						int idselecionada = (int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(), 0);
 						cmcDAO.remove(idselecionada);
 						JOptionPane.showMessageDialog(null, "Contato Apagado");
 						dispose();
 						ScreenList listagemATT = new ScreenList();
 						listagemATT.show();
-						
+
 					} else {
 						JOptionPane.showMessageDialog(null, "Operacao Cancelada");
 					}
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Selecione uma comunicacao para ser apagada!");
 				}
 
@@ -246,7 +264,7 @@ public class ScreenList extends JFrame {
 		/*
 		 * ADICIONANDO COMUNICACAO DO USUARIO
 		 */
-		
+
 		JButton addNewRegistro = new JButton("+");
 		addNewRegistro.addActionListener(new ActionListener() {
 
@@ -378,7 +396,7 @@ public class ScreenList extends JFrame {
 							modelo_comunica.addRow(new Object[] { cmc.getId_comunica(), cmc.getTipo(),
 									cmc.getRegistro(), cmc.getId_contato() });
 						}
-						
+
 					}
 
 				} catch (Exception e1) {
