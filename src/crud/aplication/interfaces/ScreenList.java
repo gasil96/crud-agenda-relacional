@@ -206,7 +206,7 @@ public class ScreenList extends JFrame {
 					if (respostaExclusao == 0) {
 						
 						int idselecionada = (int) tabela_comunica.getValueAt(tabela_comunica.getSelectedRow(),
-								tabela_comunica.getSelectedColumn());
+								0);
 						cmcDAO.remove(idselecionada);
 						JOptionPane.showMessageDialog(null, "Contato Apagado");
 						dispose();
