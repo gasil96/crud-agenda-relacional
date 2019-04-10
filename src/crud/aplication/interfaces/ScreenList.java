@@ -44,7 +44,7 @@ public class ScreenList extends JFrame {
 	private JPanel contentPane;
 	private JButton Alterar;
 	private JTable tabela_contato;
-	private JTable tabela_comunica;
+	private JTable tabela_comunica; 
 
 	/**
 	 * Launch the application.
