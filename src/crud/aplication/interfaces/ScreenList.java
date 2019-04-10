@@ -98,7 +98,7 @@ public class ScreenList extends JFrame {
 
 							if (listagemC.size() > 0) {
 								JOptionPane.showMessageDialog(null,
-										"IMPOSSIVEL APAGAR \n O contato selecionado possui uma ou mais comunicacoes!");
+										"IMPOSSIVEL APAGAR \n O contato selecionado possui Registros!");
 
 							} else {
 
