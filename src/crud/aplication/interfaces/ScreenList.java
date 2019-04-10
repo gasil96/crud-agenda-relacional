@@ -88,7 +88,7 @@ public class ScreenList extends JFrame {
 					if (respostaExclusao == 0) {
 
 						int idselecionada = (int) tabela_contato.getValueAt(tabela_contato.getSelectedRow(),
-								tabela_contato.getSelectedColumn());
+								0);
 						cttDAO.remove(idselecionada);
 						
 						//RECARREGA JTABLE APOS EXCLUSAO ******************************
