@@ -27,7 +27,6 @@ public class ComunicaDAO {
 			st.setString(2, comunica.getRegistro());
 			st.setInt(3, comunica.getId_contato());
 			st.executeUpdate();
-			System.out.println("teste do get dentro do dao new reg: " + comunica.getId_contato());
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -39,10 +38,8 @@ public class ComunicaDAO {
 			try {
 				st.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// DB.closeConnection();
 
 		}
 	}

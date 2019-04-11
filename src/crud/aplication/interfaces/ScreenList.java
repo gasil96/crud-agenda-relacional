@@ -1,3 +1,8 @@
+/*	Desenvolvido por:   Gabriel Silva
+ * 	Ultima Atualização: 11/04/2019
+ *	Versão:				1.0 
+ */
+
 package crud.aplication.interfaces;
 
 import java.awt.Color;
@@ -282,65 +287,62 @@ public class ScreenList extends JFrame {
 			}
 		});
 
-
 		JSeparator separadorTabelas = new JSeparator();
-		
+
 		JLabel labelAgenda = new JLabel("AGENDA");
 		labelAgenda.setFont(new Font("Tahoma", Font.BOLD, 53));
 		labelAgenda.setForeground(UIManager.getColor("CheckBox.darkShadow"));
 		labelAgenda.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		GroupLayout gl_painelPrincipal = new GroupLayout(painelPrincipal);
-		gl_painelPrincipal.setHorizontalGroup(
-			gl_painelPrincipal.createParallelGroup(Alignment.LEADING)
+		gl_painelPrincipal.setHorizontalGroup(gl_painelPrincipal.createParallelGroup(Alignment.LEADING)
 				.addComponent(scrollTabelaComunica, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addComponent(scrollTabelaContato, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addGroup(gl_painelPrincipal.createSequentialGroup()
-					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.LEADING)
-						.addComponent(labelContatos)
-						.addComponent(labelRegContatos)
-						.addComponent(btnApagarRegistro, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnNovoRegistro)
-						.addComponent(btnNovoContato)
-						.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.LEADING).addComponent(labelContatos)
+								.addComponent(labelRegContatos).addComponent(btnApagarRegistro,
+										GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+						.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnNovoRegistro).addComponent(btnNovoContato)
+								.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
 				.addComponent(separadorTabelas, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addGroup(gl_painelPrincipal.createSequentialGroup()
-					.addComponent(btnApagarContato, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnAlterarContato, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-				.addComponent(labelAgenda, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-		);
-		gl_painelPrincipal.setVerticalGroup(
-			gl_painelPrincipal.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_painelPrincipal.createSequentialGroup()
-					.addComponent(labelAgenda, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
-						.addComponent(labelContatos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNovoContato))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollTabelaContato, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnApagarContato)
-						.addComponent(btnAlterarContato))
-					.addGap(13)
-					.addComponent(separadorTabelas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
-						.addComponent(labelRegContatos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNovoRegistro))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollTabelaComunica, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnApagarRegistro)
-						.addComponent(btnSair))
-					.addContainerGap(19, Short.MAX_VALUE))
-		);
+						.addComponent(btnApagarContato, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnAlterarContato, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				.addComponent(labelAgenda, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE));
+		gl_painelPrincipal
+				.setVerticalGroup(gl_painelPrincipal.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_painelPrincipal.createSequentialGroup()
+								.addComponent(labelAgenda, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
+										.addComponent(labelContatos, GroupLayout.PREFERRED_SIZE, 22,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnNovoContato))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollTabelaContato, GroupLayout.PREFERRED_SIZE, 175,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btnApagarContato).addComponent(btnAlterarContato))
+								.addGap(13)
+								.addComponent(separadorTabelas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
+										.addComponent(labelRegContatos, GroupLayout.PREFERRED_SIZE, 22,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnNovoRegistro))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollTabelaComunica, GroupLayout.PREFERRED_SIZE, 142,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btnApagarRegistro).addComponent(btnSair))
+								.addContainerGap(19, Short.MAX_VALUE)));
 
 		/*
 		 * TABELA E LISTAGEM CONTATO
@@ -368,7 +370,7 @@ public class ScreenList extends JFrame {
 
 				}
 			}
-			
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
