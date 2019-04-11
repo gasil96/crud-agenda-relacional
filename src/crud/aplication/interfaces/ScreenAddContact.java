@@ -1,6 +1,6 @@
 package crud.aplication.interfaces;
 
-import java.awt.EventQueue;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Label;
 import java.awt.TextField;
@@ -16,19 +16,12 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.text.MaskFormatter;
 
 import crud.dao.ContatoDAO;
 import crud.entities.Contato;
-import crud.entities.TipoComunicaEnum;
 import crud.entities.TipoSexoEnum;
-import crud.jdbc.connection.DB;
-
-import javax.swing.JTextField;
-import java.awt.Color;
-import javax.swing.JRadioButton;
-import javax.swing.JSeparator;
 
 public class ScreenAddContact extends JFrame {
 
@@ -40,29 +33,29 @@ public class ScreenAddContact extends JFrame {
 		setBounds(100, 100, 468, 254);
 		getContentPane().setLayout(null);
 
-		Label label = new Label("Nome:");
-		label.setAlignment(Label.RIGHT);
-		label.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label.setBounds(21, 49, 60, 27);
-		getContentPane().add(label);
+		Label labelNome = new Label("Nome:");
+		labelNome.setAlignment(Label.RIGHT);
+		labelNome.setFont(new Font("Dialog", Font.PLAIN, 16));
+		labelNome.setBounds(21, 49, 60, 27);
+		getContentPane().add(labelNome);
 
-		Label label_1 = new Label("Idade:");
-		label_1.setAlignment(Label.RIGHT);
-		label_1.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_1.setBounds(264, 82, 67, 27);
-		getContentPane().add(label_1);
+		Label labelIdade = new Label("Idade:");
+		labelIdade.setAlignment(Label.RIGHT);
+		labelIdade.setFont(new Font("Dialog", Font.PLAIN, 16));
+		labelIdade.setBounds(264, 82, 67, 27);
+		getContentPane().add(labelIdade);
 
-		Label label_2 = new Label("Sexo:");
-		label_2.setAlignment(Label.RIGHT);
-		label_2.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_2.setBounds(27, 82, 54, 27);
-		getContentPane().add(label_2);
+		Label labelSexo = new Label("Sexo:");
+		labelSexo.setAlignment(Label.RIGHT);
+		labelSexo.setFont(new Font("Dialog", Font.PLAIN, 16));
+		labelSexo.setBounds(27, 82, 54, 27);
+		getContentPane().add(labelSexo);
 
-		Label label_4 = new Label("CPF:");
-		label_4.setAlignment(Label.RIGHT);
-		label_4.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_4.setBounds(30, 115, 51, 27);
-		getContentPane().add(label_4);
+		Label labelCpf = new Label("CPF:");
+		labelCpf.setAlignment(Label.RIGHT);
+		labelCpf.setFont(new Font("Dialog", Font.PLAIN, 16));
+		labelCpf.setBounds(30, 115, 51, 27);
+		getContentPane().add(labelCpf);
 
 		TextField txtNome = new TextField();
 		txtNome.setForeground(Color.BLACK);
@@ -74,8 +67,8 @@ public class ScreenAddContact extends JFrame {
 		txtIdade.setBounds(337, 82, 40, 27);
 		getContentPane().add(txtIdade);
 
-		JButton btnNewButton = new JButton("Voltar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				ScreenList listagem = new ScreenList();
@@ -83,11 +76,11 @@ public class ScreenAddContact extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(249, 180, 89, 23);
-		getContentPane().add(btnNewButton);
+		btnVoltar.setBounds(249, 180, 89, 23);
+		getContentPane().add(btnVoltar);
 
 		
-		// cria um ArrayList baseado no enum e dentro de um foreach puxa o enum em string
+		// cria um ArrayList baseado no enum e dentro de um foreach puxa o enum em string /java8
 		List<String> lista = new ArrayList<String>();
 		Arrays.stream(TipoSexoEnum.values()).forEach( i -> lista.add(i.name()));
 		
@@ -111,16 +104,16 @@ public class ScreenAddContact extends JFrame {
 		MaskFormatter mascaraCPf;
 		mascaraCPf = new MaskFormatter("###.###.###-##");
 
-		JFormattedTextField formatoCPF = new JFormattedTextField(mascaraCPf);
-		formatoCPF.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		formatoCPF.setBounds(87, 115, 119, 27);
-		getContentPane().add(formatoCPF);
+		JFormattedTextField formatoCpf = new JFormattedTextField(mascaraCPf);
+		formatoCpf.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		formatoCpf.setBounds(87, 115, 119, 27);
+		getContentPane().add(formatoCpf);
 
 		/*
 		 * METODO SALVAR
 		 * */
-		JButton btnNewButton_1 = new JButton("Salvar");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 
@@ -128,7 +121,7 @@ public class ScreenAddContact extends JFrame {
 
 				Contato contato = new Contato();
 				String nome = txtNome.getText();
-				String cpf = formatoCPF.getText();
+				String cpf = formatoCpf.getText();
 				int idade = Integer.parseInt(txtIdade.getText());
 				String sexo = comboBoxSexo.getSelectedItem().toString();
 				
@@ -148,16 +141,16 @@ public class ScreenAddContact extends JFrame {
 
 		});
 
-		btnNewButton_1.setBounds(340, 180, 89, 23);
-		getContentPane().add(btnNewButton_1);
+		btnSalvar.setBounds(340, 180, 89, 23);
+		getContentPane().add(btnSalvar);
 		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(21, 167, 408, 2);
-		getContentPane().add(separator);
+		JSeparator separadorCima = new JSeparator();
+		separadorCima.setBounds(21, 22, 408, 2);
+		getContentPane().add(separadorCima);
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(21, 22, 408, 2);
-		getContentPane().add(separator_1);
+		JSeparator separadorBaixo = new JSeparator();
+		separadorBaixo.setBounds(21, 167, 408, 2);
+		getContentPane().add(separadorBaixo);
 
 	}
 }
