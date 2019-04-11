@@ -361,8 +361,8 @@ public class ScreenList extends JFrame {
 		modelo_contato.addColumn("CPF");
 		modelo_contato.addColumn("IDADE");
 		modelo_contato.addColumn("SEXO");
-		ContatoDAO cttDAO = new ContatoDAO();
 		tabela_contato.setColumnSelectionInterval(1, 1);
+		ContatoDAO cttDAO = new ContatoDAO();
 
 		try {
 			List<Contato> listarTodos = cttDAO.listarTodos();
@@ -373,6 +373,7 @@ public class ScreenList extends JFrame {
 
 				}
 			}
+			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
