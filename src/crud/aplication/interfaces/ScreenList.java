@@ -44,7 +44,7 @@ public class ScreenList extends JFrame {
 	private JPanel contentPane;
 	private JButton Alterar;
 	private JTable tabela_contato;
-	private JTable tabela_comunica; 
+	private JTable tabela_comunica;
 
 	/**
 	 * Launch the application.
@@ -55,8 +55,7 @@ public class ScreenList extends JFrame {
 				try {
 					ScreenList frame = new ScreenList();
 					frame.setVisible(true);
-					
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -65,8 +64,9 @@ public class ScreenList extends JFrame {
 	}
 
 	public ScreenList() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\14876\\git\\crud_basa_project\\resource\\basa.png"));
-		
+		setIconImage(
+				Toolkit.getDefaultToolkit().getImage("C:\\Users\\14876\\git\\crud_basa_project\\resource\\basa.png"));
+
 		setTitle("AGENDA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 631);
@@ -91,8 +91,8 @@ public class ScreenList extends JFrame {
 
 					Object[] options = { "Confirmar" };
 					int respostaExclusao = JOptionPane.showOptionDialog(null,
-							"Tem certeza que deseja EXCLUIR este contato!", "Informacao",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+							"Tem certeza que deseja EXCLUIR este contato!", "Informacao", JOptionPane.DEFAULT_OPTION,
+							JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
 					if (respostaExclusao == 0) {
 
@@ -224,7 +224,7 @@ public class ScreenList extends JFrame {
 
 				if (tabela_comunica.getSelectedRow() >= 0) {
 
-					Object[] options = { "Confirmar", "Cancelar" };
+					Object[] options = { "Confirmar" };
 					int respostaExclusao = JOptionPane.showOptionDialog(null,
 							"Clique Confirmar para Excluir ou Cancelar para Retornar", "Informacao",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
@@ -289,63 +289,59 @@ public class ScreenList extends JFrame {
 		});
 
 		JSeparator separator = new JSeparator();
-		
+
 		JLabel agendaTitulo = new JLabel("AGENDA");
 		agendaTitulo.setFont(new Font("Tahoma", Font.BOLD, 53));
 		agendaTitulo.setForeground(UIManager.getColor("CheckBox.darkShadow"));
 		agendaTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel)
-						.addComponent(lblRegistroDosContatos)
-						.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(addNewRegistro)
-						.addComponent(addNewContact)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel)
+								.addComponent(lblRegistroDosContatos)
+								.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addComponent(addNewRegistro)
+								.addComponent(addNewContact).addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE,
+										89, GroupLayout.PREFERRED_SIZE)))
 				.addComponent(separator, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-				.addComponent(agendaTitulo, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(agendaTitulo, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(addNewContact))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(Alterar))
-					.addGap(13)
-					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblRegistroDosContatos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(addNewRegistro))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(button)
-						.addComponent(btnNewButton_1))
-					.addContainerGap(19, Short.MAX_VALUE))
-		);
+						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				.addComponent(agendaTitulo, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE));
+		gl_contentPane
+				.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(agendaTitulo, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(addNewContact))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btnNewButton).addComponent(Alterar))
+								.addGap(13)
+								.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblRegistroDosContatos, GroupLayout.PREFERRED_SIZE, 22,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(addNewRegistro))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(button)
+										.addComponent(btnNewButton_1))
+								.addContainerGap(19, Short.MAX_VALUE)));
 
 		/*
 		 * TABELA E LISTAGEM CONTATO

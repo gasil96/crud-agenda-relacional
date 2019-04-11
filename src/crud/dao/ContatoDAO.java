@@ -31,9 +31,7 @@ public class ContatoDAO {
 			st.execute();
 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
-
 		}
 
 		finally {
