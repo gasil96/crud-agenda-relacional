@@ -38,12 +38,12 @@ public class ScreenAddComunica extends JFrame {
 		/*
 		 * ADICIONANDO BOTAO VOLTAR
 		 * */
-		JButton btnNewButton = new JButton("Voltar");
+		JButton btnVoltar = new JButton("Voltar");
 		
 		/*
 		 * COLOCANDO EVENTO CLICK NO BOTAO
 		 * */
-		btnNewButton.addActionListener(new ActionListener() {
+		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				ScreenList listagem = new ScreenList();
@@ -52,14 +52,14 @@ public class ScreenAddComunica extends JFrame {
 
 			}
 		});
-		btnNewButton.setBounds(249, 125, 89, 23);
-		getContentPane().add(btnNewButton);
+		btnVoltar.setBounds(249, 125, 89, 23);
+		getContentPane().add(btnVoltar);
 
-		JComboBox comboBoxEnum = new JComboBox();
-		comboBoxEnum.setModel(new DefaultComboBoxModel(TipoComunicaEnum.values()));
-		comboBoxEnum.setBounds(21, 48, 147, 27);
-		getContentPane().add(comboBoxEnum);
-		comboBoxEnum.addItemListener(new ItemListener() {
+		JComboBox comboBoxTipo = new JComboBox();
+		comboBoxTipo.setModel(new DefaultComboBoxModel(TipoComunicaEnum.values()));
+		comboBoxTipo.setBounds(21, 48, 147, 27);
+		getContentPane().add(comboBoxTipo);
+		comboBoxTipo.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -72,14 +72,14 @@ public class ScreenAddComunica extends JFrame {
 		/*
 		 * METODO SALVAR REGISTRO
 		 * */
-		JButton btnNewButton_1 = new JButton("Salvar");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
 				ComunicaDAO cmcDAO = new ComunicaDAO();
 				Comunica comunica = new Comunica();
-				TipoComunicaEnum tipo = (TipoComunicaEnum) comboBoxEnum.getSelectedItem();
+				TipoComunicaEnum tipo = (TipoComunicaEnum) comboBoxTipo.getSelectedItem();
 
 				String registro = txtRegistro.getText();
 				
@@ -95,16 +95,16 @@ public class ScreenAddComunica extends JFrame {
 			}
 		});
 
-		btnNewButton_1.setBounds(340, 125, 89, 23);
-		getContentPane().add(btnNewButton_1);
+		btnSalvar.setBounds(340, 125, 89, 23);
+		getContentPane().add(btnSalvar);
 
-		JSeparator separator = new JSeparator();
-		separator.setBounds(21, 106, 408, 2);
-		getContentPane().add(separator);
-
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(21, 22, 408, 2);
-		getContentPane().add(separator_1);
+		JSeparator separadorCima = new JSeparator();
+		separadorCima.setBounds(21, 22, 408, 2);
+		getContentPane().add(separadorCima);
+		
+				JSeparator separadorBaixo = new JSeparator();
+				separadorBaixo.setBounds(21, 106, 408, 2);
+				getContentPane().add(separadorBaixo);
 
 		txtRegistro = new JTextField();
 		txtRegistro.setBounds(171, 48, 258, 27);

@@ -3,6 +3,7 @@ package crud.aplication.interfaces;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,8 +13,6 @@ import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,24 +24,19 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import crud.dao.ComunicaDAO;
 import crud.dao.ContatoDAO;
 import crud.entities.Comunica;
 import crud.entities.Contato;
-import crud.jdbc.connection.DB;
-import java.awt.Label;
-import javax.swing.UIManager;
-import java.awt.Toolkit;
 
 public class ScreenList extends JFrame {
 
-	private JPanel contentPane;
-	private JButton Alterar;
+	private JPanel painelPrincipal;
+	private JButton btnAlterarContato;
 	private JTable tabela_contato;
 	private JTable tabela_comunica;
 
@@ -70,17 +64,17 @@ public class ScreenList extends JFrame {
 		setTitle("AGENDA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 530, 631);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		painelPrincipal = new JPanel();
+		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(painelPrincipal);
 		final DefaultTableModel modelo_contato = new DefaultTableModel();
 		final DefaultTableModel modelo_comunica = new DefaultTableModel();
 
 		/*
 		 * METODO REMOVER CONTATO (POR ID)
 		 */
-		JButton btnNewButton = new JButton("Apagar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnApagarContato = new JButton("Apagar");
+		btnApagarContato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				ContatoDAO cttDAO = new ContatoDAO();
@@ -154,8 +148,8 @@ public class ScreenList extends JFrame {
 		/*
 		 * METODO SAIR DO SISTEMA
 		 */
-		JButton btnNewButton_1 = new JButton("Sair");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -166,8 +160,8 @@ public class ScreenList extends JFrame {
 		/*
 		 * METODO ALTERAR CONTATO
 		 */
-		Alterar = new JButton("Alterar");
-		Alterar.addActionListener(new ActionListener() {
+		btnAlterarContato = new JButton("Alterar");
+		btnAlterarContato.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
@@ -200,23 +194,23 @@ public class ScreenList extends JFrame {
 			}
 		});
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setEnabled(false);
+		JScrollPane scrollTabelaContato = new JScrollPane();
+		scrollTabelaContato.setEnabled(false);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setEnabled(false);
+		JScrollPane scrollTabelaComunica = new JScrollPane();
+		scrollTabelaComunica.setEnabled(false);
 
-		JLabel lblNewLabel = new JLabel("CONTATOS ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel.setBackground(Color.WHITE);
+		JLabel labelContatos = new JLabel("CONTATOS ");
+		labelContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
+		labelContatos.setHorizontalAlignment(SwingConstants.LEFT);
+		labelContatos.setBackground(Color.WHITE);
 
-		JLabel lblRegistroDosContatos = new JLabel("REGISTRO DE CONTATOS");
-		lblRegistroDosContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblRegistroDosContatos.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel labelRegContatos = new JLabel("REGISTRO DE CONTATOS");
+		labelRegContatos.setFont(new Font("Tahoma", Font.BOLD, 14));
+		labelRegContatos.setHorizontalAlignment(SwingConstants.LEFT);
 
-		JButton button = new JButton("Apagar");
-		button.addActionListener(new ActionListener() {
+		JButton btnApagarRegistro = new JButton("Apagar");
+		btnApagarRegistro.addActionListener(new ActionListener() {
 
 			// METODO REMOVER COMUNICACAO
 			public void actionPerformed(ActionEvent e) {
@@ -251,8 +245,8 @@ public class ScreenList extends JFrame {
 		/*
 		 * ADICIONAR CONTATO
 		 **/
-		JButton addNewContact = new JButton("+");
-		addNewContact.addActionListener(new ActionListener() {
+		JButton btnNovoContato = new JButton("+");
+		btnNovoContato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ScreenAddContact adicionar;
 				try {
@@ -270,8 +264,8 @@ public class ScreenList extends JFrame {
 		 * ADICIONANDO COMUNICACAO DO USUARIO
 		 */
 
-		JButton addNewRegistro = new JButton("+");
-		addNewRegistro.addActionListener(new ActionListener() {
+		JButton btnNovoRegistro = new JButton("+");
+		btnNovoRegistro.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				if (tabela_contato.getSelectedRow() >= 0) {
@@ -288,60 +282,65 @@ public class ScreenList extends JFrame {
 			}
 		});
 
-		JSeparator separator = new JSeparator();
 
-		JLabel agendaTitulo = new JLabel("AGENDA");
-		agendaTitulo.setFont(new Font("Tahoma", Font.BOLD, 53));
-		agendaTitulo.setForeground(UIManager.getColor("CheckBox.darkShadow"));
-		agendaTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(lblNewLabel)
-								.addComponent(lblRegistroDosContatos)
-								.addComponent(button, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING).addComponent(addNewRegistro)
-								.addComponent(addNewContact).addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE,
-										89, GroupLayout.PREFERRED_SIZE)))
-				.addComponent(separator, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-				.addGroup(gl_contentPane.createSequentialGroup()
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(Alterar, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				.addComponent(agendaTitulo, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE));
-		gl_contentPane
-				.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(agendaTitulo, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(addNewContact))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(btnNewButton).addComponent(Alterar))
-								.addGap(13)
-								.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblRegistroDosContatos, GroupLayout.PREFERRED_SIZE, 22,
-												GroupLayout.PREFERRED_SIZE)
-										.addComponent(addNewRegistro))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(button)
-										.addComponent(btnNewButton_1))
-								.addContainerGap(19, Short.MAX_VALUE)));
+		JSeparator separadorTabelas = new JSeparator();
+		
+		JLabel labelAgenda = new JLabel("AGENDA");
+		labelAgenda.setFont(new Font("Tahoma", Font.BOLD, 53));
+		labelAgenda.setForeground(UIManager.getColor("CheckBox.darkShadow"));
+		labelAgenda.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		GroupLayout gl_painelPrincipal = new GroupLayout(painelPrincipal);
+		gl_painelPrincipal.setHorizontalGroup(
+			gl_painelPrincipal.createParallelGroup(Alignment.LEADING)
+				.addComponent(scrollTabelaComunica, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+				.addComponent(scrollTabelaContato, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+				.addGroup(gl_painelPrincipal.createSequentialGroup()
+					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.LEADING)
+						.addComponent(labelContatos)
+						.addComponent(labelRegContatos)
+						.addComponent(btnApagarRegistro, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnNovoRegistro)
+						.addComponent(btnNovoContato)
+						.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
+				.addComponent(separadorTabelas, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+				.addGroup(gl_painelPrincipal.createSequentialGroup()
+					.addComponent(btnApagarContato, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnAlterarContato, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addComponent(labelAgenda, GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+		);
+		gl_painelPrincipal.setVerticalGroup(
+			gl_painelPrincipal.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_painelPrincipal.createSequentialGroup()
+					.addComponent(labelAgenda, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
+						.addComponent(labelContatos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNovoContato))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollTabelaContato, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnApagarContato)
+						.addComponent(btnAlterarContato))
+					.addGap(13)
+					.addComponent(separadorTabelas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
+						.addComponent(labelRegContatos, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNovoRegistro))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollTabelaComunica, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_painelPrincipal.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnApagarRegistro)
+						.addComponent(btnSair))
+					.addContainerGap(19, Short.MAX_VALUE))
+		);
 
 		/*
 		 * TABELA E LISTAGEM CONTATO
@@ -349,16 +348,16 @@ public class ScreenList extends JFrame {
 
 		tabela_contato = new JTable(modelo_contato);
 		tabela_contato.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		scrollPane.setViewportView(tabela_contato);
-		contentPane.setLayout(gl_contentPane);
+		scrollTabelaContato.setViewportView(tabela_contato);
+		painelPrincipal.setLayout(gl_painelPrincipal);
 
 		modelo_contato.addColumn("ID");
 		modelo_contato.addColumn("NOME");
 		modelo_contato.addColumn("CPF");
 		modelo_contato.addColumn("IDADE");
 		modelo_contato.addColumn("SEXO");
-		ContatoDAO cttDAO = new ContatoDAO();
 		tabela_contato.setColumnSelectionInterval(1, 1);
+		ContatoDAO cttDAO = new ContatoDAO();
 
 		try {
 			List<Contato> listarTodos = cttDAO.listarTodos();
@@ -369,6 +368,7 @@ public class ScreenList extends JFrame {
 
 				}
 			}
+			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -433,7 +433,7 @@ public class ScreenList extends JFrame {
 		 * TABELA COMUNICA
 		 */
 
-		scrollPane_1.setViewportView(tabela_comunica);
+		scrollTabelaComunica.setViewportView(tabela_comunica);
 		modelo_comunica.addColumn("ID");
 		modelo_comunica.addColumn("TIPO");
 		modelo_comunica.addColumn("DESCRICAO");

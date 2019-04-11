@@ -37,57 +37,58 @@ public class ScreenContactUpdate extends JFrame {
 		
 		MaskFormatter mascaraCPf;
 		mascaraCPf = new MaskFormatter("###.###.###-##");
+		getContentPane().setLayout(null);
 
 		// GAMBI JFormattedTextField txtCpf = new JFormattedTextField(mascaraCPf);
 		
 		JFormattedTextField txtCpf = new JFormattedTextField(mascaraCPf);
-		txtCpf.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtCpf.setBounds(82, 112, 119, 27);
+		txtCpf.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtCpf.setText(contato.getCpf());
 		getContentPane().add(txtCpf);
 
-		Label label_Nome = new Label("Nome:");
-		label_Nome.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_Nome.setAlignment(Label.RIGHT);
-		label_Nome.setBounds(20, 46, 60, 27);
-		getContentPane().add(label_Nome);
+		Label labelNome = new Label("Nome:");
+		labelNome.setBounds(20, 46, 60, 27);
+		labelNome.setFont(new Font("Dialog", Font.PLAIN, 16));
+		labelNome.setAlignment(Label.RIGHT);
+		getContentPane().add(labelNome);
 
-		Label label_Sexo = new Label("Sexo:");
-		label_Sexo.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_Sexo.setAlignment(Label.RIGHT);
-		label_Sexo.setBounds(26, 79, 54, 27);
-		getContentPane().add(label_Sexo);
+		Label labelSexo = new Label("Sexo:");
+		labelSexo.setBounds(26, 79, 54, 27);
+		labelSexo.setFont(new Font("Dialog", Font.PLAIN, 16));
+		labelSexo.setAlignment(Label.RIGHT);
+		getContentPane().add(labelSexo);
 
-		Label label_CPF = new Label("CPF:");
-		label_CPF.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_CPF.setAlignment(Label.RIGHT);
-		label_CPF.setBounds(29, 112, 51, 27);
-		getContentPane().add(label_CPF);
+		Label labelCpf = new Label("CPF:");
+		labelCpf.setBounds(29, 112, 51, 27);
+		labelCpf.setFont(new Font("Dialog", Font.PLAIN, 16));
+		labelCpf.setAlignment(Label.RIGHT);
+		getContentPane().add(labelCpf);
 
-		Label label_Idade = new Label("Idade:");
-		label_Idade.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_Idade.setAlignment(Label.RIGHT);
-		label_Idade.setBounds(259, 112, 67, 27);
-		getContentPane().add(label_Idade);
+		Label labelIdade = new Label("Idade:");
+		labelIdade.setBounds(259, 112, 67, 27);
+		labelIdade.setFont(new Font("Dialog", Font.PLAIN, 16));
+		labelIdade.setAlignment(Label.RIGHT);
+		getContentPane().add(labelIdade);
 
 		// IDADE
 		TextField txtIdade = new TextField(String.valueOf(contato.getIdade()));
-		txtIdade.setFont(new Font("Dialog", Font.PLAIN, 14));
 		txtIdade.setBounds(332, 112, 40, 27);
+		txtIdade.setFont(new Font("Dialog", Font.PLAIN, 14));
 		getContentPane().add(txtIdade);
 
 		TextField txtNome = new TextField(contato.getNome());
-		txtNome.setForeground(Color.BLACK);
 		txtNome.setBounds(82, 46, 290, 27);
+		txtNome.setForeground(Color.BLACK);
 		getContentPane().add(txtNome);
 
-		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 166, 408, 2);
-		getContentPane().add(separator);
+		JSeparator separadorBaixo = new JSeparator();
+		separadorBaixo.setBounds(10, 166, 408, 2);
+		getContentPane().add(separadorBaixo);
 
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 21, 408, 2);
-		getContentPane().add(separator_1);
+		JSeparator separadorCima = new JSeparator();
+		separadorCima.setBounds(10, 21, 408, 2);
+		getContentPane().add(separadorCima);
 
 		// ADICIONAR ID CONTATO
 		 
@@ -100,9 +101,9 @@ public class ScreenContactUpdate extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 444, 255);
-		getContentPane().setLayout(null);
 
 		JComboBox comboBoxSexo = new JComboBox();
+		comboBoxSexo.setBounds(82, 79, 125, 27);
 		
 		comboBoxSexo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
@@ -111,7 +112,6 @@ public class ScreenContactUpdate extends JFrame {
 		
 		comboBoxSexo.setModel(new DefaultComboBoxModel(lista.toArray()));
 		comboBoxSexo.setSelectedItem(contato.getSexo());
-		comboBoxSexo.setBounds(82, 79, 125, 27);
 		getContentPane().add(comboBoxSexo);
 		
 		comboBoxSexo.addActionListener(new ActionListener() {
@@ -128,8 +128,9 @@ public class ScreenContactUpdate extends JFrame {
 		/*
 		 * BOTAO ATUALIZAR CONTATO
 		 * */
-		JButton bttAlterar = new JButton("Alterar");
-		bttAlterar.addActionListener(new ActionListener() {
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.setBounds(329, 179, 89, 23);
+		btnAlterar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 
@@ -153,11 +154,11 @@ public class ScreenContactUpdate extends JFrame {
 
 			}
 		});
-		bttAlterar.setBounds(329, 179, 89, 23);
-		getContentPane().add(bttAlterar);
+		getContentPane().add(btnAlterar);
 		
-		JButton button = new JButton("Voltar");
-		button.addActionListener(new ActionListener() {
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(234, 179, 89, 23);
+		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ScreenList listagem = new ScreenList();
 				listagem.show();
@@ -165,8 +166,7 @@ public class ScreenContactUpdate extends JFrame {
 			
 			}
 		});
-		button.setBounds(234, 179, 89, 23);
-		getContentPane().add(button);
+		getContentPane().add(btnVoltar);
 
 	}
 }
