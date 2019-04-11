@@ -50,6 +50,11 @@ local.properties
 target/*
 /target/*
 
+.classpath
+.project
+.settings/
+target/
+
 # Tern plugin
 .tern-project
 
