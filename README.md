@@ -22,7 +22,7 @@ O crud é um modelo de criação de projeto que tem como objetivo criar, ler, al
 
 
 ## MONTAGEM DO PROJETO
-O *Designer Pattener* em que o projeto foi montado foi seguindo o modelo *SINGLETON* de java onde um objeto pode ser instanciado apenas uma vez. 
+O *Designer Pattener* em que o projeto foi montado foi seguindo o modelo *SINGLETON* de java onde um objeto pode ser instânciado apenas uma vez. 
 ~~~~
 ContatoDAO cttDAO = new ContatoDAO();
 ~~~~
@@ -30,8 +30,8 @@ A estrutura de divisão colocou uma *organização* dentro da aplicação separa
 ![padrao de projeto](https://user-images.githubusercontent.com/48265863/56034530-e762bd80-5cfd-11e9-9db3-d27331da032d.JPG)
 
 ## BANCO DE DADOS
-o banco de dados utilizado no projeto foi o MySQL criado atraves da command line o nome adotado ao banco foi **agenda**
-e 2 tabelas *relacionadas* tabela **contato** par os contatos adicionados a agenda e a tabela **comunica** para os tipos de comunicações que estes contatos possuem ( emails, telefones residenciais, telefoens comerciais, celulares, etc...). O banco foi criado atraves da **command line** do **mysql** e gerenciado com o uso do **workbench**.
+o banco de dados utilizado no projeto foi o MySQL --> criado atraves da *Command line* o nome adotado ao banco foi **agenda**
+e possui 2 tabelas *relacionadas* tabela **contato** para os contatos adicionados na agenda e a tabela **comunica** para os tipos de comunicações que estes contatos possuem como: emails, telefones residenciais, telefoens comerciais, celulares, etc... 
 ![MySQL BD CommandLine](https://user-images.githubusercontent.com/48265863/56034527-e598fa00-5cfd-11e9-8f4c-ec1ebe88e307.JPG)
 
 ### Modelagem no Workbench
