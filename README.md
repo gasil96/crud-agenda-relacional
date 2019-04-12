@@ -39,7 +39,7 @@ antes da criação das tabelas é necessário *abstrair* suas idéias e ver como
 ![ModelagemAgendaWorkbench](https://user-images.githubusercontent.com/48265863/56034525-e336a000-5cfd-11e9-8f44-6bc35fa0ca20.JPG)
 
 ### Tabelas
-apos a modelagem esta na hora da criação das tabelas os códigos **sql's** utilizados para a criação das tabelas **contato** e **comunica** foram respectivamente.
+apos a modelagem é feita a criação das tabelas, os códigos **sql's** utilizados para a criação das tabelas **contato** e **comunica** foram respectivamente.
 
 ````
 CREATE TABLE `agenda`.`contato` (
@@ -139,12 +139,12 @@ public enum TipoComunicaEnum {
 }
 ~~~~~~ 
 ### Windowbuilder
-para melhor manusear a interface foi utilizado um *plugin* chamado **Windowbuilder** que habilita um construtor de telas na *IDE*  e facilita o uso atraves do "arrasta e solta" 
+para melhor manusear a interface foi utilizado um *plugin* chamado **Windowbuilder** que habilita um construtor de telas na *IDE*  e facilita o uso através do "arrasta e solta" 
 ![Windowbuilder](https://user-images.githubusercontent.com/48265863/56034539-ec277180-5cfd-11e9-9af1-7a2a82e23aed.JPG)
-**NOTA: mesmo com a práticidade do plugin windowbuilder ainda é necessário manipular atraves do código fonte, pois a ferramente é limitada e muitas vezes pré-definida nas funcionalidades**
+**NOTA: mesmo com a práticidade do plugin windowbuilder, ainda é necessário manipula através do código fonte, pois a ferramente é limitada e muitas vezes pré-definida nas suas funcionalidades**
 
 ### Maven Project
-o *maven* é uma ferramenta de automação de código que gera um .**xml** no seu projeto que irá baixar todas as *<dependências>* do seu projeto direto do seu próprio repositório.
+o *maven* é uma ferramenta de automação de código que gera um **.xml** no seu projeto que irá baixar todas as *<dependências>* direto do seu próprio repositório.
 ~~~~
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -164,17 +164,17 @@ o *maven* é uma ferramenta de automação de código que gera um .**xml** no se
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 ~~~~
-no projeto **agenda** foi usado a dependência do conector do mysql, sendo assim não precisamos baixar o connector e colocar ele manualmente na nossa aplicação
+no projeto **agenda** foi usado a dependência do conector do mysql, sendo assim não precisamos baixar o connector e colocar ele manualmente na nossa aplicação.
 
 ## GIT/GITHUB
 para o versionamento e o armazenamento do nosso código utilizamos o sistema git e o hospedeiro[github](https://github.com)
 
 ### Git
-git é um sistema de controle de versionamento utilizado para guardar seu código e versionar ele pra um melhor controle, existem varias plataformas que podem hospedar seu código a utilizada neste projeto foi o github
+git é um sistema de controle de versionamento utilizado para guardar seu código e versionar ele pra um melhor controle, existem várias plataformas que podem hospedar seu código a utilizada neste projeto foi o github.
 ![gits](https://user-images.githubusercontent.com/48265863/56038123-8b049b80-5d07-11e9-8e28-79ecf0341766.jpg)
 
 ### Github
-github é uma opção dentre alguns hospedeiros de código com a opção de *multi-desenvolvimento* onde de forma gratuita você consegue adicionar até **3** colaboradores no seu projeto. 
+github é uma opção dentre alguns hospedeiros de código com a opção de *multi-desenvolvimento* (varias branchs) onde de forma gratuita você consegue adicionar até **3** colaboradores no seu projeto. 
 ![´github](https://user-images.githubusercontent.com/48265863/56038119-893ad800-5d07-11e9-8e78-3092444bc19a.JPG)
 
 
