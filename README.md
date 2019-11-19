@@ -1,5 +1,5 @@
 # CRUD_PROJECT_SCHEDULE
-Projeto CRUD agenda criado com o intuito de estudar e revisar conceitos básicos de Java, Java OO, Maven, Mysql, relacionamento de Banco de dados e versionamento de projeto com Git/Github.
+Projeto CRUD agenda criado com o intuito de revisar conceitos básicos de Java, Java OO, Maven, Mysql, relacionamento de Banco de dados e versionamento de projeto com Git/Github.
 
 ### FOI UTILIZADO
 Eclipse 2018 02 --> como IDE
