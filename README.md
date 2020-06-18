@@ -1,5 +1,5 @@
-# CRUD_PROJECT_SCHEDULE
-Projeto CRUD agenda criado com o intuito de revisar conceitos básicos de Java, Java OO, Maven, Mysql, relacionamento de Banco de dados e versionamento de projeto com Git/Github.
+# AGENDA
+Agenda Relacional, criado com o intuito de revisar conceitos básicos de Java, Java OO, Maven, Mysql, relacionamento de Banco de dados e versionamento de projeto com Git/Github.
 
 ### FOI UTILIZADO
 Eclipse 2018 02 --> como IDE
@@ -22,7 +22,7 @@ O crud é um modelo de criação de projeto que tem como objetivo criar, ler, al
 
 
 ## MONTAGEM DO PROJETO
-O *Designer Pattener* em que o projeto foi montado foi seguindo o modelo *SINGLETON* de java onde um objeto pode ser instânciado apenas uma vez. 
+O *Designer Pattener* em que o projeto foi montado é o *SINGLETON* de java, onde um objeto pode ser instânciado apenas uma vez. 
 ~~~~
 ContatoDAO cttDAO = new ContatoDAO();
 ~~~~
